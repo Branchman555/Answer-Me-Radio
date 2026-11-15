@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.*
 import radio.reply.R
+import radio.reply.ui.RadioTheme as Theme
+import radio.reply.ui.RadioTheme.dp
 
 /** Internal development screen. No speed-based or assumed vehicle UX authorization. */
 class CatalogActivity : Activity() {
@@ -29,15 +31,25 @@ class CatalogActivity : Activity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Theme.configure(this)
         if (!allowed(applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0,
                 intent.getBooleanExtra(DEVELOPMENT_ACCESS, false))) { finish(); return }
         alive = true
         pickerPending = savedInstanceState?.getBoolean("pickerPending") ?: false
         runtime = CatalogRuntime.get(this)
-        val root = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(24, 24, 24, 24) }
-        message = TextView(this).apply { setText(R.string.catalog_scope); textSize = 18f }
+        val root = Theme.column(this).apply { setBackgroundColor(Theme.background) }
+        root.addView(Theme.button(this, "‹  라디오로 돌아가기").apply { setOnClickListener { finish() } })
+        root.addView(Theme.gap(this, 24))
+        root.addView(Theme.text(this, "MY MUSIC COLLECTION", 11f, Theme.amber, true))
+        root.addView(Theme.gap(this, 8))
+        root.addView(Theme.text(this, "나의 음악 서랍", 30f, bold = true))
+        root.addView(Theme.gap(this, 10))
+        root.addView(Theme.text(this, getString(R.string.catalog_scope), 14f, Theme.muted))
+        root.addView(Theme.gap(this, 20))
+        message = Theme.text(this, "음악을 확인하고 있어요", 14f, Theme.amber)
         root.addView(message)
-        add = Button(this).apply {
+        root.addView(Theme.gap(this, 16))
+        add = Theme.button(this, getString(R.string.catalog_add), true).apply {
             setText(R.string.catalog_add)
             setOnClickListener {
                 ux.refresh()
@@ -51,11 +63,11 @@ class CatalogActivity : Activity() {
                 }
             }
         }
-        refresh = Button(this).apply { setText(R.string.catalog_refresh); setOnClickListener { work { runtime.load() } } }
-        root.addView(add); root.addView(refresh)
+        refresh = Theme.button(this, getString(R.string.catalog_refresh)).apply { setOnClickListener { work { runtime.load() } } }
+        root.addView(add); root.addView(Theme.gap(this, 10)); root.addView(refresh); root.addView(Theme.gap(this, 22))
         rows = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
         root.addView(rows)
-        setContentView(ScrollView(this).apply { fitsSystemWindows = true; addView(root) })
+        setContentView(ScrollView(this).apply { fitsSystemWindows = true; isFillViewport = true; setBackgroundColor(Theme.background); addView(root) })
         ux = radio.reply.ux.VehicleUx(this) { if (::ux.isInitialized && alive) updateAccess() }
         updateAccess()
     }
@@ -106,19 +118,31 @@ class CatalogActivity : Activity() {
         if (!ux.gate.detailsAllowed) { updateAccess(); return }
         message.text = getString(R.string.catalog_summary, result.entries.size, result.entries.count { it.track().eligible }, result.rejected)
         rows.removeAllViews()
+        if (result.entries.isEmpty()) {
+            rows.addView(Theme.column(this, 24).apply {
+                background = Theme.shape(this@CatalogActivity)
+                addView(Theme.text(this@CatalogActivity, "첫 번째 추억을 담아 주세요", 21f, bold = true))
+                addView(Theme.gap(this@CatalogActivity, 12))
+                addView(Theme.text(this@CatalogActivity, "1980·2010년대 MP3를 선택하면\n두 시대의 음악이 하나의 라디오로 이어집니다.\n\n제목 · 아티스트 · 연도 태그가 필요해요.", 15f, Theme.muted))
+            })
+        }
         for (entry in result.entries) {
-            val row = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
-            row.addView(TextView(this).apply {
+            val row = Theme.column(this, 18).apply { background = Theme.shape(this@CatalogActivity) }
+            row.addView(Theme.text(this, entry.releaseYear?.let { "${it / 10 * 10}s  /  $it" } ?: "연도를 확인해 주세요", 11f, Theme.amber, true))
+            row.addView(Theme.gap(this, 10))
+            row.addView(Theme.text(this, "").apply {
                 text = getString(R.string.catalog_entry, entry.title.ifBlank { getString(R.string.catalog_unknown_title) },
                     entry.artist.ifBlank { getString(R.string.catalog_unknown_artist) }, entry.releaseYear?.toString() ?: "—",
                     statusLabel(entry.status), if (entry.access == ReadAccess.SESSION_ONLY) getString(R.string.catalog_session_only) else "")
-                textSize = 17f
+                textSize = 17f; setLineSpacing(dp(4).toFloat(), 1f)
             })
-            row.addView(Button(this).apply {
+            row.addView(Theme.gap(this, 14))
+            row.addView(Theme.button(this, getString(R.string.catalog_remove)).apply {
                 setText(R.string.catalog_remove)
                 setOnClickListener { ux.refresh(); if (!busy && ux.gate.detailsAllowed) work { runtime.catalog.remove(entry.id) } }
             }, ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT))
             rows.addView(row)
+            rows.addView(Theme.gap(this, 12))
         }
     }
     private fun statusLabel(status: CatalogStatus) = getString(when (status) {

@@ -13,7 +13,11 @@
         android:supportsRtl="true">
         <uses-library android:name="android.car" android:required="false" />
         <activity android:name="radio.reply.catalog.CatalogActivity" android:exported="false" />
-        <activity android:name="radio.reply.playback.PlaybackActivity" android:exported="false">
+        <activity android:name="radio.reply.playback.PlaybackActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             <!-- Only this compact control screen stays available; setup/catalog/simulator have no DO declaration. -->
             <meta-data android:name="distractionOptimized" android:value="true" />
         </activity>
@@ -24,11 +28,6 @@
                 <action android:name="android.media.browse.MediaBrowserService" />
             </intent-filter>
         </service>
-        <activity android:name="radio.reply.demo.DemoActivity" android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name="radio.reply.demo.DemoActivity" android:exported="false" />
     </application>
 </manifest>

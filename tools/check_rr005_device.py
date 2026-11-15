@@ -17,6 +17,7 @@ def main():
     parser.add_argument("--avd", required=True)
     parser.add_argument("--picker", action="store_true")
     parser.add_argument("--voice-only", action="store_true")
+    parser.add_argument("--evidence-prefix", choices=["rr005", "ui001"], default="rr005")
     args = parser.parse_args()
     assert args.serial.startswith("emulator-") and args.avd.startswith("ReplyRadio_RR003_")
     adb = str(Path(os.environ["LOCALAPPDATA"]) / "Android/Sdk/platform-tools/adb.exe")
@@ -30,7 +31,7 @@ def main():
     apk = ROOT / "app/build/outputs/apk/debug/app-debug.apk"
     tests = ROOT / "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk"
     for path in (apk, tests): assert "Success" in call("install", "-r", str(path))
-    report = {"ticket": "RR-005", "recordedAtUtc": datetime.now(timezone.utc).isoformat(), "avd": args.avd,
+    report = {"ticket": "UI-001" if args.evidence_prefix == "ui001" else "RR-005", "recordedAtUtc": datetime.now(timezone.utc).isoformat(), "avd": args.avd,
               "serial": args.serial, "user": user, "androidApi": call("shell", "getprop", "ro.build.version.sdk"),
               "fingerprint": call("shell", "getprop", "ro.build.fingerprint"),
               "appSha256": hashlib.sha256(apk.read_bytes()).hexdigest(), "testApkSha256": hashlib.sha256(tests.read_bytes()).hexdigest(),
@@ -40,7 +41,7 @@ def main():
     try:
         for stage in stages:
             call("shell", "am", "force-stop", "--user", user, "radio.reply.prototype")
-            log = ROOT / "evidence" / f"rr005-{args.avd}-{stage}.log"
+            log = ROOT / "evidence" / f"{args.evidence_prefix}-{args.avd}-{stage}.log"
             with log.open("wb") as output:
                 process = subprocess.Popen([adb, "-s", args.serial, "shell", "am", "instrument", "--user", user, "-w", "-r", "-e", "stage", stage,
                     "radio.reply.prototype.test/radio.reply.catalog.CatalogInstrumentation"], stdout=output, stderr=subprocess.STDOUT)
@@ -63,7 +64,7 @@ def main():
                 screenshot = subprocess.check_output([adb, "-s", args.serial, "exec-out", "run-as", "radio.reply.prototype", "--user", user,
                     "cat", "no_backup/rr004-playback.png"], timeout=15)
                 assert screenshot.startswith(b"\x89PNG")
-                (ROOT / "evidence" / f"rr005-{args.avd}.png").write_bytes(screenshot)
+                (ROOT / "evidence" / f"{args.evidence_prefix}-{args.avd}.png").write_bytes(screenshot)
             if stage == "voiceux":
                 required_voice_checks = {"actual_voice_done_then_media3_audio_without_overlap", "actual_voice_pause_stop_ack_and_no_auto_resume",
                     "actual_voice_resume_then_next_uses_introduced_track", "actual_voice_stop_never_starts_next_music",
@@ -82,14 +83,14 @@ def main():
                     screenshot = subprocess.check_output([adb, "-s", args.serial, "exec-out", "run-as", "radio.reply.prototype", "--user", user,
                         "cat", f"no_backup/rr005-{image}.png"], timeout=15)
                     assert screenshot.startswith(b"\x89PNG")
-                    (ROOT / "evidence" / f"rr005-{args.avd}-{image}.png").write_bytes(screenshot)
+                    (ROOT / "evidence" / f"{args.evidence_prefix}-{args.avd}-{image}.png").write_bytes(screenshot)
             print(f"PASS {args.avd}: {stage} {expected}", flush=True)
         report["status"] = "PASS"
     except Exception as failure:
         report["status"] = "FAIL"; report["failure"] = str(failure)
         raise
     finally:
-        (ROOT / "evidence" / f"rr005-device-{args.avd}.json").write_text(json.dumps(report, indent=2) + "\n")
+        (ROOT / "evidence" / f"{args.evidence_prefix}-device-{args.avd}.json").write_text(json.dumps(report, indent=2) + "\n")
 
 
 if __name__ == "__main__": main()

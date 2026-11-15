@@ -1,0 +1,78 @@
+INSTRUMENTATION_STATUS: stream=RUN platform_ux_subscription_and_unknown_fail_closed
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=RR005_UX=NON_VEHICLE
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS platform_ux_subscription_and_unknown_fail_closed
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=RUN binding_does_not_start_music_or_voice
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS binding_does_not_start_music_or_voice
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=RUN platform_voice_initialization_and_music_fallback_probe
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=RR005_BACKEND=ANDROID_OFFLINE STATUS=SPEAKING
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS platform_voice_initialization_and_music_fallback_probe
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=RUN actual_voice_done_then_media3_audio_without_overlap
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS actual_voice_done_then_media3_audio_without_overlap
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=RUN actual_voice_pause_stop_ack_and_no_auto_resume
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS actual_voice_pause_stop_ack_and_no_auto_resume
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=RUN actual_voice_resume_then_next_uses_introduced_track
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS actual_voice_resume_then_next_uses_introduced_track
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=RUN actual_voice_stop_never_starts_next_music
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS actual_voice_stop_never_starts_next_music
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=RUN actual_focus_loss_stops_voice_gain_restarts_serially
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS actual_focus_loss_stops_voice_gain_restarts_serially
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=RUN user_pause_during_voice_focus_loss_blocks_gain_resume
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS user_pause_during_voice_focus_loss_blocks_gain_resume
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=RUN three_natural_music_completions_trigger_serial_era_bridge
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS three_natural_music_completions_trigger_serial_era_bridge
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=RUN dj_off_makes_no_additional_voice_request
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS dj_off_makes_no_additional_voice_request
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=RR005_VOICE available=true starts=9 done=2 stopAcks=7 errors=0 timeouts=0 audioBytes=1081102 rmsUpdates=0
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: stream=RR003_PASS_COUNT=11 STAGE=voiceux
+
+INSTRUMENTATION_CODE: -1

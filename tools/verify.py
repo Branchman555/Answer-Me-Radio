@@ -43,12 +43,17 @@ def verify_sources():
         assert digest(ROOT / entry["path"]) == entry["sha256"], f"RR-004 test modified: {entry['path']}"
     for entry in json.loads((ROOT / "evidence/rr005-test-hashes.json").read_text(encoding="utf-8-sig")):
         assert digest(ROOT / entry["path"]) == entry["sha256"], f"RR-005 test modified: {entry['path']}"
+    for baseline_name in ["rr006-test-hashes", "rr006-backend-test-hashes"]:
+        for entry in json.loads((ROOT / f"evidence/{baseline_name}.json").read_text(encoding="utf-8")):
+            assert digest(ROOT / entry["path"]) == entry["sha256"], f"RR-006 test modified: {entry['path']}"
     return {"status": "PASS", "manifestFilesVerified": len(manifest["files"]),
             "baselineAcceptanceCasesPreserved": 54, "roadAcceptanceCasesPreserved": 40,
             "externalExtensionMatches": external.exists()}
 
 
 def report(source_result, log, require_devices=False):
+    assert log and (ROOT / log).is_file(), "Build log is required"
+    assert "BUILD SUCCESSFUL" in (ROOT / log).read_text(encoding="utf-8-sig"), "Successful build log missing"
     suites = []
     for path in sorted((ROOT / "app/build/test-results/testDebugUnitTest").glob("TEST-*.xml")):
         suite = ET.parse(path).getroot()
@@ -78,6 +83,9 @@ def report(source_result, log, require_devices=False):
     rr005 = json.loads((ROOT / "evidence/rr005.json").read_text(encoding="utf-8"))
     voice_tests = {(suite["name"], test["name"]) for suite in rr005["jvm"]["suites"] for test in suite["tests"]}
     assert len(voice_tests) == 174 and voice_tests.issubset(passed), "An original RR-005 test was not executed"
+    rr006 = json.loads((ROOT / "evidence/rr006.json").read_text(encoding="utf-8"))
+    api_tests = {(suite["name"], test["name"]) for suite in rr006["jvm"]["suites"] for test in suite["tests"]}
+    assert len(api_tests) == 177 and api_tests.issubset(passed), "An RR-006 test was not executed"
     lint = ET.parse(ROOT / "app/build/reports/lint-results-debug.xml").getroot()
     issues = lint.findall("issue")
     assert not any(issue.attrib["severity"] in {"Error", "Fatal"} for issue in issues)
@@ -95,7 +103,7 @@ def report(source_result, log, require_devices=False):
     assert permissions == {"android.permission.FOREGROUND_SERVICE", "android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK", "android.permission.WAKE_LOCK",
                            "pleos.car.permission.TTS_SERVICE", "radio.reply.prototype.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"}, permissions
     devices = []
-    for path in sorted((ROOT / "evidence").glob("rr005-device-*.json")):
+    for path in sorted((ROOT / "evidence").glob("ui001-device-*.json")):
         device = json.loads(path.read_text(encoding="utf-8"))
         device["artifactMatchesCurrentBuild"] = device["appSha256"] == digest(apk) and device["testApkSha256"] == digest(test_apk)
         devices.append(device)
@@ -119,11 +127,14 @@ def report(source_result, log, require_devices=False):
             if "API34" in avd:
                 assert device["vehicleDrivingUx"] == "EMULATED_PLATFORM_RESTRICTION_ON_OFF"
                 assert "pleos_driving_restriction_locks_details_and_service_settings" in names
-    backend = json.loads((ROOT / "evidence/rr006-backend.json").read_text(encoding="utf-8"))
+    backend = json.loads((ROOT / "evidence/ui001-backend.json").read_text(encoding="utf-8"))
     assert backend["status"] == "PASS"
+    prior_backend = json.loads((ROOT / "evidence/rr006-backend.json").read_text(encoding="utf-8"))
+    assert len(prior_backend["tests"]) == 115
+    assert {t["name"] for t in prior_backend["tests"]}.issubset({t["name"] for t in backend["tests"]})
     for path, expected_hash in backend["sourceHashes"].items():
         assert digest(ROOT / path) == expected_hash, f"Stale backend evidence: {path}"
-    value = {"ticket": "RR-006", "recordedAtUtc": datetime.now(timezone.utc).isoformat(),
+    value = {"ticket": "UI-001", "recordedAtUtc": datetime.now(timezone.utc).isoformat(),
              "scope": "JVM_AND_ANDROID_BUILD_WITH_SEPARATE_NATIVE_DEVICE_EVIDENCE", "sourceIntegrity": source_result,
              "jvm": {"status": "PASS", "testCount": sum(len(s["tests"]) for s in suites), "suites": suites},
              "rr001Regression": {"status": "PASS", "testsPreservedAndExecuted": len(prior_tests), "sourceHashesUnchanged": True},
@@ -131,7 +142,8 @@ def report(source_result, log, require_devices=False):
              "rr003Regression": {"status": "PASS", "testsPreservedAndExecuted": len(catalog_tests), "sourceHashesUnchanged": True},
              "rr004Regression": {"status": "PASS", "testsPreservedAndExecuted": len(playback_tests), "sourceHashesUnchanged": True},
              "rr005Regression": {"status": "PASS", "testsPreservedAndExecuted": len(voice_tests), "sourceHashesUnchanged": True},
-             "backend": {"status": "PASS", "testCount": backend["testCount"], "evidence": "evidence/rr006-backend.json", "liveHttpCases": 9},
+             "backend": {"status": "PASS", "testCount": backend["testCount"], "evidence": "evidence/ui001-backend.json", "liveHttpCases": 9},
+             "rr006Regression": {"status": "PASS", "jvmPreserved": 177, "backendPreserved": 115},
              "contractVerification": "Original v0.5/v0.6 preserved; 9 Uvicorn HTTP captures checked by existing Kotlin decoder/editorial validator",
              "debugApk": {"status": "PASS", "path": apk.relative_to(ROOT).as_posix(), "sha256": digest(apk)},
              "testApk": {"path": test_apk.relative_to(ROOT).as_posix(), "sha256": digest(test_apk)},
@@ -144,8 +156,8 @@ def report(source_result, log, require_devices=False):
                              "Actual road geometry/editorial/music rights unverified", "History is process-local; no replay or 7-day persistence",
                              "Empty-cache build and supplier signature verification not performed"]}
     (ROOT / "evidence/latest.json").write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    (ROOT / "evidence/rr006.json").write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"PASS: {value['jvm']['testCount']} JVM tests (174 preserved); backend {backend['testCount']}; APK + test APK built; lint {len(issues)} warnings. Native evidence remains RR-005.")
+    (ROOT / "evidence/ui001.json").write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(f"PASS: {value['jvm']['testCount']} JVM tests (177 preserved); backend {backend['testCount']}; APK + test APK built; lint {len(issues)} warnings. Native evidence recorded under UI-001.")
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 {
-  "ticket": "RR-006",
-  "recordedAtUtc": "2026-11-15T13:18:03.726267+00:00",
+  "ticket": "UI-001",
+  "recordedAtUtc": "2026-11-15T13:44:46.979077+00:00",
   "scope": "JVM_AND_ANDROID_BUILD_WITH_SEPARATE_NATIVE_DEVICE_EVIDENCE",
   "sourceIntegrity": {
     "status": "PASS",
@@ -1117,14 +1117,19 @@
   "backend": {
     "status": "PASS",
     "testCount": 115,
-    "evidence": "evidence/rr006-backend.json",
+    "evidence": "evidence/ui001-backend.json",
     "liveHttpCases": 9
+  },
+  "rr006Regression": {
+    "status": "PASS",
+    "jvmPreserved": 177,
+    "backendPreserved": 115
   },
   "contractVerification": "Original v0.5/v0.6 preserved; 9 Uvicorn HTTP captures checked by existing Kotlin decoder/editorial validator",
   "debugApk": {
     "status": "PASS",
     "path": "app/build/outputs/apk/debug/app-debug.apk",
-    "sha256": "3460f51819b21e45995d309d2bd8863e2335ee5c87b7a88de562081e594dde9f"
+    "sha256": "28f2d49fb53e84525927c791f75a13ba02b5028f326eba520047cc9aa8f5ef62"
   },
   "testApk": {
     "path": "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk",
@@ -1136,17 +1141,17 @@
     "errors": 0,
     "warnings": 0
   },
-  "buildLog": "evidence/build-20261115-131657-969.log",
+  "buildLog": "evidence/build-20261115-134357-078.log",
   "deviceEvidence": [
     {
-      "ticket": "RR-005",
-      "recordedAtUtc": "2026-11-15T12:53:54.344768+00:00",
+      "ticket": "UI-001",
+      "recordedAtUtc": "2026-11-15T13:37:59.974665+00:00",
       "avd": "ReplyRadio_RR003_API34",
       "serial": "emulator-5584",
       "user": "10",
       "androidApi": "34",
       "fingerprint": "Pleos/crp_avd/crp_avd_x86_64:14/RELEASE.release_connect_v2.1.0/release_connect_v2.1.0:user/test-keys",
-      "appSha256": "3460f51819b21e45995d309d2bd8863e2335ee5c87b7a88de562081e594dde9f",
+      "appSha256": "28f2d49fb53e84525927c791f75a13ba02b5028f326eba520047cc9aa8f5ef62",
       "testApkSha256": "87361089d27a04e23b8dfd69397441c9bb191f42111d07985eb4f8aa74a71315",
       "audioFixture": "ORIGINAL_SYNTHESIZED_MP3_TEST_APK_ONLY",
       "tests": [
@@ -1347,7 +1352,7 @@
       "vehicleDrivingUx": "EMULATED_PLATFORM_RESTRICTION_ON_OFF",
       "audio": {
         "audioTrackAdvances": 5,
-        "renderedDecoderBuffers": 255,
+        "renderedDecoderBuffers": 223,
         "verifiedDecoderOrIoErrors": 5
       },
       "voice": {
@@ -1364,14 +1369,14 @@
       "artifactMatchesCurrentBuild": true
     },
     {
-      "ticket": "RR-005",
-      "recordedAtUtc": "2026-11-15T12:53:51.710018+00:00",
+      "ticket": "UI-001",
+      "recordedAtUtc": "2026-11-15T13:37:55.323843+00:00",
       "avd": "ReplyRadio_RR003_API37",
       "serial": "emulator-5586",
       "user": "0",
       "androidApi": "37",
       "fingerprint": "google/sdk_gphone64_x86_64/emu64xa:17/CE2A.260420.051.A2/16418371:user/release-keys",
-      "appSha256": "3460f51819b21e45995d309d2bd8863e2335ee5c87b7a88de562081e594dde9f",
+      "appSha256": "28f2d49fb53e84525927c791f75a13ba02b5028f326eba520047cc9aa8f5ef62",
       "testApkSha256": "87361089d27a04e23b8dfd69397441c9bb191f42111d07985eb4f8aa74a71315",
       "audioFixture": "ORIGINAL_SYNTHESIZED_MP3_TEST_APK_ONLY",
       "tests": [
@@ -1572,7 +1577,7 @@
       "vehicleDrivingUx": "NON_VEHICLE",
       "audio": {
         "audioTrackAdvances": 3,
-        "renderedDecoderBuffers": 266,
+        "renderedDecoderBuffers": 240,
         "verifiedDecoderOrIoErrors": 5
       },
       "voice": {
@@ -1581,7 +1586,7 @@
         "stopAcks": 7,
         "errors": 0,
         "stopTimeouts": 0,
-        "audioBytes": 1066766,
+        "audioBytes": 1081102,
         "rmsUpdates": 0
       },
       "ux": "NON_VEHICLE",

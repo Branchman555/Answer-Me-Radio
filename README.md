@@ -12,7 +12,7 @@
 
 ![Android](https://img.shields.io/badge/Android-Kotlin-153F42?style=flat-square)
 ![Media3](https://img.shields.io/badge/Media3-Local_Audio-AD7941?style=flat-square)
-![Stage](https://img.shields.io/badge/Prototype-RR--006-153F42?style=flat-square)
+![Stage](https://img.shields.io/badge/Prototype-UI--001-153F42?style=flat-square)
 ![Tests](https://img.shields.io/badge/JVM-177_passed-397566?style=flat-square)
 ![API](https://img.shields.io/badge/Mock_API-115_passed-AD7941?style=flat-square)
 
@@ -39,14 +39,16 @@
 
 ## 실제 앱 화면
 
+**따뜻한 앰버 빛의 라디오, 크게 보이는 곡 정보, 한눈에 들어오는 재생 버튼.** 휴대폰에서는 세로로, 차량 화면에서는 좌우로 배치합니다. 기능을 켜기 위한 개발 화면을 거치지 않고 실제 재생 화면에서 시작합니다.
+
 <table>
   <tr>
     <td align="center" width="50%"><strong>01 · 내 음악 등록</strong><br /><sub>SAF 선택 · 태그 확인 · 권한 관리</sub></td>
-    <td align="center" width="50%"><strong>02 · 음악 사이, 한국어 DJ</strong><br /><sub>실제 TTS · 표준 제어 · 순차 출력</sub></td>
+    <td align="center" width="50%"><strong>02 · 나만의 드라이브 라디오</strong><br /><sub>레트로 다이얼 · 현재 곡 · 큰 재생 제어</sub></td>
   </tr>
   <tr>
-    <td align="center"><img src="docs/assets/catalog-android.png" alt="선택한 MP3의 제목, 아티스트, 연도와 편성 가능 상태를 보여주는 실제 카탈로그 화면" width="240" /></td>
-    <td align="center"><img src="docs/assets/voice-android.png" alt="실제 한국어 DJ 음성 재생 상태와 5개 표준 제어 버튼" width="240" /></td>
+    <td align="center"><img src="docs/assets/prototype-catalog.png" alt="선택한 MP3의 제목, 아티스트, 연도와 편성 가능 상태를 보여주는 실제 카탈로그 화면" width="240" /></td>
+    <td align="center"><img src="docs/assets/prototype-radio.png" alt="앰버 라디오 다이얼과 현재 곡, 실제 재생 상태를 보여주는 프로토타입 화면" width="240" /></td>
   </tr>
   <tr>
     <td>선택한 파일만 읽습니다. 필요한 태그가 없으면 제외 사유를 표시하고, 목록 제거 시 원본 파일은 유지합니다.</td>
@@ -54,12 +56,12 @@
   </tr>
 </table>
 
-<sub>Android API37 개발판 캡처. 화면 속 곡은 검증용으로 직접 생성한 합성 음악이며, 최종 레트로 UI는 후속 단계입니다.</sub>
+<sub>Android API37 프로토타입의 실제 캡처입니다. 화면 속 곡은 검증용 합성 음악입니다. 라디오 다이얼은 시대를 표현하는 장식이며 실제 FM 주파수가 아닙니다.</sub>
 
 <details>
 <summary><strong>03 · Pleos 차량 제한 화면 보기</strong></summary>
 
-<img src="docs/assets/vehicle-ux-pleos.png" alt="Pleos 에뮬레이터의 상세 조작 잠금 상태. DJ 설정과 파일 관리가 숨겨지고 표준 재생 버튼만 남는다." width="100%" />
+<img src="docs/assets/prototype-restricted.png" alt="Pleos 에뮬레이터의 상세 조작 잠금 상태. DJ 설정과 파일 관리가 숨겨지고 표준 재생 버튼만 남는다." width="100%" />
 
 Virtual Console의 D/P 변경으로 실제 플랫폼 제한 콜백을 검사했습니다. 속도 0이어도 D에서 상세 조작이 잠깁니다. 실제 차량 주행·안전 인증을 의미하지 않습니다.
 
@@ -126,14 +128,14 @@ flowchart LR
 
 ## 검증으로 확인한 것
 
-**2026-11-15 · RR-006 로컬 검증 스냅샷** — 아래 수치는 실행 증거에 기반하며 CI 또는 실차 인증 배지가 아닙니다.
+**2026-11-15 · UI-001 프로토타입 검증 스냅샷** — 아래 수치는 실행 증거에 기반하며 CI 또는 실차 인증 배지가 아닙니다.
 
 | 검증 대상 | 결과 | 확인한 범위 |
 | :--- | :---: | :--- |
-| JVM 회귀 테스트 | **177 / 177** | 기존 174개 소스·테스트 유지 + 서버 호환성 3개, 실패·스킵 0 |
+| JVM 회귀 테스트 | **177 / 177** | 기존 177개 소스·테스트 유지, 실패·스킵 0 |
 | FastAPI + Mock LLM | **115 / 115** | 원본 계약·인증·한도·실제 3초 timeout, HTTP 9개 시나리오 포함 |
-| Pleos API34 에뮬레이터 | **38 / 38** | RR-005 증거 재사용 · 현재 APK hash 일치 |
-| Android API37 에뮬레이터 | **38 / 38** | RR-005 증거 재사용 · 현재 APK hash 일치 |
+| Pleos API34 에뮬레이터 | **38 / 38** | UI-001 새 APK로 전체 38개 재검증 |
+| Android API37 에뮬레이터 | **38 / 38** | UI-001 새 APK로 전체 38개 재검증 |
 | Android lint | **오류 0 · 경고 0** | debug 앱·테스트 APK 생성, strict 의존성 검증 |
 | 설계 원본 보존 | **27개 hash 일치** | 기존 인수 기준 54 + 40개 상태 보존 |
 
@@ -141,11 +143,11 @@ flowchart LR
 
 **검증 경계도 함께 공개합니다.** 에뮬레이터는 호스트 무음으로 실행했으므로 물리 스피커 청취 검증은 아닙니다. 물리 USB 분리·실제 차량 버튼·실차 주행·국가별 UX 심사는 미검증입니다. 오류·늦은 음성 콜백 순서는 JVM에서 별도로 검증했습니다. 현재 Pleos 이미지의 파일 선택기는 stub이어서 실제 파일 선택 왕복은 일반 Android에서 검증했습니다.
 
-[전체 검증 증거](evidence/rr006.json) · [서버 검증](evidence/rr006-backend.json) · [서버 구현·재현](docs/rr006-backend.md) · [음성·차량 UX 재현](docs/rr005-voice-ux.md) · [Pleos 결과](evidence/rr005-device-ReplyRadio_RR003_API34.json) · [Android 결과](evidence/rr005-device-ReplyRadio_RR003_API37.json)
+[전체 검증 증거](evidence/ui001.json) · [서버 검증](evidence/ui001-backend.json) · [UI 변경·재현](docs/ui001-prototype.md) · [서버 구현·재현](docs/rr006-backend.md) · [음성·차량 UX 재현](docs/rr005-voice-ux.md) · [Pleos 결과](evidence/ui001-device-ReplyRadio_RR003_API34.json) · [Android 결과](evidence/ui001-device-ReplyRadio_RR003_API37.json)
 
 ## 직접 실행하기
 
-개발 APK에서 **`개발용 로컬 MP3 관리` → 파일 등록 → `실제 로컬 라디오 재생` → `DJ 켜기`(선택) → 재생** 순서로 실행합니다. TITLE·ARTIST·YEAR가 채워진 MP3와 동작하는 Android 파일 선택기가 필요합니다. 차량에서는 플랫폼이 상세 조작을 허용해야 하며, 한국어 음성 미지원 시 음악만 이어집니다.
+앱을 열면 바로 라디오 화면이 나옵니다. **`음악 서랍` → `MP3 선택·등록` → `라디오로 돌아가기` → `DJ 켜기`(선택) → `재생`** 순서로 실행합니다. 화면 진입만으로 자동 재생하지 않습니다. TITLE·ARTIST·YEAR가 채워진 MP3와 동작하는 Android 파일 선택기가 필요합니다. 차량에서는 플랫폼이 상세 조작을 허용해야 하며, 한국어 음성 미지원 시 음악만 이어집니다.
 
 <details>
 <summary><strong>개발 환경과 빌드 명령</strong></summary>
@@ -163,7 +165,7 @@ python -X utf8 tools/generate_rr004_audio.py
 # 로컬 Mock API 계약 검증 · 실제 HTTP 자료 생성
 py -3.11 -m venv backend/.venv
 backend/.venv/Scripts/python.exe -m pip install --require-hashes -r backend/requirements.lock
-backend/.venv/Scripts/python.exe -X utf8 tools/check_backend.py
+backend/.venv/Scripts/python.exe -X utf8 tools/check_backend.py --evidence-prefix ui001
 
 # JAVA_HOME / ANDROID_HOME을 설정한 환경
 ./tools/check.ps1 -Offline
@@ -190,6 +192,7 @@ app/src/main/kotlin/radio/reply/
 ├── orchestrator/   상태 · 이벤트 · 단일 Reducer
 ├── playback/       Media3 · 실제 TTS · 단일 출력 · 표준 제어
 ├── ux/             CarUxRestrictions · UNKNOWN 상세 잠금
+├── ui/             레트로 다이얼 · 공통 색상·타이포·버튼
 ├── context/        상황정보 · 날씨 캐시 계약
 ├── dj/             DJ 요청·응답 검증 · 로컬 폴백
 ├── story/          역사 콘텐츠 검수·권리·구간 게이트
@@ -213,8 +216,10 @@ backend/            FastAPI · 엄격한 v0.5 모델 · Mock · 검증 · 폴백
 | RR-003 | SAF 로컬 MP3 카탈로그 | 완료 · Pleos 선택기 제한 공개 |
 | RR-004 | Media3 · 표준 제어 · 실제 재생 오류 처리 | 완료 · 에뮬레이터 검증 |
 | RR-005 | 실제 한국어 음성 · 차량 UX 제한 | 완료 · Pleos/Android 에뮬레이터 검증 |
-| **RR-006** | **FastAPI · Mock LLM · 계약 검증** | **완료 · 로컬 API / 앱 HTTP 연결은 별도** |
-| RR-007~009 | 실제 역사/위치 · 기록 · 통합 시연 | 예정 |
+| RR-006 | FastAPI · Mock LLM · 계약 검증 | 완료 · 로컬 API / 앱 HTTP 연결은 별도 |
+| **UI-001** | **레트로 라디오 · 음악 서랍 UI** | **완료 · 새 화면으로 기존 기능 재검증** |
+| RR-007 | 실제 역사 콘텐츠 · 위치 | 사용자 요청으로 중단 · 대관령 예시 계획 유지 |
+| RR-008~009 | 기록 · 통합 시연 | 예정 |
 
 [상세 완료 조건과 남은 과제 →](docs/roadmap.md)
 

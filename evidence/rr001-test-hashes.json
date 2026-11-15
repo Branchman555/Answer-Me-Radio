@@ -1,0 +1,18 @@
+[
+  {
+    "sha256": "b0570fdbcd6a729417a12cf776ec714bf957d51ace1eacd485d038b8e1cbe30d",
+    "path": "app/src/test/kotlin/radio/reply/EventInterleavingTest.kt"
+  },
+  {
+    "sha256": "48cf9b34416c38bdc6fc2c45ac97267622f8770c0e78878b58b0066fabf8c0df",
+    "path": "app/src/test/kotlin/radio/reply/RadioPlannerTest.kt"
+  },
+  {
+    "sha256": "9bbebbf021612f94365bdd814687d08491ea0b57225d78d27527463154fa127e",
+    "path": "app/src/test/kotlin/radio/reply/RadioReducerTest.kt"
+  },
+  {
+    "sha256": "5f30d63ae45b18bd29524a337e3e8447dc682fb22e65ef060fc37d9e3318bba9",
+    "path": "app/src/test/kotlin/radio/reply/RoadStoryTest.kt"
+  }
+]

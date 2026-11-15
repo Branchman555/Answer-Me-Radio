@@ -1,0 +1,1028 @@
+{
+  "ticket": "RR-003",
+  "recordedAtUtc": "2026-11-15T10:09:43.460636+00:00",
+  "scope": "JVM_AND_ANDROID_BUILD_WITH_SEPARATE_NATIVE_DEVICE_EVIDENCE",
+  "sourceIntegrity": {
+    "status": "PASS",
+    "manifestFilesVerified": 27,
+    "baselineAcceptanceCasesPreserved": 54,
+    "roadAcceptanceCasesPreserved": 40,
+    "externalExtensionMatches": true
+  },
+  "jvm": {
+    "status": "PASS",
+    "testCount": 127,
+    "suites": [
+      {
+        "name": "radio.reply.ContextDjIntegrationTest",
+        "tests": [
+          {
+            "name": "providerErrorAndInvalidJsonFallbackWithoutRetries",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "ac040_sameWeatherFetchDoesNotDuplicateRequestsOrChangeGeneration",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-040"
+            ]
+          },
+          {
+            "name": "threeSecondTimeoutNeverRetriesOrBlocksPlayback",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "earlyBoundaryUsesFallbackAndLateReplyCannotReplaceSpeakingVoice",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "djOffEmitsNoProviderRequestsAndRawLegacyTextHasNoPlaybackAuthority",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "historyCornerCancelsOrdinaryPrefetchAndNeverUsesHistoryApiType",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "exactDeadlineReplyIsTooLateButEarlierReplyIsUsable",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "changedContextCancelsOldRequestAndRejectsLateResponse",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "revokedLocationWeatherIsRemovedFromMemoryEvenIfAdapterSuppliesCachedReading",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "lastSongStartPrefetchesExactlyOnceAndResponseCannotStartAudio",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "locationRevocationBeforeBoundaryRemovesWeatherAndPreservesMusic",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "pauseCanCacheReplyButCannotPlayUntilUserPlay",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "catalogChangeInvalidatesIntroducedTrackAndUsesCurrentMetadataOnly",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "staleWeatherDuringSongOrVoicePauseFallsBackAtSpeechStart",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "malformedTrackMetadataSkipsNetworkButKeepsEraFallback",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "ac039_midTrackWeatherDoesNotInterruptAndAdoptsOnlyAtBlockBoundary",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-039"
+            ]
+          },
+          {
+            "name": "nextInvalidatesPrefetchWithoutChangingCompletionCount",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "stopAndDjOffCancelAndLateRepliesNeverReviveOutput",
+            "status": "PASS",
+            "relatedDesignCases": []
+          }
+        ]
+      },
+      {
+        "name": "radio.reply.ContextEngineTest",
+        "tests": [
+          {
+            "name": "ac040_captureFetchIdsLocationAndVehicleDoNotChangeFingerprint",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-040"
+            ]
+          },
+          {
+            "name": "explicitlyConsentedRegionIsIndependentOfLocationPermission",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "weatherFailureKeepsOnlyStillValidCache",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "ac041_projectionHasOnlyFiveFieldsAndRechecksTtl",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-041"
+            ]
+          },
+          {
+            "name": "simulationRequiresBothExplicitModeAndDevelopmentBuild",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "weatherGatewaySingleFlightRefreshBackoffAndRevocation",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "ac040_fingerprintMatchesAllEightPreservedFixtureHashes",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-040"
+            ]
+          },
+          {
+            "name": "timeBoundariesAndTimezoneChangesUseLocalClock",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "ac038_deniedUnavailableAndBlockedLocationsRemoveWeather",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-038"
+            ]
+          },
+          {
+            "name": "ac037_sixtyMinuteAndFiveMinuteFutureBoundaries",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-037"
+            ]
+          },
+          {
+            "name": "ac036_validObservationUsesModelTimeAndPreservesEraFilter",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-036"
+            ]
+          },
+          {
+            "name": "invalidConditionDatesAndUnknownClockFailClosed",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "genresCanonicalizeAndEqualErasBecomeSingle",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "ac042_unknownClockOrZoneDoesNotInventContext",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-042"
+            ]
+          },
+          {
+            "name": "fetchTimeCannotFreshenOldObservation",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "snapshotsDoNotRetainMutablePreferenceCollections",
+            "status": "PASS",
+            "relatedDesignCases": []
+          }
+        ]
+      },
+      {
+        "name": "radio.reply.DjContractTest",
+        "tests": [
+          {
+            "name": "fallbackTypesUseOnlyNormalizedErasAndNoWeatherClaims",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "ac041_generatedSnapshotRequestResponseConformToPreservedSchemas",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-041"
+            ]
+          },
+          {
+            "name": "originalDjFixtureDecodesAndSchemaRejectsAddedPlaybackCommands",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "ac018_weatherIsRevalidatedAndUnprovenFactsNeverRender",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-018"
+            ]
+          },
+          {
+            "name": "simulatedWeatherSpeechIsExplicitlyLabeled",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "unknownGroundingReferencesCannotAuthorizeText",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "everyResponseCorrelationFieldMustMatch",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "preservedContextFixturesAndTheirNegativeMutationsExerciseSchemaOracle",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "strictResponseReaderRejectsWrongTypesDuplicatesTrailingDataAndMissingFields",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "actualPayloadContainsNoLocalSnapshotOrPlaybackFields",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "unicodeMetadataIsNormalizedBoundedAndEncodedOnlyAsData",
+            "status": "PASS",
+            "relatedDesignCases": []
+          }
+        ]
+      },
+      {
+        "name": "radio.reply.EventInterleavingTest",
+        "tests": [
+          {
+            "name": "seededUserAndLateCallbackInterleavingsPreserveSingleOutputAndUserHold",
+            "status": "PASS",
+            "relatedDesignCases": []
+          }
+        ]
+      },
+      {
+        "name": "radio.reply.LocalMusicCatalogTest",
+        "tests": [
+          {
+            "name": "longOrControlCharacterTagsCannotEnterDjPayload",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "ac004_persistedGrantAndStableIdSurviveRepositoryRestart",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-004"
+            ]
+          },
+          {
+            "name": "ac002_tagYearsProduceExactEraClassification",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-002"
+            ]
+          },
+          {
+            "name": "ac003_missingYearIsQuarantinedWithoutFilenameGuess",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-003"
+            ]
+          },
+          {
+            "name": "missingTitleOrArtistNeverFallsBackToFilename",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "oneUnreadableFileDoesNotAbortOtherSelections",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "failedDeleteDoesNotReleaseGrantOrLoseDurableRow",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "uriSchemeAuthorityAndSelectionReadGrantAreRequired",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "mimeAndReadableDurationRequiredEvenForMp3Suffix",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "selectionAndCatalogLimitsBoundWorkWithoutScanning",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "ac001_onlyExplicitlySelectedUrisAreRead",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-001"
+            ]
+          },
+          {
+            "name": "usbRemovalAndReconnectRequireSuccessfulReopen",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "removingCatalogEntryReleasesOnlyItsGrantAndNeverDeletesOriginal",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "unicodeAndWhitespaceAreNormalized",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "failedCommitRollsBackNewGrantsButNotPreexistingGrants",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "catalogUpdatesInvalidateDjAndDoNotStartPausedRadio",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "permissionCanBeRevokedBetweenCheckAndOpen",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "androidReadPermissionIsRecheckedRatherThanTrustingIntentFlags",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "persistenceFailureIsSessionOnlyAndRequiresReselectionAfterRestart",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "malformedDurableCatalogFailsWithoutOverwritingIt",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "revokedGrantIsKeptVisibleButExcludedFromPlanning",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "missingPersistableOfferNeverAttemptsToTakeGrant",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "duplicateSelectionAndReselectionUpdateInPlace",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "badYearsAreNotCoercedIntoAValidYear",
+            "status": "PASS",
+            "relatedDesignCases": []
+          }
+        ]
+      },
+      {
+        "name": "radio.reply.RadioPlannerTest",
+        "tests": [
+          {
+            "name": "ac011_missingEraIsReported",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-011"
+            ]
+          },
+          {
+            "name": "ac007_eraIsHardFilter",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-007"
+            ]
+          },
+          {
+            "name": "ac014_seedIsDeterministicAndLastTrackMovesBack",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-014"
+            ]
+          },
+          {
+            "name": "ac015_sameErasNormalizeToSingle",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-015"
+            ]
+          },
+          {
+            "name": "ac009_twoCandidatesShortenBlock",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-009"
+            ]
+          },
+          {
+            "name": "ac008_familyAlternatesThreeTrackTargets",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-008"
+            ]
+          },
+          {
+            "name": "ac012_noTracksBlocksPlanning",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-012"
+            ]
+          },
+          {
+            "name": "ac010_oneCandidateShortensBlock",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-010"
+            ]
+          },
+          {
+            "name": "invalidMetadataAndUnavailableTracksAreExcluded",
+            "status": "PASS",
+            "relatedDesignCases": []
+          }
+        ]
+      },
+      {
+        "name": "radio.reply.RadioReducerTest",
+        "tests": [
+          {
+            "name": "playWithoutFocusWaitsThenResumesOnGain",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "ac024_openingOnceThenMusic",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-024"
+            ]
+          },
+          {
+            "name": "stopTimeoutNeverStartsMusicEvenAfterPlay",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "nextWhilePausedChangesPositionWithoutOutput",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "ac032_duplicateEndDoesNotCountTwice",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-032"
+            ]
+          },
+          {
+            "name": "ac031_permanentFocusNeedsExplicitPlay",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-031"
+            ]
+          },
+          {
+            "name": "threeConsecutiveMediaFailuresStopAndExcludeBadTracks",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "eraChangeInvalidatesOldOutputAndKeepsPause",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "voiceErrorWaitsForConfirmedSilence",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "ac030_transientFocusResumesSameMusicOnlyAfterStop",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-030"
+            ]
+          },
+          {
+            "name": "singleTrackRepeatDoesNotSpamDj",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "emptyCatalogStopsCleanly",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "ac025_threeNaturalEndsBridgeToNextEra",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-025"
+            ]
+          },
+          {
+            "name": "ac028_nextWaitsForStopThenStartsIntroducedTrackOnce",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-028"
+            ]
+          },
+          {
+            "name": "pauseBeforeFirstPlayAndAfterStopDoesNotStrandSession",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "ac026_allSkippedBlockDoesNotSpeak",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-026"
+            ]
+          },
+          {
+            "name": "ac029_focusGainDoesNotResumeUserPause",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-029"
+            ]
+          },
+          {
+            "name": "ac033_oldGenerationAndEveryCorrelationFieldAreRejected",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-033"
+            ]
+          },
+          {
+            "name": "ac035_djOffNeverStartsVoice",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-035"
+            ]
+          },
+          {
+            "name": "stopCannotBeResurrectedByOldSession",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "ac027_pauseWinsLateVoiceDone",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-027"
+            ]
+          },
+          {
+            "name": "ac013_skipReplenishesWithinEraWithoutCompletion",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "AC-013"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "radio.reply.RoadStoryTest",
+        "tests": [
+          {
+            "name": "rs016_secondBoundaryReplacesRegularDj",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "RS-016"
+            ]
+          },
+          {
+            "name": "rs027_rs028_etaUsesReviewedShortOrSkips",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "RS-027",
+              "RS-028"
+            ]
+          },
+          {
+            "name": "rs040_newRouteReplacesPendingWithoutStoppingMusic",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "RS-040"
+            ]
+          },
+          {
+            "name": "rs039_usbRemovalBeforeSpeechCancelsIntroduction",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "RS-039"
+            ]
+          },
+          {
+            "name": "rs003_rs035_rs038_storyRestoresExactBaseQueueAndCursor",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "RS-003",
+              "RS-035",
+              "RS-038"
+            ]
+          },
+          {
+            "name": "rs012_rs013_canonicalEventDeduplicatesArticles",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "RS-012",
+              "RS-013"
+            ]
+          },
+          {
+            "name": "rs024_noExactYearTrackKeepsBaseMusic",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "RS-024"
+            ]
+          },
+          {
+            "name": "rs018_pausedEntryAndFocusCannotStartAnything",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "RS-018"
+            ]
+          },
+          {
+            "name": "rs033_revocationShadowsOlderApprovedVersion",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "RS-033"
+            ]
+          },
+          {
+            "name": "conflictingSameVersionFailsClosed",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "rs037_djOffOrConsentWithdrawalReleasesSubscription",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "RS-037"
+            ]
+          },
+          {
+            "name": "rs005_rs007_anniversaryUsesEventDateNotPublication",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "RS-005",
+              "RS-007"
+            ]
+          },
+          {
+            "name": "rs034_bundledDraftLoadsButCannotExecute",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "RS-034"
+            ]
+          },
+          {
+            "name": "rs017_exitOrExpiryCancelsPending",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "RS-017"
+            ]
+          },
+          {
+            "name": "rs021_unapprovedContentOrScriptNeverRuns",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "RS-021"
+            ]
+          },
+          {
+            "name": "rs010_rs011_ambiguousGeometryAndRouteOnlyCannotConfirm",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "RS-010",
+              "RS-011"
+            ]
+          },
+          {
+            "name": "rs019_rs020_interruptedHistoryIsPartialAndDoesNotDoubleSkip",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "RS-019",
+              "RS-020"
+            ]
+          },
+          {
+            "name": "contentReaderRejectsUnknownFieldsTypesDatesAndDanglingReferences",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "repeatedSamplesDoNotChurnGeneration",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "rs004_otherRoadIsExcludedEvenOnAnniversary",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "RS-004"
+            ]
+          },
+          {
+            "name": "rs006_noAnniversaryStillAllowsSameRoadStory",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "RS-006"
+            ]
+          },
+          {
+            "name": "rs023_rs025_labelsDoNotInventChartOrBroadcastClaims",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "RS-023",
+              "RS-025"
+            ]
+          },
+          {
+            "name": "rs008_rs009_missingStaleFutureLocationIsRejected",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "RS-008",
+              "RS-009"
+            ]
+          },
+          {
+            "name": "rs014_rs015_entryDoesNotInterruptAndOneCompletionDoesNotSpeak",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "RS-014",
+              "RS-015"
+            ]
+          },
+          {
+            "name": "clearHistoryKeepsTripDedupeAndInterruptedVoiceDoesNotRepeatOnPlay",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "rs001_rs002_defaultOffPreservesBaseEras",
+            "status": "PASS",
+            "relatedDesignCases": [
+              "RS-001",
+              "RS-002"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "rr001Regression": {
+    "status": "PASS",
+    "testsPreservedAndExecuted": 58,
+    "sourceHashesUnchanged": true
+  },
+  "rr002Regression": {
+    "status": "PASS",
+    "testsPreservedAndExecuted": 103,
+    "sourceHashesUnchanged": true
+  },
+  "contractVerification": "Preserved v0.5/v0.6 schema keyword checks, fixture hashes, payload isolation, Mock provider/reducer integration",
+  "debugApk": {
+    "status": "PASS",
+    "path": "app/build/outputs/apk/debug/app-debug.apk",
+    "sha256": "75616d4f09badc887b2186b0c2bbbd5a577fb3c155265b612f1fd1d20c13cdb3"
+  },
+  "testApk": {
+    "path": "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk",
+    "sha256": "add77a34755ef92232b2d5da3ba04faf1464c47ec75a86f3484a612e6e9ae630"
+  },
+  "catalogArtifactIsolation": "PASS_NO_AUDIO_OR_TEST_PROVIDER_IN_MAIN_APK_NO_BROAD_PERMISSIONS",
+  "lint": {
+    "status": "PASS",
+    "errors": 0,
+    "warnings": 0
+  },
+  "buildLog": "evidence/build-20261115-100751-494.log",
+  "deviceEvidence": [
+    {
+      "ticket": "RR-003",
+      "recordedAtUtc": "2026-11-15T10:09:13.056231+00:00",
+      "serial": "emulator-5584",
+      "avd": "ReplyRadio_RR003_API34",
+      "androidApi": "34",
+      "fingerprint": "Pleos/crp_avd/crp_avd_x86_64:14/RELEASE.release_connect_v2.1.0/release_connect_v2.1.0:user/test-keys",
+      "user": "10",
+      "appSha256": "75616d4f09badc887b2186b0c2bbbd5a577fb3c155265b612f1fd1d20c13cdb3",
+      "testApkSha256": "add77a34755ef92232b2d5da3ba04faf1464c47ec75a86f3484a612e6e9ae630",
+      "fixture": "GENERATED_SILENT_MPEG_FRAMES_AND_SYNTHETIC_TAGS_TEST_APK_ONLY",
+      "pickerResolver": "priority=101 preferredOrder=0 match=0x608000 specificIndex=-1 isDefault=true\r\ncom.android.car.frameworkpackagestubs/.Stubs$DocumentsUIStubWithResult",
+      "picker": "BLOCKED_PLATFORM_STUB",
+      "tests": [
+        {
+          "name": "picker_contract_local_only_read_only_multiple",
+          "stage": "write",
+          "status": "PASS"
+        },
+        {
+          "name": "cancel_and_clipdata_results",
+          "stage": "write",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown_detail_access_is_denied",
+          "stage": "write",
+          "status": "PASS"
+        },
+        {
+          "name": "six_real_mp3_metadata_and_persisted_read_grants",
+          "stage": "write",
+          "status": "PASS"
+        },
+        {
+          "name": "missing_year_and_broken_files_are_individual_failures",
+          "stage": "write",
+          "status": "PASS"
+        },
+        {
+          "name": "native_store_roundtrip_stable_ids_and_no_backup_path",
+          "stage": "write",
+          "status": "PASS"
+        },
+        {
+          "name": "corrupt_store_is_not_silently_overwritten",
+          "stage": "write",
+          "status": "PASS"
+        },
+        {
+          "name": "persisted_rights_survive_target_process_death",
+          "stage": "restore",
+          "status": "PASS"
+        },
+        {
+          "name": "revoked_rights_require_reselection",
+          "stage": "restore",
+          "status": "PASS"
+        },
+        {
+          "name": "reselection_keeps_id_and_does_not_duplicate",
+          "stage": "restore",
+          "status": "PASS"
+        },
+        {
+          "name": "deleted_document_is_excluded_after_reopen",
+          "stage": "restore",
+          "status": "PASS"
+        },
+        {
+          "name": "remove_releases_persisted_grant_and_keeps_source_file",
+          "stage": "restore",
+          "status": "PASS"
+        }
+      ],
+      "actualMusicPlayback": "NOT_RUN",
+      "physicalUsbUnplug": "NOT_RUN",
+      "vehicleDrivingUx": "NOT_RUN",
+      "targetProcessForceStoppedBeforeRestore": true,
+      "status": "PASS_WITH_PLATFORM_LIMIT",
+      "artifactMatchesCurrentBuild": true
+    },
+    {
+      "ticket": "RR-003",
+      "recordedAtUtc": "2026-11-15T10:09:12.410246+00:00",
+      "serial": "emulator-5586",
+      "avd": "ReplyRadio_RR003_API37",
+      "androidApi": "37",
+      "fingerprint": "google/sdk_gphone64_x86_64/emu64xa:17/CE2A.260420.051.A2/16418371:user/release-keys",
+      "user": "0",
+      "appSha256": "75616d4f09badc887b2186b0c2bbbd5a577fb3c155265b612f1fd1d20c13cdb3",
+      "testApkSha256": "add77a34755ef92232b2d5da3ba04faf1464c47ec75a86f3484a612e6e9ae630",
+      "fixture": "GENERATED_SILENT_MPEG_FRAMES_AND_SYNTHETIC_TAGS_TEST_APK_ONLY",
+      "pickerResolver": "priority=100 preferredOrder=0 match=0x608000 specificIndex=-1 isDefault=true\r\ncom.google.android.documentsui/com.android.documentsui.picker.PickActivity",
+      "picker": "PASS",
+      "tests": [
+        {
+          "name": "picker_contract_local_only_read_only_multiple",
+          "stage": "write",
+          "status": "PASS"
+        },
+        {
+          "name": "cancel_and_clipdata_results",
+          "stage": "write",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown_detail_access_is_denied",
+          "stage": "write",
+          "status": "PASS"
+        },
+        {
+          "name": "six_real_mp3_metadata_and_persisted_read_grants",
+          "stage": "write",
+          "status": "PASS"
+        },
+        {
+          "name": "missing_year_and_broken_files_are_individual_failures",
+          "stage": "write",
+          "status": "PASS"
+        },
+        {
+          "name": "native_store_roundtrip_stable_ids_and_no_backup_path",
+          "stage": "write",
+          "status": "PASS"
+        },
+        {
+          "name": "corrupt_store_is_not_silently_overwritten",
+          "stage": "write",
+          "status": "PASS"
+        },
+        {
+          "name": "persisted_rights_survive_target_process_death",
+          "stage": "restore",
+          "status": "PASS"
+        },
+        {
+          "name": "revoked_rights_require_reselection",
+          "stage": "restore",
+          "status": "PASS"
+        },
+        {
+          "name": "reselection_keeps_id_and_does_not_duplicate",
+          "stage": "restore",
+          "status": "PASS"
+        },
+        {
+          "name": "deleted_document_is_excluded_after_reopen",
+          "stage": "restore",
+          "status": "PASS"
+        },
+        {
+          "name": "remove_releases_persisted_grant_and_keeps_source_file",
+          "stage": "restore",
+          "status": "PASS"
+        },
+        {
+          "name": "system_picker_and_actual_catalog_activity_import",
+          "stage": "picker",
+          "status": "PASS"
+        }
+      ],
+      "actualMusicPlayback": "NOT_RUN",
+      "physicalUsbUnplug": "NOT_RUN",
+      "vehicleDrivingUx": "NOT_RUN",
+      "targetProcessForceStoppedBeforeRestore": true,
+      "status": "PASS",
+      "artifactMatchesCurrentBuild": true
+    }
+  ],
+  "realAudioPlayback": "NOT_RUN",
+  "vehicle": "NOT_RUN",
+  "acceptanceMatricesPromoted": false,
+  "limitations": [
+    "MP3 metadata import implemented; audio playback/Media3/TTS/GPS/network not connected",
+    "Pleos API34 picker resolves to platform stub; actual SAF picker tested separately if device evidence says PASS",
+    "Physical USB removal and driving restriction integration not tested",
+    "Only local approved templates; unrestricted LLM/backend validation remains RR-006",
+    "Actual road geometry/editorial/music rights unverified",
+    "History is process-local; no replay or 7-day persistence",
+    "Empty-cache build and supplier signature verification not performed"
+  ]
+}

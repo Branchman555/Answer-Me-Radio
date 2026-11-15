@@ -1,0 +1,1126 @@
+{
+  "schemaVersion": "0.7",
+  "status": "DESIGN_ONLY_NOT_EXECUTED",
+  "fixedNow": "2026-11-15T02:30:00+09:00",
+  "description": "음원 파일 바이너리를 포함하지 않는 예상 재생 시퀀스·이벤트 fixture. 자동 테스트의 expected trace로 구체화할 초안.",
+  "sourceContracts": {
+    "djApiSchema": "reply_radio_dj_script_schema_v0.5.json",
+    "contextSchema": "reply_radio_context_schema_v0.6.json",
+    "stateMachine": "reply_radio_playback_state_machine_v0.4.md"
+  },
+  "catalog": [
+    {
+      "id": "1980-01",
+      "title": "연습곡 1980s 1",
+      "artist": "샘플 아티스트 1980s 1",
+      "releaseYear": 1982,
+      "genre": "BALLAD",
+      "durationMs": 190000,
+      "isAccessible": true,
+      "isPlayable": true,
+      "source": "LOCAL_URI_FIXTURE"
+    },
+    {
+      "id": "1980-02",
+      "title": "연습곡 1980s 2",
+      "artist": "샘플 아티스트 1980s 2",
+      "releaseYear": 1985,
+      "genre": "POP",
+      "durationMs": 200000,
+      "isAccessible": true,
+      "isPlayable": true,
+      "source": "LOCAL_URI_FIXTURE"
+    },
+    {
+      "id": "1980-03",
+      "title": "연습곡 1980s 3",
+      "artist": "샘플 아티스트 1980s 3",
+      "releaseYear": 1987,
+      "genre": "BALLAD",
+      "durationMs": 210000,
+      "isAccessible": true,
+      "isPlayable": true,
+      "source": "LOCAL_URI_FIXTURE"
+    },
+    {
+      "id": "1980-04",
+      "title": "연습곡 1980s 4",
+      "artist": "샘플 아티스트 1980s 4",
+      "releaseYear": 1989,
+      "genre": "POP",
+      "durationMs": 220000,
+      "isAccessible": true,
+      "isPlayable": true,
+      "source": "LOCAL_URI_FIXTURE"
+    },
+    {
+      "id": "2010-01",
+      "title": "연습곡 2010s 1",
+      "artist": "샘플 아티스트 2010s 1",
+      "releaseYear": 2010,
+      "genre": "BALLAD",
+      "durationMs": 190000,
+      "isAccessible": true,
+      "isPlayable": true,
+      "source": "LOCAL_URI_FIXTURE"
+    },
+    {
+      "id": "2010-02",
+      "title": "연습곡 2010s 2",
+      "artist": "샘플 아티스트 2010s 2",
+      "releaseYear": 2012,
+      "genre": "POP",
+      "durationMs": 200000,
+      "isAccessible": true,
+      "isPlayable": true,
+      "source": "LOCAL_URI_FIXTURE"
+    },
+    {
+      "id": "2010-03",
+      "title": "연습곡 2010s 3",
+      "artist": "샘플 아티스트 2010s 3",
+      "releaseYear": 2014,
+      "genre": "BALLAD",
+      "durationMs": 210000,
+      "isAccessible": true,
+      "isPlayable": true,
+      "source": "LOCAL_URI_FIXTURE"
+    },
+    {
+      "id": "2010-04",
+      "title": "연습곡 2010s 4",
+      "artist": "샘플 아티스트 2010s 4",
+      "releaseYear": 2018,
+      "genre": "POP",
+      "durationMs": 220000,
+      "isAccessible": true,
+      "isPlayable": true,
+      "source": "LOCAL_URI_FIXTURE"
+    },
+    {
+      "id": "1990-01",
+      "title": "연습곡 1990s 1",
+      "artist": "샘플 아티스트 1990s 1",
+      "releaseYear": 1991,
+      "genre": "BALLAD",
+      "durationMs": 190000,
+      "isAccessible": true,
+      "isPlayable": true,
+      "source": "LOCAL_URI_FIXTURE"
+    },
+    {
+      "id": "1990-02",
+      "title": "연습곡 1990s 2",
+      "artist": "샘플 아티스트 1990s 2",
+      "releaseYear": 1994,
+      "genre": "POP",
+      "durationMs": 200000,
+      "isAccessible": true,
+      "isPlayable": true,
+      "source": "LOCAL_URI_FIXTURE"
+    },
+    {
+      "id": "1990-03",
+      "title": "연습곡 1990s 3",
+      "artist": "샘플 아티스트 1990s 3",
+      "releaseYear": 1997,
+      "genre": "BALLAD",
+      "durationMs": 210000,
+      "isAccessible": true,
+      "isPlayable": true,
+      "source": "LOCAL_URI_FIXTURE"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "E2E-01",
+      "name": "FAMILY 정상 3+3+DJ",
+      "priority": "P0",
+      "profile": {
+        "mode": "FAMILY",
+        "eras": [
+          "1980s",
+          "2010s"
+        ],
+        "djEnabled": true
+      },
+      "stimuli": [
+        "PLAY",
+        "OPENING_VOICE_DONE",
+        "A_TRACK_1_END",
+        "A_TRACK_2_END",
+        "A_TRACK_3_END",
+        "ERA_BRIDGE_VOICE_DONE",
+        "B_TRACK_1_END",
+        "B_TRACK_2_END",
+        "B_TRACK_3_END"
+      ],
+      "expected": [
+        "DJ_OPENING",
+        "A_1980s_COMPLETE_3",
+        "DJ_BRIDGE_A_B_ONCE",
+        "B_2010s_COMPLETE_3",
+        "DJ_NEXT_BRIDGE_ONCE"
+      ],
+      "assertions": [
+        "era_hard_filter",
+        "activeAudioOutputs<=1",
+        "no_unrequested_autoplay"
+      ],
+      "contextSnapshotId": "ctx-e2e-01",
+      "contextTemplate": "CTX-BASE-VALID"
+    },
+    {
+      "id": "E2E-02",
+      "name": "SINGLE 1990s",
+      "priority": "P0",
+      "profile": {
+        "mode": "SINGLE",
+        "eras": [
+          "1990s"
+        ],
+        "djEnabled": true
+      },
+      "stimuli": [
+        "PLAY",
+        "OPENING_VOICE_DONE",
+        "TRACK_END",
+        "TRACK_END",
+        "TRACK_END"
+      ],
+      "expected": [
+        "ONLY_1990s",
+        "SAME_ERA_BRIDGE",
+        "NO_FALSE_FAMILY_TRANSITION"
+      ],
+      "assertions": [
+        "era_hard_filter"
+      ],
+      "contextSnapshotId": "ctx-e2e-02",
+      "contextTemplate": "CTX-NO-WEATHER"
+    },
+    {
+      "id": "E2E-03",
+      "name": "다른 시대 하드 필터",
+      "priority": "P0",
+      "profile": {
+        "mode": "SINGLE",
+        "eras": [
+          "1980s"
+        ],
+        "djEnabled": false
+      },
+      "stimuli": [
+        "PLAY",
+        "HIGH_CONTEXT_SCORE_2014_TRACK"
+      ],
+      "expected": [
+        "ONLY_1980s"
+      ],
+      "assertions": [
+        "era_hard_filter"
+      ],
+      "contextSnapshotId": "ctx-e2e-03",
+      "contextTemplate": "CTX-BASE-VALID"
+    },
+    {
+      "id": "E2E-04",
+      "name": "한쪽 시대 0곡",
+      "priority": "P0",
+      "profile": {
+        "mode": "FAMILY",
+        "eras": [
+          "1980s",
+          "2010s"
+        ],
+        "djEnabled": true
+      },
+      "libraryOverride": {
+        "excludeEra": "1980s"
+      },
+      "stimuli": [
+        "PLAY"
+      ],
+      "expected": [
+        "DEGRADED_SINGLE_2010s",
+        "NOTICE_MISSING_1980s"
+      ],
+      "assertions": [
+        "no_false_family_claim"
+      ],
+      "contextSnapshotId": "ctx-e2e-04",
+      "contextTemplate": "CTX-NO-WEATHER"
+    },
+    {
+      "id": "E2E-05",
+      "name": "둘 다 0곡",
+      "priority": "P0",
+      "profile": {
+        "mode": "FAMILY",
+        "eras": [
+          "1980s",
+          "2010s"
+        ],
+        "djEnabled": true
+      },
+      "libraryOverride": {
+        "clearAll": true
+      },
+      "stimuli": [
+        "PLAY"
+      ],
+      "expected": [
+        "PREPARING_TO_STOPPED",
+        "REGISTER_FILES_NOTICE"
+      ],
+      "assertions": [
+        "activeAudioOutputs==0"
+      ],
+      "contextSnapshotId": "ctx-e2e-05",
+      "contextTemplate": "CTX-NO-WEATHER"
+    },
+    {
+      "id": "E2E-06",
+      "name": "전 곡 스킵",
+      "priority": "P0",
+      "profile": {
+        "mode": "FAMILY",
+        "eras": [
+          "1980s",
+          "2010s"
+        ],
+        "djEnabled": true
+      },
+      "stimuli": [
+        "PLAY",
+        "OPENING_VOICE_DONE",
+        "NEXT_ALL_A_UNTIL_CANDIDATE_EXHAUSTED"
+      ],
+      "expected": [
+        "A_COMPLETED_0",
+        "NO_BRIDGE_FOR_A",
+        "NEXT_ERA_B"
+      ],
+      "assertions": [
+        "skips_do_not_count_completed"
+      ],
+      "contextSnapshotId": "ctx-e2e-06",
+      "contextTemplate": "CTX-NO-WEATHER"
+    },
+    {
+      "id": "E2E-07",
+      "name": "DJ 중 PAUSE 후 늦은 완료",
+      "priority": "P0",
+      "profile": {
+        "mode": "SINGLE",
+        "eras": [
+          "1980s"
+        ],
+        "djEnabled": true
+      },
+      "stimuli": [
+        "PLAY",
+        "DJ_SPEAKING",
+        "PAUSE",
+        "VOICE_DONE_OLD_TOKEN"
+      ],
+      "expected": [
+        "PAUSED",
+        "NO_AUTO_MUSIC"
+      ],
+      "assertions": [
+        "user_pause_wins",
+        "activeAudioOutputs<=1"
+      ],
+      "contextSnapshotId": "ctx-e2e-07",
+      "contextTemplate": "CTX-NO-WEATHER"
+    },
+    {
+      "id": "E2E-08",
+      "name": "DJ 중 NEXT",
+      "priority": "P0",
+      "profile": {
+        "mode": "SINGLE",
+        "eras": [
+          "1980s"
+        ],
+        "djEnabled": true
+      },
+      "stimuli": [
+        "PLAY",
+        "DJ_SPEAKING",
+        "NEXT",
+        "VOICE_STOP_ACTIVE_TOKEN"
+      ],
+      "expected": [
+        "FIRST_QUEUED_TRACK_ONCE"
+      ],
+      "assertions": [
+        "no_double_next",
+        "activeAudioOutputs<=1"
+      ],
+      "contextSnapshotId": "ctx-e2e-08",
+      "contextTemplate": "CTX-NO-WEATHER"
+    },
+    {
+      "id": "E2E-09",
+      "name": "AI 지연 및 이전 generation",
+      "priority": "P0",
+      "profile": {
+        "mode": "FAMILY",
+        "eras": [
+          "1980s",
+          "2010s"
+        ],
+        "djEnabled": true
+      },
+      "stimuli": [
+        "REQUEST_SCRIPT_GEN_12",
+        "NEXT_INCREMENTS_GEN_13",
+        "SCRIPT_READY_GEN_12"
+      ],
+      "expected": [
+        "STALE_SCRIPT_DISCARDED"
+      ],
+      "assertions": [
+        "generation_guard"
+      ],
+      "contextSnapshotId": "ctx-e2e-09",
+      "contextTemplate": "CTX-BASE-VALID"
+    },
+    {
+      "id": "E2E-10",
+      "name": "TTS 출력 실패",
+      "priority": "P0",
+      "profile": {
+        "mode": "SINGLE",
+        "eras": [
+          "1980s"
+        ],
+        "djEnabled": true
+      },
+      "stimuli": [
+        "PLAY",
+        "TTS_ERROR"
+      ],
+      "expected": [
+        "MUSIC_PLAYS_NO_DJ"
+      ],
+      "assertions": [
+        "no_retry_loop"
+      ],
+      "contextSnapshotId": "ctx-e2e-10",
+      "contextTemplate": "CTX-NO-WEATHER"
+    },
+    {
+      "id": "E2E-11",
+      "name": "날씨 만료",
+      "priority": "P0",
+      "profile": {
+        "mode": "SINGLE",
+        "eras": [
+          "1990s"
+        ],
+        "djEnabled": true
+      },
+      "stimuli": [
+        "PLAY",
+        "REQUEST_OPENING"
+      ],
+      "expected": [
+        "WEATHER_NULL_IN_API",
+        "NO_WEATHER_MENTION"
+      ],
+      "assertions": [
+        "no_stale_weather"
+      ],
+      "contextSnapshotId": "ctx-e2e-11",
+      "contextTemplate": "CTX-WEATHER-STALE"
+    },
+    {
+      "id": "E2E-12",
+      "name": "날씨 변경 후 다음 블록 적용",
+      "priority": "P0",
+      "profile": {
+        "mode": "FAMILY",
+        "eras": [
+          "1980s",
+          "2010s"
+        ],
+        "djEnabled": true
+      },
+      "stimuli": [
+        "PLAY_A_CURRENT_TRACK",
+        "WEATHER_SWITCH_SUN",
+        "A_CURRENT_TRACK_END",
+        "ADOPT_CONTEXT_NEXT_BLOCK"
+      ],
+      "expected": [
+        "CURRENT_TRACK_UNCHANGED",
+        "NEXT_BLOCK_SUN_CONTEXT"
+      ],
+      "assertions": [
+        "block_boundary_adoption"
+      ],
+      "contextSnapshotId": "ctx-e2e-12",
+      "contextTemplate": "CTX-BASE-VALID"
+    },
+    {
+      "id": "E2E-13",
+      "name": "위치 거부",
+      "priority": "P0",
+      "profile": {
+        "mode": "FAMILY",
+        "eras": [
+          "1980s",
+          "2010s"
+        ],
+        "djEnabled": true
+      },
+      "stimuli": [
+        "PLAY"
+      ],
+      "expected": [
+        "MUSIC_PLAYABLE",
+        "WEATHER_NULL",
+        "NO_LOCATION_IN_PAYLOAD"
+      ],
+      "assertions": [
+        "privacy_safe"
+      ],
+      "contextSnapshotId": "ctx-e2e-13",
+      "contextTemplate": "CTX-LOCATION-DENIED"
+    },
+    {
+      "id": "E2E-14",
+      "name": "포커스 일시 상실",
+      "priority": "P0",
+      "profile": {
+        "mode": "SINGLE",
+        "eras": [
+          "1980s"
+        ],
+        "djEnabled": true
+      },
+      "stimuli": [
+        "PLAY",
+        "FOCUS_LOSS_TRANSIENT",
+        "FOCUS_GAIN"
+      ],
+      "expected": [
+        "SUSPENDED_THEN_CONDITIONAL_RESTORE"
+      ],
+      "assertions": [
+        "focus_user_intent"
+      ],
+      "contextSnapshotId": "ctx-e2e-14",
+      "contextTemplate": "CTX-NO-WEATHER"
+    },
+    {
+      "id": "E2E-15",
+      "name": "포커스 영구 상실",
+      "priority": "P0",
+      "profile": {
+        "mode": "SINGLE",
+        "eras": [
+          "1980s"
+        ],
+        "djEnabled": true
+      },
+      "stimuli": [
+        "PLAY",
+        "FOCUS_LOSS_PERMANENT",
+        "FOCUS_GAIN"
+      ],
+      "expected": [
+        "NO_AUTO_RESUME"
+      ],
+      "assertions": [
+        "focus_user_intent"
+      ],
+      "contextSnapshotId": "ctx-e2e-15",
+      "contextTemplate": "CTX-NO-WEATHER"
+    },
+    {
+      "id": "E2E-16",
+      "name": "DJ OFF",
+      "priority": "P0",
+      "profile": {
+        "mode": "FAMILY",
+        "eras": [
+          "1980s",
+          "2010s"
+        ],
+        "djEnabled": false
+      },
+      "stimuli": [
+        "PLAY",
+        "A_BLOCK_END",
+        "B_BLOCK_END"
+      ],
+      "expected": [
+        "NO_LLM_CALL",
+        "NO_TTS_CALL",
+        "MUSIC_CONTINUED"
+      ],
+      "assertions": [
+        "dj_off"
+      ],
+      "contextSnapshotId": "ctx-e2e-16",
+      "contextTemplate": "CTX-NO-WEATHER"
+    },
+    {
+      "id": "E2E-17",
+      "name": "AI 장애에서도 MP3 유지",
+      "priority": "P0",
+      "profile": {
+        "mode": "FAMILY",
+        "eras": [
+          "1980s",
+          "2010s"
+        ],
+        "djEnabled": true
+      },
+      "stimuli": [
+        "PLAY",
+        "AI_TIMEOUT_3S",
+        "USE_LOCAL_FALLBACK"
+      ],
+      "expected": [
+        "MUSIC_CONTINUED",
+        "NO_RETRY"
+      ],
+      "assertions": [
+        "offline_music_independent"
+      ],
+      "contextSnapshotId": "ctx-e2e-17",
+      "contextTemplate": "CTX-NO-WEATHER"
+    },
+    {
+      "id": "E2E-18",
+      "name": "권한 철회 및 3연속 재생 실패",
+      "priority": "P0",
+      "profile": {
+        "mode": "SINGLE",
+        "eras": [
+          "1980s"
+        ],
+        "djEnabled": false
+      },
+      "stimuli": [
+        "PLAY",
+        "FILE_UNAVAILABLE_1",
+        "FILE_UNAVAILABLE_2",
+        "FILE_UNAVAILABLE_3"
+      ],
+      "expected": [
+        "STOPPED",
+        "ERROR_NOTICE",
+        "NO_INFINITE_LOOP"
+      ],
+      "assertions": [
+        "error_budget"
+      ],
+      "contextSnapshotId": "ctx-e2e-18",
+      "contextTemplate": "CTX-NO-WEATHER"
+    }
+  ],
+  "globalInvariants": [
+    "Era hard filter",
+    "No autoplay on app launch",
+    "No extra user data to LLM",
+    "At most 1 app audio output",
+    "Discard stale session/generation/epoch callbacks",
+    "User PAUSE blocks auto-resume",
+    "Fallback without indefinite AI wait"
+  ],
+  "contextSnapshots": {
+    "ctx-e2e-01": {
+      "schemaVersion": "1.0",
+      "snapshotId": "ctx-e2e-01",
+      "capturedAt": "2026-11-15T02:30:00+09:00",
+      "simulationMode": false,
+      "mode": "FAMILY",
+      "eras": [
+        "1980s",
+        "2010s"
+      ],
+      "timeOfDay": "NIGHT",
+      "preferences": {
+        "genres": [],
+        "djEnabled": true,
+        "tripIntent": "NONE"
+      },
+      "weather": {
+        "condition": "RAIN",
+        "observedAt": "2026-11-15T02:10:00+09:00",
+        "fetchedAt": "2026-11-15T02:21:00+09:00",
+        "source": "API",
+        "valid": true
+      },
+      "locationStatus": "AVAILABLE",
+      "vehicle": {
+        "availability": "DISABLED",
+        "tripDurationSeconds": null,
+        "dataCapturedAt": null
+      },
+      "omissions": [],
+      "contextFingerprint": "sha256:5eacf5f9bf52ec61c5d7b63c2d5d05aec48254124de7a9f80a1e46fe1b2434f7"
+    },
+    "ctx-e2e-02": {
+      "schemaVersion": "1.0",
+      "snapshotId": "ctx-e2e-02",
+      "capturedAt": "2026-11-15T02:30:00+09:00",
+      "simulationMode": false,
+      "mode": "SINGLE",
+      "eras": [
+        "1990s"
+      ],
+      "timeOfDay": "NIGHT",
+      "preferences": {
+        "genres": [],
+        "djEnabled": true,
+        "tripIntent": "NONE"
+      },
+      "weather": null,
+      "locationStatus": "NOT_REQUESTED",
+      "vehicle": {
+        "availability": "DISABLED",
+        "tripDurationSeconds": null,
+        "dataCapturedAt": null
+      },
+      "omissions": [],
+      "contextFingerprint": "sha256:b8fcc9f86b123c071b68226650f05e2b8d941881b22980531c94f1977e33176d"
+    },
+    "ctx-e2e-03": {
+      "schemaVersion": "1.0",
+      "snapshotId": "ctx-e2e-03",
+      "capturedAt": "2026-11-15T02:30:00+09:00",
+      "simulationMode": false,
+      "mode": "SINGLE",
+      "eras": [
+        "1980s"
+      ],
+      "timeOfDay": "NIGHT",
+      "preferences": {
+        "genres": [],
+        "djEnabled": false,
+        "tripIntent": "NONE"
+      },
+      "weather": {
+        "condition": "RAIN",
+        "observedAt": "2026-11-15T02:10:00+09:00",
+        "fetchedAt": "2026-11-15T02:21:00+09:00",
+        "source": "API",
+        "valid": true
+      },
+      "locationStatus": "AVAILABLE",
+      "vehicle": {
+        "availability": "DISABLED",
+        "tripDurationSeconds": null,
+        "dataCapturedAt": null
+      },
+      "omissions": [],
+      "contextFingerprint": "sha256:9bdfc09b167c0653ff6acd714d5fc029c25f7febebaabea226bf1d5d1b61c054"
+    },
+    "ctx-e2e-04": {
+      "schemaVersion": "1.0",
+      "snapshotId": "ctx-e2e-04",
+      "capturedAt": "2026-11-15T02:30:00+09:00",
+      "simulationMode": false,
+      "mode": "FAMILY",
+      "eras": [
+        "1980s",
+        "2010s"
+      ],
+      "timeOfDay": "NIGHT",
+      "preferences": {
+        "genres": [],
+        "djEnabled": true,
+        "tripIntent": "NONE"
+      },
+      "weather": null,
+      "locationStatus": "NOT_REQUESTED",
+      "vehicle": {
+        "availability": "DISABLED",
+        "tripDurationSeconds": null,
+        "dataCapturedAt": null
+      },
+      "omissions": [],
+      "contextFingerprint": "sha256:f6cd3ca27380d62a2d1b68abd53c6c01d13d1eccc7839e2cdd2955e76e6e3cce"
+    },
+    "ctx-e2e-05": {
+      "schemaVersion": "1.0",
+      "snapshotId": "ctx-e2e-05",
+      "capturedAt": "2026-11-15T02:30:00+09:00",
+      "simulationMode": false,
+      "mode": "FAMILY",
+      "eras": [
+        "1980s",
+        "2010s"
+      ],
+      "timeOfDay": "NIGHT",
+      "preferences": {
+        "genres": [],
+        "djEnabled": true,
+        "tripIntent": "NONE"
+      },
+      "weather": null,
+      "locationStatus": "NOT_REQUESTED",
+      "vehicle": {
+        "availability": "DISABLED",
+        "tripDurationSeconds": null,
+        "dataCapturedAt": null
+      },
+      "omissions": [],
+      "contextFingerprint": "sha256:f6cd3ca27380d62a2d1b68abd53c6c01d13d1eccc7839e2cdd2955e76e6e3cce"
+    },
+    "ctx-e2e-06": {
+      "schemaVersion": "1.0",
+      "snapshotId": "ctx-e2e-06",
+      "capturedAt": "2026-11-15T02:30:00+09:00",
+      "simulationMode": false,
+      "mode": "FAMILY",
+      "eras": [
+        "1980s",
+        "2010s"
+      ],
+      "timeOfDay": "NIGHT",
+      "preferences": {
+        "genres": [],
+        "djEnabled": true,
+        "tripIntent": "NONE"
+      },
+      "weather": null,
+      "locationStatus": "NOT_REQUESTED",
+      "vehicle": {
+        "availability": "DISABLED",
+        "tripDurationSeconds": null,
+        "dataCapturedAt": null
+      },
+      "omissions": [],
+      "contextFingerprint": "sha256:f6cd3ca27380d62a2d1b68abd53c6c01d13d1eccc7839e2cdd2955e76e6e3cce"
+    },
+    "ctx-e2e-07": {
+      "schemaVersion": "1.0",
+      "snapshotId": "ctx-e2e-07",
+      "capturedAt": "2026-11-15T02:30:00+09:00",
+      "simulationMode": false,
+      "mode": "SINGLE",
+      "eras": [
+        "1980s"
+      ],
+      "timeOfDay": "NIGHT",
+      "preferences": {
+        "genres": [],
+        "djEnabled": true,
+        "tripIntent": "NONE"
+      },
+      "weather": null,
+      "locationStatus": "NOT_REQUESTED",
+      "vehicle": {
+        "availability": "DISABLED",
+        "tripDurationSeconds": null,
+        "dataCapturedAt": null
+      },
+      "omissions": [],
+      "contextFingerprint": "sha256:ef083ba4d7e896d4378418d0caea8e9795d645901df74fe60b46bddf2e53395d"
+    },
+    "ctx-e2e-08": {
+      "schemaVersion": "1.0",
+      "snapshotId": "ctx-e2e-08",
+      "capturedAt": "2026-11-15T02:30:00+09:00",
+      "simulationMode": false,
+      "mode": "SINGLE",
+      "eras": [
+        "1980s"
+      ],
+      "timeOfDay": "NIGHT",
+      "preferences": {
+        "genres": [],
+        "djEnabled": true,
+        "tripIntent": "NONE"
+      },
+      "weather": null,
+      "locationStatus": "NOT_REQUESTED",
+      "vehicle": {
+        "availability": "DISABLED",
+        "tripDurationSeconds": null,
+        "dataCapturedAt": null
+      },
+      "omissions": [],
+      "contextFingerprint": "sha256:ef083ba4d7e896d4378418d0caea8e9795d645901df74fe60b46bddf2e53395d"
+    },
+    "ctx-e2e-09": {
+      "schemaVersion": "1.0",
+      "snapshotId": "ctx-e2e-09",
+      "capturedAt": "2026-11-15T02:30:00+09:00",
+      "simulationMode": false,
+      "mode": "FAMILY",
+      "eras": [
+        "1980s",
+        "2010s"
+      ],
+      "timeOfDay": "NIGHT",
+      "preferences": {
+        "genres": [],
+        "djEnabled": true,
+        "tripIntent": "NONE"
+      },
+      "weather": {
+        "condition": "RAIN",
+        "observedAt": "2026-11-15T02:10:00+09:00",
+        "fetchedAt": "2026-11-15T02:21:00+09:00",
+        "source": "API",
+        "valid": true
+      },
+      "locationStatus": "AVAILABLE",
+      "vehicle": {
+        "availability": "DISABLED",
+        "tripDurationSeconds": null,
+        "dataCapturedAt": null
+      },
+      "omissions": [],
+      "contextFingerprint": "sha256:5eacf5f9bf52ec61c5d7b63c2d5d05aec48254124de7a9f80a1e46fe1b2434f7"
+    },
+    "ctx-e2e-10": {
+      "schemaVersion": "1.0",
+      "snapshotId": "ctx-e2e-10",
+      "capturedAt": "2026-11-15T02:30:00+09:00",
+      "simulationMode": false,
+      "mode": "SINGLE",
+      "eras": [
+        "1980s"
+      ],
+      "timeOfDay": "NIGHT",
+      "preferences": {
+        "genres": [],
+        "djEnabled": true,
+        "tripIntent": "NONE"
+      },
+      "weather": null,
+      "locationStatus": "NOT_REQUESTED",
+      "vehicle": {
+        "availability": "DISABLED",
+        "tripDurationSeconds": null,
+        "dataCapturedAt": null
+      },
+      "omissions": [],
+      "contextFingerprint": "sha256:ef083ba4d7e896d4378418d0caea8e9795d645901df74fe60b46bddf2e53395d"
+    },
+    "ctx-e2e-11": {
+      "schemaVersion": "1.0",
+      "snapshotId": "ctx-e2e-11",
+      "capturedAt": "2026-11-15T02:30:00+09:00",
+      "simulationMode": false,
+      "mode": "SINGLE",
+      "eras": [
+        "1990s"
+      ],
+      "timeOfDay": "NIGHT",
+      "preferences": {
+        "genres": [],
+        "djEnabled": true,
+        "tripIntent": "NONE"
+      },
+      "weather": null,
+      "locationStatus": "AVAILABLE",
+      "vehicle": {
+        "availability": "DISABLED",
+        "tripDurationSeconds": null,
+        "dataCapturedAt": null
+      },
+      "omissions": [
+        "WEATHER_STALE"
+      ],
+      "contextFingerprint": "sha256:b8fcc9f86b123c071b68226650f05e2b8d941881b22980531c94f1977e33176d"
+    },
+    "ctx-e2e-12": {
+      "schemaVersion": "1.0",
+      "snapshotId": "ctx-e2e-12",
+      "capturedAt": "2026-11-15T02:30:00+09:00",
+      "simulationMode": false,
+      "mode": "FAMILY",
+      "eras": [
+        "1980s",
+        "2010s"
+      ],
+      "timeOfDay": "NIGHT",
+      "preferences": {
+        "genres": [],
+        "djEnabled": true,
+        "tripIntent": "NONE"
+      },
+      "weather": {
+        "condition": "RAIN",
+        "observedAt": "2026-11-15T02:10:00+09:00",
+        "fetchedAt": "2026-11-15T02:21:00+09:00",
+        "source": "API",
+        "valid": true
+      },
+      "locationStatus": "AVAILABLE",
+      "vehicle": {
+        "availability": "DISABLED",
+        "tripDurationSeconds": null,
+        "dataCapturedAt": null
+      },
+      "omissions": [],
+      "contextFingerprint": "sha256:5eacf5f9bf52ec61c5d7b63c2d5d05aec48254124de7a9f80a1e46fe1b2434f7"
+    },
+    "ctx-e2e-13": {
+      "schemaVersion": "1.0",
+      "snapshotId": "ctx-e2e-13",
+      "capturedAt": "2026-11-15T02:30:00+09:00",
+      "simulationMode": false,
+      "mode": "FAMILY",
+      "eras": [
+        "1980s",
+        "2010s"
+      ],
+      "timeOfDay": "NIGHT",
+      "preferences": {
+        "genres": [],
+        "djEnabled": true,
+        "tripIntent": "NONE"
+      },
+      "weather": null,
+      "locationStatus": "DENIED",
+      "vehicle": {
+        "availability": "DISABLED",
+        "tripDurationSeconds": null,
+        "dataCapturedAt": null
+      },
+      "omissions": [
+        "LOCATION_DENIED"
+      ],
+      "contextFingerprint": "sha256:f6cd3ca27380d62a2d1b68abd53c6c01d13d1eccc7839e2cdd2955e76e6e3cce"
+    },
+    "ctx-e2e-14": {
+      "schemaVersion": "1.0",
+      "snapshotId": "ctx-e2e-14",
+      "capturedAt": "2026-11-15T02:30:00+09:00",
+      "simulationMode": false,
+      "mode": "SINGLE",
+      "eras": [
+        "1980s"
+      ],
+      "timeOfDay": "NIGHT",
+      "preferences": {
+        "genres": [],
+        "djEnabled": true,
+        "tripIntent": "NONE"
+      },
+      "weather": null,
+      "locationStatus": "NOT_REQUESTED",
+      "vehicle": {
+        "availability": "DISABLED",
+        "tripDurationSeconds": null,
+        "dataCapturedAt": null
+      },
+      "omissions": [],
+      "contextFingerprint": "sha256:ef083ba4d7e896d4378418d0caea8e9795d645901df74fe60b46bddf2e53395d"
+    },
+    "ctx-e2e-15": {
+      "schemaVersion": "1.0",
+      "snapshotId": "ctx-e2e-15",
+      "capturedAt": "2026-11-15T02:30:00+09:00",
+      "simulationMode": false,
+      "mode": "SINGLE",
+      "eras": [
+        "1980s"
+      ],
+      "timeOfDay": "NIGHT",
+      "preferences": {
+        "genres": [],
+        "djEnabled": true,
+        "tripIntent": "NONE"
+      },
+      "weather": null,
+      "locationStatus": "NOT_REQUESTED",
+      "vehicle": {
+        "availability": "DISABLED",
+        "tripDurationSeconds": null,
+        "dataCapturedAt": null
+      },
+      "omissions": [],
+      "contextFingerprint": "sha256:ef083ba4d7e896d4378418d0caea8e9795d645901df74fe60b46bddf2e53395d"
+    },
+    "ctx-e2e-16": {
+      "schemaVersion": "1.0",
+      "snapshotId": "ctx-e2e-16",
+      "capturedAt": "2026-11-15T02:30:00+09:00",
+      "simulationMode": false,
+      "mode": "FAMILY",
+      "eras": [
+        "1980s",
+        "2010s"
+      ],
+      "timeOfDay": "NIGHT",
+      "preferences": {
+        "genres": [],
+        "djEnabled": false,
+        "tripIntent": "NONE"
+      },
+      "weather": null,
+      "locationStatus": "NOT_REQUESTED",
+      "vehicle": {
+        "availability": "DISABLED",
+        "tripDurationSeconds": null,
+        "dataCapturedAt": null
+      },
+      "omissions": [],
+      "contextFingerprint": "sha256:03838ebb798639ee571f3b6c44a88d27d0d379183c2440066b3d684b7c164628"
+    },
+    "ctx-e2e-17": {
+      "schemaVersion": "1.0",
+      "snapshotId": "ctx-e2e-17",
+      "capturedAt": "2026-11-15T02:30:00+09:00",
+      "simulationMode": false,
+      "mode": "FAMILY",
+      "eras": [
+        "1980s",
+        "2010s"
+      ],
+      "timeOfDay": "NIGHT",
+      "preferences": {
+        "genres": [],
+        "djEnabled": true,
+        "tripIntent": "NONE"
+      },
+      "weather": null,
+      "locationStatus": "NOT_REQUESTED",
+      "vehicle": {
+        "availability": "DISABLED",
+        "tripDurationSeconds": null,
+        "dataCapturedAt": null
+      },
+      "omissions": [],
+      "contextFingerprint": "sha256:f6cd3ca27380d62a2d1b68abd53c6c01d13d1eccc7839e2cdd2955e76e6e3cce"
+    },
+    "ctx-e2e-18": {
+      "schemaVersion": "1.0",
+      "snapshotId": "ctx-e2e-18",
+      "capturedAt": "2026-11-15T02:30:00+09:00",
+      "simulationMode": false,
+      "mode": "SINGLE",
+      "eras": [
+        "1980s"
+      ],
+      "timeOfDay": "NIGHT",
+      "preferences": {
+        "genres": [],
+        "djEnabled": false,
+        "tripIntent": "NONE"
+      },
+      "weather": null,
+      "locationStatus": "NOT_REQUESTED",
+      "vehicle": {
+        "availability": "DISABLED",
+        "tripDurationSeconds": null,
+        "dataCapturedAt": null
+      },
+      "omissions": [],
+      "contextFingerprint": "sha256:d78701ddc51d7656efc8344905657ded39300f32220e85f2848763682b0fe1d8"
+    }
+  }
+}

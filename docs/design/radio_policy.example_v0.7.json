@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "1.0",
+  "status": "PROPOSED_MVP_DEFAULTS_NOT_CALIBRATED",
+  "catalog": {
+    "source": "USER_SELECTED_LOCAL_MP3",
+    "requiredTags": [
+      "TITLE",
+      "ARTIST",
+      "YEAR"
+    ],
+    "inferMissingReleaseYear": false,
+    "autoCrossEraFallback": false
+  },
+  "planner": {
+    "targetCompletedTracksPerBlock": 3,
+    "minCompletedTracksForDj": 2,
+    "recentTrackWindow": 3,
+    "repeatSingleCandidateOnlyWithNotice": true,
+    "skipCountsAsCompleted": false,
+    "reproducibleWithSeed": true,
+    "experimentalWeights": {
+      "preferences": 0.45,
+      "context": 0.25,
+      "diversity": 0.2,
+      "repetition": 0.1
+    },
+    "excludeMissingFeaturesAndRenormalize": true
+  },
+  "dj": {
+    "personaId": "retro_fm_90_v1",
+    "defaultEnabled": true,
+    "openingTargetSeconds": [
+      15,
+      25
+    ],
+    "bridgeTargetSeconds": [
+      10,
+      20
+    ],
+    "scriptGenerationTimeoutMs": 3000,
+    "autoLlmRetries": 0,
+    "recentTopicWindow": 2,
+    "requireCompletedTracksAfterPreviousDj": true,
+    "suppressMidrollForSingleUniqueTrackLoop": true,
+    "ttsMusicOverlapAllowed": false,
+    "onTtsFailure": "SKIP_DJ_CONTINUE_MUSIC"
+  },
+  "weather": {
+    "enabledOnlyIfProviderAndConsentConfigured": true,
+    "refreshIntervalMinutes": 15,
+    "maxObservationAgeMinutes": 60,
+    "maxFutureObservationMinutes": 5,
+    "retryCooldownMinutes": 5,
+    "unknownWeatherFallback": "NULL_NO_WEATHER_MENTION"
+  },
+  "safety": {
+    "allowDetailsOnlyWhenUxRestrictionsPermit": true,
+    "unknownRestrictionState": "RESTRICT",
+    "onPermanentFocusLoss": "DO_NOT_AUTO_RESUME",
+    "requireConfirmedTtsStopBeforeMusic": true,
+    "maxConsecutiveTrackErrors": 3
+  },
+  "privacy": {
+    "sendRawCoordinatesToDjApi": false,
+    "sendContentUrisToDjApi": false,
+    "sendVehicleContextToDjApi": false,
+    "sendUserProfilesToDjApi": false,
+    "simulationDataAllowedInRelease": false
+  },
+  "api": {
+    "djScriptApiPath": "/api/v1/dj/scripts",
+    "djScriptSchemaVersion": "1.0",
+    "contextSchemaVersion": "1.0"
+  },
+  "scope": {
+    "voiceCloningInMvp": false,
+    "familyCassetteSavingInMvp": false,
+    "externalStreamingInMvp": false,
+    "sttListenerStoriesInMvp": false
+  }
+}

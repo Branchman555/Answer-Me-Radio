@@ -1,0 +1,81 @@
+{
+  "ticket": "RR-003",
+  "recordedAtUtc": "2026-11-15T10:09:13.056231+00:00",
+  "serial": "emulator-5584",
+  "avd": "ReplyRadio_RR003_API34",
+  "androidApi": "34",
+  "fingerprint": "Pleos/crp_avd/crp_avd_x86_64:14/RELEASE.release_connect_v2.1.0/release_connect_v2.1.0:user/test-keys",
+  "user": "10",
+  "appSha256": "75616d4f09badc887b2186b0c2bbbd5a577fb3c155265b612f1fd1d20c13cdb3",
+  "testApkSha256": "add77a34755ef92232b2d5da3ba04faf1464c47ec75a86f3484a612e6e9ae630",
+  "fixture": "GENERATED_SILENT_MPEG_FRAMES_AND_SYNTHETIC_TAGS_TEST_APK_ONLY",
+  "pickerResolver": "priority=101 preferredOrder=0 match=0x608000 specificIndex=-1 isDefault=true\r\ncom.android.car.frameworkpackagestubs/.Stubs$DocumentsUIStubWithResult",
+  "picker": "BLOCKED_PLATFORM_STUB",
+  "tests": [
+    {
+      "name": "picker_contract_local_only_read_only_multiple",
+      "stage": "write",
+      "status": "PASS"
+    },
+    {
+      "name": "cancel_and_clipdata_results",
+      "stage": "write",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown_detail_access_is_denied",
+      "stage": "write",
+      "status": "PASS"
+    },
+    {
+      "name": "six_real_mp3_metadata_and_persisted_read_grants",
+      "stage": "write",
+      "status": "PASS"
+    },
+    {
+      "name": "missing_year_and_broken_files_are_individual_failures",
+      "stage": "write",
+      "status": "PASS"
+    },
+    {
+      "name": "native_store_roundtrip_stable_ids_and_no_backup_path",
+      "stage": "write",
+      "status": "PASS"
+    },
+    {
+      "name": "corrupt_store_is_not_silently_overwritten",
+      "stage": "write",
+      "status": "PASS"
+    },
+    {
+      "name": "persisted_rights_survive_target_process_death",
+      "stage": "restore",
+      "status": "PASS"
+    },
+    {
+      "name": "revoked_rights_require_reselection",
+      "stage": "restore",
+      "status": "PASS"
+    },
+    {
+      "name": "reselection_keeps_id_and_does_not_duplicate",
+      "stage": "restore",
+      "status": "PASS"
+    },
+    {
+      "name": "deleted_document_is_excluded_after_reopen",
+      "stage": "restore",
+      "status": "PASS"
+    },
+    {
+      "name": "remove_releases_persisted_grant_and_keeps_source_file",
+      "stage": "restore",
+      "status": "PASS"
+    }
+  ],
+  "actualMusicPlayback": "NOT_RUN",
+  "physicalUsbUnplug": "NOT_RUN",
+  "vehicleDrivingUx": "NOT_RUN",
+  "targetProcessForceStoppedBeforeRestore": true,
+  "status": "PASS_WITH_PLATFORM_LIMIT"
+}

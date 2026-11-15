@@ -1,0 +1,440 @@
+{
+  "version": "0.6",
+  "fixedNow": "2026-11-15T02:30:00+09:00",
+  "fingerprint": {
+    "algorithm": "SHA256(JSON.stringify(meaningfulProjection, sorted keys, compact separators, UTF-8))",
+    "excludes": [
+      "snapshotId",
+      "capturedAt",
+      "weather.observedAt",
+      "weather.fetchedAt",
+      "locationStatus",
+      "vehicle",
+      "omissions",
+      "rawCoordinates"
+    ]
+  },
+  "testCases": [
+    {
+      "id": "CTX-BASE-VALID",
+      "note": "20분 전 모델 시각, 유효한 API 비",
+      "snapshot": {
+        "schemaVersion": "1.0",
+        "snapshotId": "ctx-001",
+        "capturedAt": "2026-11-15T02:30:00+09:00",
+        "simulationMode": false,
+        "mode": "FAMILY",
+        "eras": [
+          "1980s",
+          "2010s"
+        ],
+        "timeOfDay": "NIGHT",
+        "preferences": {
+          "genres": [
+            "BALLAD"
+          ],
+          "djEnabled": true,
+          "tripIntent": "TRAVEL"
+        },
+        "weather": {
+          "condition": "RAIN",
+          "observedAt": "2026-11-15T02:10:00+09:00",
+          "fetchedAt": "2026-11-15T02:21:00+09:00",
+          "source": "API",
+          "valid": true
+        },
+        "locationStatus": "AVAILABLE",
+        "vehicle": {
+          "availability": "DISABLED",
+          "tripDurationSeconds": null,
+          "dataCapturedAt": null
+        },
+        "omissions": [],
+        "contextFingerprint": "sha256:c6c1444214792ab88167f4556ea75af43e4d20aee5b57dbfb66a97b85523ab2b"
+      },
+      "expectedDjContext": {
+        "timeOfDay": "NIGHT",
+        "weather": {
+          "condition": "RAIN",
+          "observedAt": "2026-11-15T02:10:00+09:00",
+          "valid": true
+        },
+        "mode": "FAMILY",
+        "previousEra": "1980s",
+        "nextEra": "2010s"
+      },
+      "expectedWeatherIncluded": true
+    },
+    {
+      "id": "CTX-WEATHER-STALE",
+      "note": "수집 어댑터에서 61분 오래된 날씨를 버린 결과",
+      "snapshot": {
+        "schemaVersion": "1.0",
+        "snapshotId": "ctx-002",
+        "capturedAt": "2026-11-15T02:30:00+09:00",
+        "simulationMode": false,
+        "mode": "FAMILY",
+        "eras": [
+          "1980s",
+          "2010s"
+        ],
+        "timeOfDay": "NIGHT",
+        "preferences": {
+          "genres": [
+            "BALLAD"
+          ],
+          "djEnabled": true,
+          "tripIntent": "TRAVEL"
+        },
+        "weather": null,
+        "locationStatus": "AVAILABLE",
+        "vehicle": {
+          "availability": "DISABLED",
+          "tripDurationSeconds": null,
+          "dataCapturedAt": null
+        },
+        "omissions": [
+          "WEATHER_STALE"
+        ],
+        "contextFingerprint": "sha256:186cd1c3f0c24213b5da6ea8d27624a2b5c2ba36fc3e557cad8815db10dc7501"
+      },
+      "expectedDjContext": {
+        "timeOfDay": "NIGHT",
+        "weather": null,
+        "mode": "FAMILY",
+        "previousEra": "1980s",
+        "nextEra": "2010s"
+      },
+      "expectedWeatherIncluded": false
+    },
+    {
+      "id": "CTX-LOCATION-DENIED",
+      "note": "위치 권한 거부; 정상 방송 진행",
+      "snapshot": {
+        "schemaVersion": "1.0",
+        "snapshotId": "ctx-003",
+        "capturedAt": "2026-11-15T02:30:00+09:00",
+        "simulationMode": false,
+        "mode": "FAMILY",
+        "eras": [
+          "1980s",
+          "2010s"
+        ],
+        "timeOfDay": "NIGHT",
+        "preferences": {
+          "genres": [
+            "BALLAD"
+          ],
+          "djEnabled": true,
+          "tripIntent": "TRAVEL"
+        },
+        "weather": null,
+        "locationStatus": "DENIED",
+        "vehicle": {
+          "availability": "DISABLED",
+          "tripDurationSeconds": null,
+          "dataCapturedAt": null
+        },
+        "omissions": [
+          "LOCATION_DENIED"
+        ],
+        "contextFingerprint": "sha256:186cd1c3f0c24213b5da6ea8d27624a2b5c2ba36fc3e557cad8815db10dc7501"
+      },
+      "expectedDjContext": {
+        "timeOfDay": "NIGHT",
+        "weather": null,
+        "mode": "FAMILY",
+        "previousEra": "1980s",
+        "nextEra": "2010s"
+      },
+      "expectedWeatherIncluded": false
+    },
+    {
+      "id": "CTX-WEATHER-SWITCH-SUN",
+      "note": "다음 블록 경계에 반영할 후보 컨텍스트",
+      "snapshot": {
+        "schemaVersion": "1.0",
+        "snapshotId": "ctx-004",
+        "capturedAt": "2026-11-15T02:30:00+09:00",
+        "simulationMode": false,
+        "mode": "FAMILY",
+        "eras": [
+          "1980s",
+          "2010s"
+        ],
+        "timeOfDay": "NIGHT",
+        "preferences": {
+          "genres": [
+            "BALLAD"
+          ],
+          "djEnabled": true,
+          "tripIntent": "TRAVEL"
+        },
+        "weather": {
+          "condition": "SUN",
+          "observedAt": "2026-11-15T02:20:00+09:00",
+          "fetchedAt": "2026-11-15T02:25:00+09:00",
+          "source": "API",
+          "valid": true
+        },
+        "locationStatus": "AVAILABLE",
+        "vehicle": {
+          "availability": "DISABLED",
+          "tripDurationSeconds": null,
+          "dataCapturedAt": null
+        },
+        "omissions": [],
+        "contextFingerprint": "sha256:d51f15c6cbf15da53b610f2fda7d02b06888e22b7471ce4e41c1b7ee95bdb272"
+      },
+      "expectedDjContext": {
+        "timeOfDay": "NIGHT",
+        "weather": {
+          "condition": "SUN",
+          "observedAt": "2026-11-15T02:20:00+09:00",
+          "valid": true
+        },
+        "mode": "FAMILY",
+        "previousEra": "1980s",
+        "nextEra": "2010s"
+      },
+      "expectedWeatherIncluded": true
+    },
+    {
+      "id": "CTX-SAME-WEATHER-NEW-FETCH",
+      "note": "새 수신 시각만 달라 의미 fingerprint 동일",
+      "snapshot": {
+        "schemaVersion": "1.0",
+        "snapshotId": "ctx-005",
+        "capturedAt": "2026-11-15T02:30:00+09:00",
+        "simulationMode": false,
+        "mode": "FAMILY",
+        "eras": [
+          "1980s",
+          "2010s"
+        ],
+        "timeOfDay": "NIGHT",
+        "preferences": {
+          "genres": [
+            "BALLAD"
+          ],
+          "djEnabled": true,
+          "tripIntent": "TRAVEL"
+        },
+        "weather": {
+          "condition": "RAIN",
+          "observedAt": "2026-11-15T02:15:00+09:00",
+          "fetchedAt": "2026-11-15T02:29:00+09:00",
+          "source": "API",
+          "valid": true
+        },
+        "locationStatus": "AVAILABLE",
+        "vehicle": {
+          "availability": "DISABLED",
+          "tripDurationSeconds": null,
+          "dataCapturedAt": null
+        },
+        "omissions": [],
+        "contextFingerprint": "sha256:c6c1444214792ab88167f4556ea75af43e4d20aee5b57dbfb66a97b85523ab2b"
+      },
+      "expectedDjContext": {
+        "timeOfDay": "NIGHT",
+        "weather": {
+          "condition": "RAIN",
+          "observedAt": "2026-11-15T02:15:00+09:00",
+          "valid": true
+        },
+        "mode": "FAMILY",
+        "previousEra": "1980s",
+        "nextEra": "2010s"
+      },
+      "expectedWeatherIncluded": true
+    },
+    {
+      "id": "CTX-SINGLE-NO-WEATHER",
+      "note": "단일 시대 채널, DJ OFF이며 날씨 없음",
+      "snapshot": {
+        "schemaVersion": "1.0",
+        "snapshotId": "ctx-006",
+        "capturedAt": "2026-11-15T02:30:00+09:00",
+        "simulationMode": false,
+        "mode": "SINGLE",
+        "eras": [
+          "1990s"
+        ],
+        "timeOfDay": "NIGHT",
+        "preferences": {
+          "genres": [],
+          "djEnabled": false,
+          "tripIntent": "NONE"
+        },
+        "weather": null,
+        "locationStatus": "NOT_REQUESTED",
+        "vehicle": {
+          "availability": "DISABLED",
+          "tripDurationSeconds": null,
+          "dataCapturedAt": null
+        },
+        "omissions": [],
+        "contextFingerprint": "sha256:ec5c18747ad4e043ae6ee93df903518ac15a31144280e476ee06823a2ec1a974"
+      },
+      "expectedDjContext": {
+        "timeOfDay": "NIGHT",
+        "weather": null,
+        "mode": "SINGLE",
+        "previousEra": null,
+        "nextEra": "1990s"
+      },
+      "expectedWeatherIncluded": false
+    },
+    {
+      "id": "CTX-DEMO-SIMULATION",
+      "note": "시연에서만 허용, 반드시 시뮬레이션 표시",
+      "snapshot": {
+        "schemaVersion": "1.0",
+        "snapshotId": "ctx-007",
+        "capturedAt": "2026-11-15T02:30:00+09:00",
+        "simulationMode": true,
+        "mode": "FAMILY",
+        "eras": [
+          "1980s",
+          "2010s"
+        ],
+        "timeOfDay": "NIGHT",
+        "preferences": {
+          "genres": [
+            "BALLAD"
+          ],
+          "djEnabled": true,
+          "tripIntent": "TRAVEL"
+        },
+        "weather": {
+          "condition": "SNOW",
+          "observedAt": "2026-11-15T02:30:00+09:00",
+          "fetchedAt": "2026-11-15T02:30:00+09:00",
+          "source": "SIMULATION",
+          "valid": true
+        },
+        "locationStatus": "NOT_REQUESTED",
+        "vehicle": {
+          "availability": "DISABLED",
+          "tripDurationSeconds": null,
+          "dataCapturedAt": null
+        },
+        "omissions": [],
+        "contextFingerprint": "sha256:8fffc908da03569e61379dbbc4f418f54c20aba3220feedefc90061f7be8c735"
+      },
+      "expectedDjContext": {
+        "timeOfDay": "NIGHT",
+        "weather": {
+          "condition": "SNOW",
+          "observedAt": "2026-11-15T02:30:00+09:00",
+          "valid": true
+        },
+        "mode": "FAMILY",
+        "previousEra": "1980s",
+        "nextEra": "2010s"
+      },
+      "expectedWeatherIncluded": true
+    },
+    {
+      "id": "CTX-VEHICLE-UNAVAILABLE",
+      "note": "SDK 미승인/미지원에 영향받지 않음",
+      "snapshot": {
+        "schemaVersion": "1.0",
+        "snapshotId": "ctx-008",
+        "capturedAt": "2026-11-15T02:30:00+09:00",
+        "simulationMode": false,
+        "mode": "FAMILY",
+        "eras": [
+          "1980s",
+          "2010s"
+        ],
+        "timeOfDay": "NIGHT",
+        "preferences": {
+          "genres": [
+            "BALLAD"
+          ],
+          "djEnabled": true,
+          "tripIntent": "TRAVEL"
+        },
+        "weather": {
+          "condition": "RAIN",
+          "observedAt": "2026-11-15T02:10:00+09:00",
+          "fetchedAt": "2026-11-15T02:21:00+09:00",
+          "source": "API",
+          "valid": true
+        },
+        "locationStatus": "AVAILABLE",
+        "vehicle": {
+          "availability": "UNAVAILABLE",
+          "tripDurationSeconds": null,
+          "dataCapturedAt": null
+        },
+        "omissions": [
+          "VEHICLE_UNAVAILABLE"
+        ],
+        "contextFingerprint": "sha256:c6c1444214792ab88167f4556ea75af43e4d20aee5b57dbfb66a97b85523ab2b"
+      },
+      "expectedDjContext": {
+        "timeOfDay": "NIGHT",
+        "weather": {
+          "condition": "RAIN",
+          "observedAt": "2026-11-15T02:10:00+09:00",
+          "valid": true
+        },
+        "mode": "FAMILY",
+        "previousEra": "1980s",
+        "nextEra": "2010s"
+      },
+      "expectedWeatherIncluded": true
+    }
+  ],
+  "negativeCases": [
+    {
+      "id": "CTX-INVALID-ERA-COUNT",
+      "base": "CTX-BASE-VALID",
+      "modify": {
+        "eras": [
+          "1980s"
+        ]
+      },
+      "expected": "SCHEMA_INVALID"
+    },
+    {
+      "id": "CTX-INVALID-GPS-LEAK",
+      "base": "CTX-BASE-VALID",
+      "modify": {
+        "latitude": 37.6
+      },
+      "expected": "SCHEMA_INVALID"
+    },
+    {
+      "id": "CTX-INVALID-SIM-RELEASE",
+      "base": "CTX-BASE-VALID",
+      "modify": {
+        "weather": {
+          "condition": "SNOW",
+          "observedAt": "2026-11-15T02:10:00+09:00",
+          "fetchedAt": "2026-11-15T02:20:00+09:00",
+          "source": "SIMULATION",
+          "valid": true
+        }
+      },
+      "expected": "SCHEMA_INVALID"
+    },
+    {
+      "id": "CTX-INVALID-WEATHER-UNKNOWN-VALID",
+      "base": "CTX-BASE-VALID",
+      "modify": {
+        "weather": {
+          "condition": "UNKNOWN",
+          "observedAt": "2026-11-15T02:10:00+09:00",
+          "fetchedAt": "2026-11-15T02:20:00+09:00",
+          "source": "API",
+          "valid": true
+        }
+      },
+      "expected": "SCHEMA_INVALID"
+    }
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "bundleVersion": "0.8",
+  "parentBundleFile": "reply_radio_codex_design_bundle_v0.7.zip",
+  "parentBundleSha256": "58c6178d3c968cf440dd04a8dcc2d1901f57c977556d5f1a14454baf36c299a8",
+  "preservedParentFiles": 18,
+  "addedFilesBeforeManifest": 9,
+  "files": [
+    {
+      "path": "CODEX_README_v0.7.md",
+      "bytes": 4333,
+      "sha256": "f349710e54bc9b2d3dfb79031905580eedb5f2d12d4d8ea99333d75d1d4f875b",
+      "origin": "PRESERVED_V0.7"
+    },
+    {
+      "path": "CODEX_README_v0.8.md",
+      "bytes": 3860,
+      "sha256": "68d479b24ff85792343eb9e5c0df72a66b031dc39efa84da516198b180dfff7b",
+      "origin": "ADDED_V0.8"
+    },
+    {
+      "path": "radio_policy.example_v0.7.json",
+      "bytes": 2210,
+      "sha256": "ae21ff5254ec85f978a2c512efe133396163681661c65faf6aaec2a9aeffef8e",
+      "origin": "PRESERVED_V0.7"
+    },
+    {
+      "path": "reference/reply-radio-review-v1.1.md",
+      "bytes": 23683,
+      "sha256": "1fff61a83c69f32b86f132012cbccd9c874663cc7a24e72805ba4958d22f24e1",
+      "origin": "PRESERVED_V0.7"
+    },
+    {
+      "path": "reference/응답하라_라디오_차량_UI_3화면_시안_v0_1.png",
+      "bytes": 2006791,
+      "sha256": "d8210937379256ea6c143521caf9a0e1bbb21456cf2d646016b4adcfaae8fa2e",
+      "origin": "PRESERVED_V0.7"
+    },
+    {
+      "path": "reply_radio_acceptance_matrix_v0.7.csv",
+      "bytes": 8510,
+      "sha256": "2ec435920209821c037ff219586108341e3ebef9b72b8041264ef6d702568266",
+      "origin": "PRESERVED_V0.7"
+    },
+    {
+      "path": "reply_radio_ai_dj_spec_v0.2.md",
+      "bytes": 21003,
+      "sha256": "88b73e4af18b69eb8f8a74ccea81fc8ed85c247f483c64c94b99e173bcc15e04",
+      "origin": "PRESERVED_V0.7"
+    },
+    {
+      "path": "reply_radio_bundle_manifest_v0.7.json",
+      "bytes": 3247,
+      "sha256": "a4404d0923587ee5c9dcded031a291105385931f32ab8d93b52f4cffbf3c04b3",
+      "origin": "PRESERVED_V0.7"
+    },
+    {
+      "path": "reply_radio_codex_handoff_v0.1.md",
+      "bytes": 10018,
+      "sha256": "7a6bae2c7624d69cbab720ceb6f6ea2d8156ae67ba69901201ee58e9935757f2",
+      "origin": "PRESERVED_V0.7"
+    },
+    {
+      "path": "reply_radio_context_engine_v0.6.md",
+      "bytes": 19171,
+      "sha256": "9ac4ec78c6acf06dc33ae800ff831e396b7512545fd677f036d9daabb48b1067",
+      "origin": "PRESERVED_V0.7"
+    },
+    {
+      "path": "reply_radio_context_fixtures_v0.6.json",
+      "bytes": 12146,
+      "sha256": "df7b6d68f92210652a36b75091b67147a9139150d7394ef7bcedf68a413260f7",
+      "origin": "PRESERVED_V0.7"
+    },
+    {
+      "path": "reply_radio_context_schema_v0.6.json",
+      "bytes": 6382,
+      "sha256": "e47f699a3cdf7c20205c5085928bab81f06cb513478ae4d522d8c43575bac1e4",
+      "origin": "PRESERVED_V0.7"
+    },
+    {
+      "path": "reply_radio_decision_log_v0.7.md",
+      "bytes": 3611,
+      "sha256": "92e06672a5368808673735a731a861c14e7ae9d33650a7c9968171aba1c340ec",
+      "origin": "PRESERVED_V0.7"
+    },
+    {
+      "path": "reply_radio_dj_script_fixture_v0.5.json",
+      "bytes": 2438,
+      "sha256": "6dd3c2d584d6caeb2896315b2225adaf1de587fcfd76ad36b58a16a4afdf9901",
+      "origin": "PRESERVED_V0.7"
+    },
+    {
+      "path": "reply_radio_dj_script_generator_v0.5.md",
+      "bytes": 20155,
+      "sha256": "8ba43bea68f3019599a3bd1f4067ca3da2594403e093c2fd379d434f8bcf7450",
+      "origin": "PRESERVED_V0.7"
+    },
+    {
+      "path": "reply_radio_dj_script_schema_v0.5.json",
+      "bytes": 6597,
+      "sha256": "c135dd289649e22320ebe1cf3d7876f9315476c67ea44d39e2d460c360e4ecc7",
+      "origin": "PRESERVED_V0.7"
+    },
+    {
+      "path": "reply_radio_integration_fixtures_v0.7.json",
+      "bytes": 27956,
+      "sha256": "cecec0fa3465a5d7f98a2dd0e5d9f5caf3dc94e358758ce2ea037f3996d8f78f",
+      "origin": "PRESERVED_V0.7"
+    },
+    {
+      "path": "reply_radio_mvp_integration_spec_v0.7.md",
+      "bytes": 29504,
+      "sha256": "09ea348353323d42a3ad229d70eeb0521d9f0de0fcb1b1a17b828567736f1c19",
+      "origin": "PRESERVED_V0.7"
+    },
+    {
+      "path": "reply_radio_playback_state_machine_v0.4.md",
+      "bytes": 18634,
+      "sha256": "4fa157b961d007bf0876d2aa1b175e254c92c4a71f268ebb5f6eaef07423e307",
+      "origin": "PRESERVED_V0.7"
+    },
+    {
+      "path": "reply_radio_proposal_road_story_v0.8.md",
+      "bytes": 8153,
+      "sha256": "8fede0d872f5466abdab456f45e076bfd3348ed792ff11b813875b0dc4cfa36f",
+      "origin": "ADDED_V0.8"
+    },
+    {
+      "path": "reply_radio_road_story_acceptance_v0.8.json",
+      "bytes": 9829,
+      "sha256": "003f56db6f7fea163d939489d6143b1267c93fe17725bd8bde72fddaf5b0157f",
+      "origin": "ADDED_V0.8"
+    },
+    {
+      "path": "reply_radio_road_story_content_sample_v0.8.json",
+      "bytes": 1955,
+      "sha256": "1fc90958192ce62483512b4d3765cc063f85b4875532a9215d9c8702db5cb9a4",
+      "origin": "ADDED_V0.8"
+    },
+    {
+      "path": "reply_radio_road_story_content_schema_v0.8.json",
+      "bytes": 5680,
+      "sha256": "a1d3866a318dfe879a32089abf5d780acfc0beb8feca2e0a1199753e3eb86d50",
+      "origin": "ADDED_V0.8"
+    },
+    {
+      "path": "reply_radio_road_story_extension_v0.8.md",
+      "bytes": 21920,
+      "sha256": "186f5fac1b3e52cc17539a7709dfe8dde9f19c8bbbc19a8113a25dc1bcb3fd2c",
+      "origin": "ADDED_V0.8"
+    },
+    {
+      "path": "reply_radio_road_story_policy.example_v0.8.json",
+      "bytes": 2698,
+      "sha256": "23c8e5308e24c8d1e9a2ca8f83cc02c3784eb383c27ef080b7cb482363bbc13f",
+      "origin": "ADDED_V0.8"
+    },
+    {
+      "path": "reply_radio_road_story_sources_v0.8.json",
+      "bytes": 6427,
+      "sha256": "75edc1a4231c6a8a3f1f28fae64335a331c69c7938517ff9636842bfe373f5dc",
+      "origin": "ADDED_V0.8"
+    },
+    {
+      "path": "reply_radio_validation_report_v0.8.json",
+      "bytes": 888,
+      "sha256": "392b613b3ce0782f5c70861436c288d932a9575e41f41a63dc8cb98a28976fc8",
+      "origin": "ADDED_V0.8"
+    }
+  ]
+}

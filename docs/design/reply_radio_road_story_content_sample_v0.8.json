@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "0.8",
+  "packId": "draft-daegwallyeong-2001",
+  "status": "DRAFT",
+  "story": {
+    "storyId": "daegwallyeong-opening-20011128",
+    "canonicalEventId": "road-opening-hoenggye-gangneung-20011128",
+    "contentVersion": 1,
+    "placeName": "영동고속도로 횡계~강릉 구간",
+    "eventDate": "2001-11-28",
+    "publicationDate": "2001-11-28",
+    "segmentRef": null,
+    "geometryVerified": false,
+    "editorialStatus": "PENDING",
+    "contentRightsStatus": "UNCONFIRMED",
+    "facts": [
+      {
+        "id": "FACT-001",
+        "text": "횡계~강릉 구간은 2001년 11월 28일 개통됐다.",
+        "sourceIds": [
+          "S3"
+        ]
+      }
+    ],
+    "musicAssociations": [
+      {
+        "id": "MUSIC-001",
+        "title": "길",
+        "artist": "god",
+        "releaseYear": 2001,
+        "releaseMonth": 11,
+        "basis": "RELEASE_PERIOD",
+        "evidenceSourceIds": [
+          "S4",
+          "S5"
+        ],
+        "localTrackId": null,
+        "publicPlaybackRightsConfirmed": false
+      }
+    ],
+    "scripts": [
+      {
+        "id": "SCRIPT-LONG-001",
+        "variant": "LONG",
+        "text": "길 위의 타임머신입니다. 이 구간의 기록을 2001년 11월 28일로 돌려봅니다. 그날, 횡계와 강릉을 잇는 새 구간이 개통됐습니다. 이번에는 같은 해 11월에 나온 노래 한 곡을 연결해 보겠습니다. god의 길입니다.",
+        "factIds": [
+          "FACT-001"
+        ],
+        "musicAssociationId": "MUSIC-001",
+        "editorialStatus": "PENDING"
+      },
+      {
+        "id": "SCRIPT-SHORT-001",
+        "variant": "SHORT",
+        "text": "2001년 11월 28일, 횡계와 강릉을 잇는 새 구간이 개통됐습니다. 같은 달에 나온 god의 길을 이어갑니다.",
+        "factIds": [
+          "FACT-001"
+        ],
+        "musicAssociationId": "MUSIC-001",
+        "editorialStatus": "PENDING"
+      }
+    ]
+  }
+}

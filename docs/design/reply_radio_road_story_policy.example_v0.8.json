@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "0.8",
+  "status": "PROPOSED_DEFAULTS_NOT_DEVICE_TESTED",
+  "extendsFile": "radio_policy.example_v0.7.json",
+  "roadStory": {
+    "enabledByDefault": false,
+    "requiresExplicitUserOptIn": true,
+    "requiresActivePlayIntent": true,
+    "eraPolicyWhenEnabled": "FOLLOW_STORY_YEAR",
+    "baseModesUnchanged": [
+      "SINGLE",
+      "FAMILY"
+    ],
+    "musicMatch": {
+      "sameYearRequired": true,
+      "preferSameMonthOnlyWithEvidence": true,
+      "allowOtherYearFallback": false,
+      "noMatchingTrack": "KEEP_BASE_RADIO_SKIP_STORY"
+    },
+    "storyChoice": {
+      "directSegmentRelationRequired": true,
+      "preferSameMonthDay": true,
+      "eventDateNotPublicationDate": true,
+      "onePendingMaximum": true,
+      "dedupeKey": [
+        "tripSessionId",
+        "canonicalEventId"
+      ]
+    },
+    "speech": {
+      "normalTargetSeconds": [
+        20,
+        30
+      ],
+      "shortTargetSeconds": [
+        8,
+        12
+      ],
+      "minCompletedTracksSinceLastDj": 2,
+      "replaceRegularDj": true,
+      "interruptMusic": false,
+      "startOnlyWhileMatchedSegmentValid": true,
+      "dropOnConfirmedExit": true,
+      "skipMarksAttemptedForTrip": true,
+      "ttsAndMusicOverlap": false
+    },
+    "matchingInitialAssumptions": {
+      "maxLocationAgeSeconds": 10,
+      "maxAccuracyMeters": 50,
+      "minConsecutiveValidSamples": 2,
+      "parallelRoadDisambiguationRequired": true,
+      "unverifiedGeometry": "DISABLE_AUTO_TRIGGER",
+      "unknownMeasurementTimeOrAccuracy": "UNKNOWN_NO_TRIGGER",
+      "valuesNeedCalibration": true
+    },
+    "navigation": {
+      "optional": true,
+      "remainTimeUnitMustBeVerified": true,
+      "remainingSecondsShortBelow": 180,
+      "remainingSecondsSkipBelow": 30,
+      "missingValue": "NO_ETA_ADAPTATION",
+      "changeNavigationRoute": false
+    },
+    "content": {
+      "runtimeWebSearch": false,
+      "requireEditorialApproved": true,
+      "requireRightsReviewed": true,
+      "requireReviewedFallback": true,
+      "allowRawNewsAudio": false,
+      "allowTemplateGenerationWithoutFacts": false
+    },
+    "history": {
+      "storage": "LOCAL_ONLY",
+      "maxItemsPerTrip": 50,
+      "maxRetentionDays": 7,
+      "storeRawCoordinates": false,
+      "storeExactLocationTimestamps": false,
+      "userCanClear": true
+    },
+    "privacy": {
+      "uploadRawLocation": false,
+      "sendStoryTriggerToLlm": false,
+      "prefetchReviewedContentPack": true,
+      "locationSubscriptionOnlyDuringEnabledSession": true
+    },
+    "existingContracts": {
+      "djApi": "UNCHANGED_V0.5",
+      "contextSnapshot": "UNCHANGED_V0.6",
+      "newServerEndpoint": "NOT_DEFINED_IN_THIS_VERSION"
+    }
+  }
+}

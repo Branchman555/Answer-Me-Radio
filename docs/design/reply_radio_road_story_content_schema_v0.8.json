@@ -1,0 +1,273 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:reply-radio:road-story-content:0.8",
+  "title": "응답하라 라디오 길 위 코너 콘텐츠 초안 계약 v0.8",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "packId",
+    "status",
+    "story"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "0.8"
+    },
+    "packId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "enum": [
+        "DRAFT",
+        "APPROVED"
+      ]
+    },
+    "story": {
+      "$ref": "#/$defs/story"
+    }
+  },
+  "$defs": {
+    "fact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "text",
+        "sourceIds"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "sourceIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^S[0-9]+$"
+          }
+        }
+      }
+    },
+    "music": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "artist",
+        "releaseYear",
+        "releaseMonth",
+        "basis",
+        "evidenceSourceIds",
+        "localTrackId",
+        "publicPlaybackRightsConfirmed"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "artist": {
+          "type": "string"
+        },
+        "releaseYear": {
+          "type": "integer",
+          "minimum": 1900,
+          "maximum": 2100
+        },
+        "releaseMonth": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 12
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "basis": {
+          "enum": [
+            "BROADCAST_VERIFIED",
+            "CHART_VERIFIED",
+            "RELEASE_PERIOD",
+            "ERA_ONLY"
+          ]
+        },
+        "evidenceSourceIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^S[0-9]+$"
+          }
+        },
+        "localTrackId": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "publicPlaybackRightsConfirmed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "script": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "variant",
+        "text",
+        "factIds",
+        "musicAssociationId",
+        "editorialStatus"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "variant": {
+          "enum": [
+            "LONG",
+            "SHORT"
+          ]
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 600
+        },
+        "factIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "musicAssociationId": {
+          "type": "string"
+        },
+        "editorialStatus": {
+          "enum": [
+            "PENDING",
+            "APPROVED",
+            "REVOKED"
+          ]
+        }
+      }
+    },
+    "story": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "storyId",
+        "canonicalEventId",
+        "contentVersion",
+        "placeName",
+        "eventDate",
+        "publicationDate",
+        "segmentRef",
+        "geometryVerified",
+        "editorialStatus",
+        "contentRightsStatus",
+        "facts",
+        "musicAssociations",
+        "scripts"
+      ],
+      "properties": {
+        "storyId": {
+          "type": "string"
+        },
+        "canonicalEventId": {
+          "type": "string"
+        },
+        "contentVersion": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "placeName": {
+          "type": "string"
+        },
+        "eventDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "publicationDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "segmentRef": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "geometryVerified": {
+          "type": "boolean"
+        },
+        "editorialStatus": {
+          "enum": [
+            "PENDING",
+            "APPROVED",
+            "REVOKED"
+          ]
+        },
+        "contentRightsStatus": {
+          "enum": [
+            "UNCONFIRMED",
+            "REVIEWED",
+            "REVOKED"
+          ]
+        },
+        "facts": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/fact"
+          }
+        },
+        "musicAssociations": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/music"
+          }
+        },
+        "scripts": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/script"
+          }
+        }
+      }
+    }
+  }
+}

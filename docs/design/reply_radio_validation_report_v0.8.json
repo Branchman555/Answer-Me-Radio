@@ -1,0 +1,27 @@
+{
+  "version": "0.8",
+  "scope": "자료 구조·참조·기존 ZIP 바이트 보존 검증만 실시",
+  "schemaValid": true,
+  "sampleSchemaValid": true,
+  "sourceAndFactReferencesValid": true,
+  "negativeSchemaChecks": {
+    "invalidCalendarDateRejected": true,
+    "undeclaredCoordinateFieldRejected": true,
+    "unsupportedMusicEvidenceLabelRejected": true
+  },
+  "sampleAutoPlaybackReady": false,
+  "sampleBlockedReasons": [
+    "PACK_DRAFT",
+    "GEOMETRY_NOT_VERIFIED",
+    "EDITORIAL_PENDING",
+    "CONTENT_RIGHTS_UNCONFIRMED",
+    "LOCAL_TRACK_NOT_BOUND",
+    "PUBLIC_MUSIC_RIGHTS_UNCONFIRMED"
+  ],
+  "newAcceptanceCount": 40,
+  "newAcceptanceStatus": "ALL_NOT_RUN",
+  "applicationRuntimeTestsExecuted": false,
+  "sdkOrVehicleTestsExecuted": false,
+  "newsOrMusicPermissionsAcquired": false,
+  "externalSourcesFullPdfVisualCheck": "FAILED_SIZE_LIMIT_TEXT_ONLY_FOR_STATISTICS"
+}

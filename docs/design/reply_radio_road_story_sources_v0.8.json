@@ -1,0 +1,156 @@
+{
+  "checkedOn": "2026-11-15",
+  "limitations": [
+    "실제 SDK·에뮬레이터·실차 검증 미실시",
+    "2025 조사 보고서는 원문 추출 텍스트 129쪽을 확인. 전체 PDF 웹 캡처는 파일 크기 제한으로 실패했으며 로컬 다운로드도 실패. 별도 보도자료 12쪽 캡처는 확인했으나 연령별 수치 검증을 대신하지 않음.",
+    "검색 결과와 공개 자료 확인은 콘텐츠 이용허락 취득을 의미하지 않음."
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "publisher": "방송미디어통신위원회",
+      "title": "2025년 방송매체 이용행태조사 보고서",
+      "url": "https://www.kmcc.go.kr/download.do?fileSeq=62435",
+      "locator": "보고서 129쪽, 그림 2-6-1·2-6-2",
+      "supportedFacts": [
+        "최근 1주일 라디오 이용률: 전체 17.8%, 40대 29.1%, 50대 28.7%",
+        "라디오 이용자 중 자가용 청취 장소 응답 79.9%, 중복응답"
+      ],
+      "notSupported": [
+        "가족 여행·귀성 중 이용 비율",
+        "이 앱의 설치 또는 결제 의향",
+        "40~50대 운전자 중 79.9%가 이 앱의 잠재 고객이라는 주장"
+      ]
+    },
+    {
+      "id": "S2",
+      "publisher": "Autio",
+      "title": "공식 서비스 소개",
+      "url": "https://autio.com/",
+      "supportedFacts": [
+        "주변 위치 기반 이야기 자동 재생",
+        "오프라인 이야기 다운로드 기능"
+      ],
+      "notSupported": [
+        "응답하라 라디오의 독점성·시장 우위"
+      ]
+    },
+    {
+      "id": "S3",
+      "publisher": "MBC",
+      "title": "영동고속도로 대관령길 횡계-강릉 구간 개통",
+      "url": "https://imnews.imbc.com/replay/2001/nwdesk/article/1883929_30743.html",
+      "eventDate": "2001-11-28",
+      "publicationDate": "2001-11-28",
+      "supportedFacts": [
+        "2001-11-28 횡계~강릉 구간 개통"
+      ],
+      "notSupported": [
+        "현재 위치의 도로 매칭",
+        "해당 날짜 god 길의 실제 방송 선곡",
+        "기사·영상·녹음의 자유로운 재사용"
+      ]
+    },
+    {
+      "id": "S4",
+      "publisher": "Apple Music",
+      "title": "god Chapter 4 / 길 카탈로그",
+      "url": "https://music.apple.com/us/album/chapter-4/1669438161",
+      "secondaryUrl": "https://music.apple.com/us/song/1669438164",
+      "supportedFacts": [
+        "2001년 11월 발매로 분류된 앨범·곡"
+      ],
+      "limitation": "앨범 페이지는 11월 15일, 곡 페이지는 11월 11일로 표시되어 정확한 일자는 통일하지 않음. 예시에서는 연월만 사용."
+    },
+    {
+      "id": "S5",
+      "publisher": "벅스",
+      "title": "god Chapter 4 앨범 정보",
+      "url": "https://music.bugs.co.kr/album/8848",
+      "supportedFacts": [
+        "앨범 카탈로그 발매일 표기 2001.11.12"
+      ],
+      "limitation": "검색 색인 내용 확인, 직접 열기는 403. 다른 서비스와 일자 불일치하므로 월 단위만 채택."
+    },
+    {
+      "id": "S6",
+      "publisher": "Pleos Playground",
+      "title": "FusedLocation 위치 데이터 접근",
+      "url": "https://document.pleos.ai/docs/pleos-only/connect-sdk-pleos/FusedLocation/location-data-access",
+      "supportedFacts": [
+        "getLastKnownLocation은 새 위치 산출이 아니며 null 가능",
+        "registerFusedLocationCallback으로 위치 변경 수신"
+      ]
+    },
+    {
+      "id": "S7",
+      "publisher": "Pleos Playground",
+      "title": "FusedLocation 권한",
+      "url": "https://document.pleos.ai/docs/pleos-only/connect-sdk-pleos/FusedLocation/declaring-permissions",
+      "supportedFacts": [
+        "pleos.car.permission.FUSED_LOCATION",
+        "위치 보호 설정 차단·null·오류 처리 필요"
+      ],
+      "limitation": "Google Fused Location의 백그라운드 동작을 Pleos 보장으로 해석하지 않음."
+    },
+    {
+      "id": "S8",
+      "publisher": "Pleos Playground",
+      "title": "NaviHelper Destinations",
+      "url": "https://document.pleos.ai/docs/pleos-only/connect-sdk-pleos/NaviHelper/destinations",
+      "supportedFacts": [
+        "getDestinationInfo 결과는 onDestinationInfo 콜백으로 수신"
+      ]
+    },
+    {
+      "id": "S9",
+      "publisher": "Pleos Playground",
+      "title": "NaviHelper 권한",
+      "url": "https://document.pleos.ai/docs/pleos-only/connect-sdk-pleos/NaviHelper/declaring-permissions",
+      "supportedFacts": [
+        "get*Info는 NAVI_ROUTE 권한 범주",
+        "경로 변경은 NAVI_ROUTE_SEARCH 별도 범주"
+      ]
+    },
+    {
+      "id": "S10",
+      "publisher": "Pleos Playground",
+      "title": "2026-10-19 SDK 릴리즈 노트",
+      "url": "https://document.pleos.ai/docs/pleos-only/release-note/sdk-release-note",
+      "supportedFacts": [
+        "DestinationInfo의 totalTime이 remainTime으로 변경"
+      ],
+      "limitation": "remainTime 상세 공개 페이지의 파싱 결과에는 단위가 없어 단위·미설정 값·갱신 방식은 실제 SDK 검증 필요."
+    },
+    {
+      "id": "S11",
+      "publisher": "Pleos Playground",
+      "title": "TextToSpeech Introduction",
+      "url": "https://document.pleos.ai/docs/pleos-only/connect-sdk-pleos/TextToSpeech/intro",
+      "supportedFacts": [
+        "텍스트 음성 합성 및 차량 오디오 출력 API 제공"
+      ],
+      "limitation": "특정 계정의 권한·단말 음질·콜백·캐시 파일 반환은 별도 검증."
+    },
+    {
+      "id": "S12",
+      "publisher": "Pleos Playground",
+      "title": "주행 규제 개발 가이드",
+      "url": "https://document.pleos.ai/docs/pleos-only/vehicle-app-developer-guide/driving-restriction-development-guide",
+      "supportedFacts": [
+        "CarUxRestrictions와 활성 제한 플래그로 기능별 UX 제한 적용"
+      ]
+    },
+    {
+      "id": "S13",
+      "publisher": "국가법령정보센터 / 대법원",
+      "title": "대법원 2006.9.14. 선고 2004도5350",
+      "url": "https://www.law.go.kr/LSW/precInfoP.do?evtNo=2004%EB%8F%845350",
+      "supportedFacts": [
+        "사실 자체와 창작적인 기사 표현을 구분",
+        "기사·사진 전부가 단순 사실보도 예외가 되는 것은 아님"
+      ],
+      "limitation": "본 설계는 개별 콘텐츠에 대한 이용허락 또는 법률 검토 결과가 아님."
+    }
+  ]
+}

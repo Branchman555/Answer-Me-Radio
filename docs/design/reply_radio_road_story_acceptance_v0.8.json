@@ -1,0 +1,327 @@
+{
+  "version": "0.8",
+  "scope": "기존 v0.7 54건을 대체하지 않는 추가 인수 명세",
+  "runtimeTestsExecuted": false,
+  "tests": [
+    {
+      "id": "RS-001",
+      "area": "기존 방송 회귀",
+      "given": "새 코너 OFF",
+      "expected": "기존 SINGLE/FAMILY, 시대 필터, DJ 주기 유지",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-002",
+      "area": "명시적 선택",
+      "given": "가족 모드 1980s/2010s에서 새 코너 미선택",
+      "expected": "2001년 사건 곡 자동 삽입 금지",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-003",
+      "area": "코너 시대 전환",
+      "given": "사용자가 길의 사건 연도 이동 ON + 검수 기록",
+      "expected": "코너 동안 사건 연도 필터 적용, 종료 후 기존 큐 복귀",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-004",
+      "area": "직접 구간 관계",
+      "given": "같은 날짜지만 다른 도로의 기록",
+      "expected": "편성 제외",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-005",
+      "area": "날짜 우선순위",
+      "given": "같은 구간에 오늘과 같은 월일 기록 존재",
+      "expected": "실제 사건 날짜로 우선 선택",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-006",
+      "area": "기념일 없음",
+      "given": "같은 구간의 다른 날짜 기록 존재",
+      "expected": "실제 날짜를 밝혀 소개",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-007",
+      "area": "사건일/게시일",
+      "given": "두 날짜가 서로 다름",
+      "expected": "사건일로 기념일·음원 연도 결정",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-008",
+      "area": "위치 권한 거부",
+      "given": "위치 없음/거부/차단",
+      "expected": "기본 음악 유지, 길 코너 비활성",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-009",
+      "area": "위치 최신성",
+      "given": "오래된 lastKnownLocation 수신",
+      "expected": "현재 진입으로 사용하지 않음",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-010",
+      "area": "평행 도로",
+      "given": "서로 인접한 옛길·신도로를 구별 불가",
+      "expected": "UNKNOWN, 발화하지 않음",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-011",
+      "area": "우회",
+      "given": "계획 경로에는 있으나 실제 진입 없음",
+      "expected": "준비만 하고 재생하지 않음",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-012",
+      "area": "구간 중복",
+      "given": "같은 사건 구간에 재진입",
+      "expected": "같은 trip에서 자동 발화 1회 이하",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-013",
+      "area": "중복 기사",
+      "given": "서로 다른 source로 같은 사건 등록",
+      "expected": "canonicalEventId로 한 번만 편성",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-014",
+      "area": "음악 보호",
+      "given": "음악 중 구간 진입",
+      "expected": "음악 유지, pending 코너만 등록",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-015",
+      "area": "발화 주기",
+      "given": "이전 DJ 후 정상 완료 1곡",
+      "expected": "역사 코너 발화 보류",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-016",
+      "area": "2곡 경계",
+      "given": "정상 완료 2곡 + 위치 유효 + 승인 코너",
+      "expected": "기존 DJ 대신 역사 DJ 1회",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-017",
+      "area": "코너 만료",
+      "given": "곡 경계 전에 구간 이탈",
+      "expected": "역사 코너 생략, 현재 위치처럼 소개 금지",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-018",
+      "area": "사용자 일시정지",
+      "given": "PAUSED 중 구간 진입/포커스 복귀",
+      "expected": "자동 발화·재생 금지",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-019",
+      "area": "상위 오디오",
+      "given": "통화/내비 안내 시 포커스 손실",
+      "expected": "기존 오디오 정책 우선, 동시 출력 없음",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-020",
+      "area": "TTS 중단",
+      "given": "NEXT 누른 뒤 늦게 DONE 도착",
+      "expected": "소개 예정 곡을 중복 시작하지 않음",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-021",
+      "area": "뉴스 근거",
+      "given": "검수된 사실 외 AI 내용 포함",
+      "expected": "승인 대본 아니면 배포·재생 차단",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-022",
+      "area": "현재 뉴스 오인",
+      "given": "과거 사건에 오늘 개통 표현",
+      "expected": "검수 실패, 실제 날짜 과거시제로 수정",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-023",
+      "area": "실제 선곡표 없음",
+      "given": "발매연도·발매월만 존재",
+      "expected": "그날 실제 선곡/인기곡 라벨 금지",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-024",
+      "area": "음악 없음",
+      "given": "사건 연도의 재생 가능한 곡 0개",
+      "expected": "다른 연도 대체 금지, 기본 방송 유지",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-025",
+      "area": "월 정보 없음",
+      "given": "YEAR만 존재",
+      "expected": "같은 해 라벨만 허용",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-026",
+      "area": "미래 발매",
+      "given": "사건일 뒤 발표한 것이 확인된 곡",
+      "expected": "당시 실제 청취·당시 이용 가능 주장 금지",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-027",
+      "area": "목적지 없음",
+      "given": "remainTime null 또는 단위 미확인",
+      "expected": "시간 단축 기능 없이 기본 동작",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-028",
+      "area": "목적지 임박",
+      "given": "검증된 remainingSeconds 120",
+      "expected": "축약본 사용, 곡 완주 보장 주장 없음",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-029",
+      "area": "SDK 미지원",
+      "given": "FusedLocation/NaviHelper 중 하나 미지원",
+      "expected": "기본 방송 유지, 모의 위치 실제로 위장 금지",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-030",
+      "area": "출처 화면",
+      "given": "주행 규제가 활성",
+      "expected": "상세 기사/설정/기록 탐색 차단",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-031",
+      "area": "기록과 삭제",
+      "given": "현재 이동에서 재생한 코너 기록",
+      "expected": "로컬에 근거·상태만 저장, 사용자 삭제·보존기한 적용",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-032",
+      "area": "개인정보",
+      "given": "위치 구간 이벤트 수신",
+      "expected": "원시 좌표·진입시각·이동로그 서버 전송 없음",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-033",
+      "area": "콘텐츠 철회",
+      "given": "story contentVersion 철회",
+      "expected": "미발화 캐시 무효화, 다시듣기도 차단",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-034",
+      "area": "실행 불가 예시",
+      "given": "제공 sample의 지오메트리·권리·파일 미확보",
+      "expected": "자동 트리거/공개 재생 BLOCKED",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-035",
+      "area": "가족 큐 복구",
+      "given": "역사 코너 2곡 후 원래 세대로 복귀",
+      "expected": "미재생 곡과 세대 순서 누락 없음",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-036",
+      "area": "불변 API",
+      "given": "v0.5 API에 HISTORY_STORY 필드 삽입 시도",
+      "expected": "기존 스키마 유지, 별도 로컬 provider 이용",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-037",
+      "area": "DJ 끄기",
+      "given": "DJ OFF 중 새 구간 진입",
+      "expected": "역사 음성 없음, 불필요 위치 구독 해제",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-038",
+      "area": "축약 블록",
+      "given": "사건 연도 곡이 1곡뿐",
+      "expected": "축약 후 즉시 DJ 중복 없이 기본 음악으로 이동",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-039",
+      "area": "가용성 재확인",
+      "given": "대본 시작 전 USB 제거",
+      "expected": "재생 못할 곡을 소개하지 않고 코너 생략",
+      "status": "NOT_RUN",
+      "evidence": null
+    },
+    {
+      "id": "RS-040",
+      "area": "경로 갱신",
+      "given": "pending 코너 준비 뒤 다른 길로 변경",
+      "expected": "미발화 후보 폐기, 재생 중 음악은 끊지 않음",
+      "status": "NOT_RUN",
+      "evidence": null
+    }
+  ]
+}

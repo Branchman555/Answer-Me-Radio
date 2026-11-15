@@ -1,0 +1,33 @@
+INSTRUMENTATION_STATUS: stream=RUN persisted_rights_survive_target_process_death
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS persisted_rights_survive_target_process_death
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=RUN revoked_rights_require_reselection
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS revoked_rights_require_reselection
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=RUN reselection_keeps_id_and_does_not_duplicate
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS reselection_keeps_id_and_does_not_duplicate
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=RUN deleted_document_is_excluded_after_reopen
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS deleted_document_is_excluded_after_reopen
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=RUN remove_releases_persisted_grant_and_keeps_source_file
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS remove_releases_persisted_grant_and_keeps_source_file
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: stream=RR003_PASS_COUNT=5 STAGE=restore
+
+INSTRUMENTATION_CODE: -1

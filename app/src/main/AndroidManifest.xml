@@ -1,0 +1,25 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <application android:allowBackup="false" android:fullBackupContent="@xml/backup_rules" android:label="@string/app_name"
+        android:icon="@drawable/radio_icon" android:dataExtractionRules="@xml/data_extraction_rules"
+        android:theme="@android:style/Theme.Material.NoActionBar"
+        android:supportsRtl="true">
+        <activity android:name="radio.reply.catalog.CatalogActivity" android:exported="false" />
+        <activity android:name="radio.reply.playback.PlaybackActivity" android:exported="false" />
+        <!-- Media browsers require discovery; onConnect restricts controllers to this UID or OS-trusted clients. -->
+        <service android:name="radio.reply.playback.RadioService" android:foregroundServiceType="mediaPlayback" android:exported="true" tools:ignore="ExportedService">
+            <intent-filter>
+                <action android:name="androidx.media3.session.MediaLibraryService" />
+                <action android:name="android.media.browse.MediaBrowserService" />
+            </intent-filter>
+        </service>
+        <activity android:name="radio.reply.demo.DemoActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

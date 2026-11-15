@@ -1,0 +1,2 @@
+# Preserve source-bundle and regression-test hashes across Windows/Linux checkouts.
+* -text

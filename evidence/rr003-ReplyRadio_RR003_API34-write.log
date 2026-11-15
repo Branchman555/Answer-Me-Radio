@@ -1,0 +1,24 @@
+INSTRUMENTATION_STATUS: stream=PASS picker_contract_local_only_read_only_multiple
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS cancel_and_clipdata_results
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS unknown_detail_access_is_denied
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS six_real_mp3_metadata_and_persisted_read_grants
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS missing_year_and_broken_files_are_individual_failures
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS native_store_roundtrip_stable_ids_and_no_backup_path
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS corrupt_store_is_not_silently_overwritten
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: stream=RR003_PASS_COUNT=7 STAGE=write
+
+INSTRUMENTATION_CODE: -1

@@ -1,0 +1,38 @@
+[
+  {
+    "path": "app/src/test/kotlin/radio/reply/ContextDjIntegrationTest.kt",
+    "sha256": "6de1fa91bfe8c88506f93d7c3f3ada1fb790bee487339fbcb7071a72b575faac"
+  },
+  {
+    "path": "app/src/test/kotlin/radio/reply/ContextEngineTest.kt",
+    "sha256": "e87dc3df8d832f2fcd791ab450c97b1a5f3d32572e05445149a477a4017dc1be"
+  },
+  {
+    "path": "app/src/test/kotlin/radio/reply/ContractSchema.kt",
+    "sha256": "b545f4840c7374381d63ecf2be0fede5a4d3da65627899a4b0d2437059186daf"
+  },
+  {
+    "path": "app/src/test/kotlin/radio/reply/DjContractTest.kt",
+    "sha256": "c7764bc11168c06701bee06546f0ef3acb7f60bb567391ff9df9f24d41410537"
+  },
+  {
+    "path": "app/src/test/kotlin/radio/reply/EventInterleavingTest.kt",
+    "sha256": "b0570fdbcd6a729417a12cf776ec714bf957d51ace1eacd485d038b8e1cbe30d"
+  },
+  {
+    "path": "app/src/test/kotlin/radio/reply/LocalMusicCatalogTest.kt",
+    "sha256": "dcbcece3fffc08c4394fe2e49c5419d2dedb39102bdd35b3c72e8fedbb1b0ff1"
+  },
+  {
+    "path": "app/src/test/kotlin/radio/reply/RadioPlannerTest.kt",
+    "sha256": "48cf9b34416c38bdc6fc2c45ac97267622f8770c0e78878b58b0066fabf8c0df"
+  },
+  {
+    "path": "app/src/test/kotlin/radio/reply/RadioReducerTest.kt",
+    "sha256": "9bbebbf021612f94365bdd814687d08491ea0b57225d78d27527463154fa127e"
+  },
+  {
+    "path": "app/src/test/kotlin/radio/reply/RoadStoryTest.kt",
+    "sha256": "5f30d63ae45b18bd29524a337e3e8447dc682fb22e65ef060fc37d9e3318bba9"
+  }
+]

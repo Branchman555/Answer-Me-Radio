@@ -1,0 +1,321 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:reply-radio:context:0.6",
+  "title": "Reply Radio ContextEngine Local Snapshot v0.6",
+  "description": "Internal app-only DTO, NOT DJ API request payload. Coordinate-free, no raw vehicle data.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "snapshotId",
+    "capturedAt",
+    "simulationMode",
+    "mode",
+    "eras",
+    "timeOfDay",
+    "preferences",
+    "weather",
+    "locationStatus",
+    "vehicle",
+    "omissions",
+    "contextFingerprint"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0"
+    },
+    "snapshotId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "capturedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "simulationMode": {
+      "type": "boolean"
+    },
+    "mode": {
+      "enum": [
+        "SINGLE",
+        "FAMILY"
+      ]
+    },
+    "eras": {
+      "type": "array",
+      "uniqueItems": true,
+      "minItems": 1,
+      "maxItems": 2,
+      "items": {
+        "type": "string",
+        "pattern": "^(19|20)\\d0s$"
+      }
+    },
+    "timeOfDay": {
+      "enum": [
+        "MORNING",
+        "DAY",
+        "EVENING",
+        "NIGHT",
+        "UNKNOWN"
+      ]
+    },
+    "preferences": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "genres",
+        "djEnabled",
+        "tripIntent"
+      ],
+      "properties": {
+        "genres": {
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 12,
+          "items": {
+            "type": "string",
+            "maxLength": 48,
+            "minLength": 1
+          }
+        },
+        "djEnabled": {
+          "type": "boolean"
+        },
+        "tripIntent": {
+          "enum": [
+            "NONE",
+            "COMMUTE",
+            "TRAVEL",
+            "LONG_DRIVE"
+          ]
+        }
+      }
+    },
+    "weather": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "condition",
+            "observedAt",
+            "fetchedAt",
+            "source",
+            "valid"
+          ],
+          "properties": {
+            "condition": {
+              "enum": [
+                "RAIN",
+                "SUN",
+                "CLOUD",
+                "SNOW",
+                "UNKNOWN"
+              ]
+            },
+            "observedAt": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "fetchedAt": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "source": {
+              "enum": [
+                "API",
+                "SIMULATION"
+              ]
+            },
+            "valid": {
+              "type": "boolean"
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "locationStatus": {
+      "enum": [
+        "NOT_REQUESTED",
+        "AVAILABLE",
+        "DENIED",
+        "UNAVAILABLE",
+        "BLOCKED"
+      ]
+    },
+    "vehicle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "availability",
+        "tripDurationSeconds",
+        "dataCapturedAt"
+      ],
+      "properties": {
+        "availability": {
+          "enum": [
+            "DISABLED",
+            "UNAVAILABLE",
+            "AVAILABLE"
+          ]
+        },
+        "tripDurationSeconds": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "dataCapturedAt": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "omissions": {
+      "type": "array",
+      "maxItems": 10,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "LOCATION_DENIED",
+          "LOCATION_UNAVAILABLE",
+          "LOCATION_BLOCKED",
+          "WEATHER_STALE",
+          "WEATHER_TIMEOUT",
+          "WEATHER_INVALID",
+          "TIME_UNKNOWN",
+          "VEHICLE_UNAVAILABLE",
+          "SIMULATION_DISABLED"
+        ]
+      }
+    },
+    "contextFingerprint": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "mode": {
+            "const": "FAMILY"
+          }
+        },
+        "required": [
+          "mode"
+        ]
+      },
+      "then": {
+        "properties": {
+          "eras": {
+            "minItems": 2,
+            "maxItems": 2
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "mode": {
+            "const": "SINGLE"
+          }
+        },
+        "required": [
+          "mode"
+        ]
+      },
+      "then": {
+        "properties": {
+          "eras": {
+            "minItems": 1,
+            "maxItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "simulationMode": {
+            "const": false
+          }
+        },
+        "required": [
+          "simulationMode"
+        ]
+      },
+      "then": {
+        "properties": {
+          "weather": {
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "const": "API"
+                  }
+                },
+                "required": [
+                  "source"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "weather": {
+            "type": "object",
+            "properties": {
+              "valid": {
+                "const": true
+              }
+            },
+            "required": [
+              "valid"
+            ]
+          }
+        },
+        "required": [
+          "weather"
+        ]
+      },
+      "then": {
+        "properties": {
+          "weather": {
+            "properties": {
+              "condition": {
+                "enum": [
+                  "RAIN",
+                  "SUN",
+                  "CLOUD",
+                  "SNOW"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "source": "ORIGINAL_SYNTHESIZED_ARPEGGIO_NO_USER_MUSIC",
+  "encoder": "lameenc 1.8.5",
+  "sampleRate": 44100,
+  "durationSeconds": 12,
+  "nonzeroPcmSamples": 528402,
+  "testAssetsSha256": {
+    "song1.mp3": "7b233a5ce2b25b203f02a599ec4eba6c9abc80964bbada37155bb549e62c4568",
+    "song2.mp3": "73a02be25c324362e428ef71de45348ab997260a08d09d80901325edb0366e96",
+    "song3.mp3": "541a10137878a36a46cbda1b3fb314cdcc83b8ebeb8c5ea2d66a822df651a98c",
+    "song4.mp3": "b498f431d9eef006500b4aa15aa2e9930f8b20cda503d2eb471d74f59f37124a",
+    "song5.mp3": "5829d1cc947dad7229861b55c3110c8b786fe94b12ca3407f8a66e748d86de2f",
+    "song6.mp3": "324083197acfcc1adf004eeeaa966cdc5535e30cfd2ad01df53c966b2fd46919"
+  }
+}

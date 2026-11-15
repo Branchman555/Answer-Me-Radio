@@ -1,0 +1,315 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:reply-radio:dj:0.5",
+  "title": "Reply Radio DJ Script API v1 (draft v0.5)",
+  "$defs": {
+    "track": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "artist",
+        "year"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "artist": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "year": {
+          "type": "integer",
+          "minimum": 1900,
+          "maximum": 2100
+        }
+      }
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "timeOfDay",
+        "weather",
+        "mode",
+        "previousEra",
+        "nextEra"
+      ],
+      "properties": {
+        "timeOfDay": {
+          "enum": [
+            "MORNING",
+            "DAY",
+            "EVENING",
+            "NIGHT",
+            "UNKNOWN"
+          ]
+        },
+        "weather": {
+          "anyOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "condition",
+                "observedAt",
+                "valid"
+              ],
+              "properties": {
+                "condition": {
+                  "enum": [
+                    "RAIN",
+                    "SUN",
+                    "CLOUD",
+                    "SNOW",
+                    "UNKNOWN"
+                  ]
+                },
+                "observedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "valid": {
+                  "type": "boolean"
+                }
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "mode": {
+          "enum": [
+            "SINGLE",
+            "FAMILY"
+          ]
+        },
+        "previousEra": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(19|20)\\d0s$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "nextEra": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(19|20)\\d0s$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "request": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "schemaVersion",
+      "requestId",
+      "sessionId",
+      "generation",
+      "segmentId",
+      "type",
+      "personaId",
+      "locale",
+      "maxSpokenSeconds",
+      "context",
+      "previousTracks",
+      "nextTracks",
+      "recentTopics"
+    ],
+    "properties": {
+      "schemaVersion": {
+        "const": "1.0"
+      },
+      "requestId": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 100
+      },
+      "sessionId": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 100
+      },
+      "generation": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "segmentId": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 100
+      },
+      "type": {
+        "enum": [
+          "OPENING",
+          "ERA_BRIDGE",
+          "SAME_ERA_BRIDGE"
+        ]
+      },
+      "personaId": {
+        "const": "retro_fm_90_v1"
+      },
+      "locale": {
+        "const": "ko-KR"
+      },
+      "maxSpokenSeconds": {
+        "type": "integer",
+        "minimum": 5,
+        "maximum": 30
+      },
+      "context": {
+        "$ref": "#/$defs/context"
+      },
+      "previousTracks": {
+        "type": "array",
+        "maxItems": 3,
+        "items": {
+          "$ref": "#/$defs/track"
+        }
+      },
+      "nextTracks": {
+        "type": "array",
+        "maxItems": 3,
+        "items": {
+          "$ref": "#/$defs/track"
+        }
+      },
+      "recentTopics": {
+        "type": "array",
+        "maxItems": 3,
+        "items": {
+          "enum": [
+            "ERA_TRANSITION",
+            "MUSIC_METADATA",
+            "WEATHER",
+            "GENERAL_NOSTALGIA",
+            "LIGHT_HUMOR"
+          ]
+        }
+      }
+    }
+  },
+  "response": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "schemaVersion",
+      "requestId",
+      "sessionId",
+      "generation",
+      "segmentId",
+      "type",
+      "personaId",
+      "text",
+      "topic",
+      "delivery",
+      "groundingFields",
+      "isFallback"
+    ],
+    "properties": {
+      "schemaVersion": {
+        "const": "1.0"
+      },
+      "requestId": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 100
+      },
+      "sessionId": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 100
+      },
+      "generation": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "segmentId": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 100
+      },
+      "type": {
+        "enum": [
+          "OPENING",
+          "ERA_BRIDGE",
+          "SAME_ERA_BRIDGE"
+        ]
+      },
+      "personaId": {
+        "const": "retro_fm_90_v1"
+      },
+      "text": {
+        "type": "string",
+        "minLength": 10,
+        "maxLength": 160
+      },
+      "topic": {
+        "enum": [
+          "ERA_TRANSITION",
+          "MUSIC_METADATA",
+          "WEATHER",
+          "GENERAL_NOSTALGIA",
+          "LIGHT_HUMOR"
+        ]
+      },
+      "delivery": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "tone",
+          "pace"
+        ],
+        "properties": {
+          "tone": {
+            "enum": [
+              "WARM",
+              "CALM",
+              "BRIGHT"
+            ]
+          },
+          "pace": {
+            "enum": [
+              "RELAXED",
+              "NORMAL"
+            ]
+          }
+        }
+      },
+      "groundingFields": {
+        "type": "array",
+        "uniqueItems": true,
+        "maxItems": 12,
+        "items": {
+          "type": "string",
+          "pattern": "^(context\\.(timeOfDay|previousEra|nextEra|weather\\.condition)|previousTracks\\[[0-2]\\]\\.(title|artist|year)|nextTracks\\[[0-2]\\]\\.(title|artist|year))$"
+        }
+      },
+      "isFallback": {
+        "type": "boolean"
+      }
+    }
+  }
+}

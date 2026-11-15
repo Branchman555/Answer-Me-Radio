@@ -1,0 +1,101 @@
+{
+  "description": "모델이 이미 정해진 1980s→2010s 시대 전환을 말로 소개하는 성공 예제",
+  "request": {
+    "schemaVersion": "1.0",
+    "requestId": "req-00017",
+    "sessionId": "session-001",
+    "generation": 12,
+    "segmentId": "dj-before-block-002",
+    "type": "ERA_BRIDGE",
+    "personaId": "retro_fm_90_v1",
+    "locale": "ko-KR",
+    "maxSpokenSeconds": 18,
+    "context": {
+      "timeOfDay": "EVENING",
+      "weather": {
+        "condition": "RAIN",
+        "observedAt": "2026-11-15T02:30:00+09:00",
+        "valid": true
+      },
+      "mode": "FAMILY",
+      "previousEra": "1980s",
+      "nextEra": "2010s"
+    },
+    "previousTracks": [
+      {
+        "id": "local-1987",
+        "title": "연습곡 A",
+        "artist": "가수 A",
+        "year": 1987
+      }
+    ],
+    "nextTracks": [
+      {
+        "id": "local-2014",
+        "title": "연습곡 B",
+        "artist": "가수 B",
+        "year": 2014
+      }
+    ],
+    "recentTopics": [
+      "GENERAL_NOSTALGIA"
+    ]
+  },
+  "response": {
+    "schemaVersion": "1.0",
+    "requestId": "req-00017",
+    "sessionId": "session-001",
+    "generation": 12,
+    "segmentId": "dj-before-block-002",
+    "type": "ERA_BRIDGE",
+    "personaId": "retro_fm_90_v1",
+    "text": "비가 내리는 저녁이네요. 이제 시간을 조금 앞으로 돌려볼까요? 이번에는 이천십 년대의 음악으로 이어가겠습니다.",
+    "topic": "WEATHER",
+    "delivery": {
+      "tone": "WARM",
+      "pace": "RELAXED"
+    },
+    "groundingFields": [
+      "context.weather.condition",
+      "context.timeOfDay",
+      "context.nextEra"
+    ],
+    "isFallback": false
+  },
+  "negativeCases": [
+    {
+      "id": "wrong-generation",
+      "modifyResponse": {
+        "generation": 11
+      },
+      "expected": "CONTEXT_MISMATCH"
+    },
+    {
+      "id": "unexpected-track-list",
+      "modifyResponse": {
+        "trackIds": [
+          "another-track"
+        ]
+      },
+      "expected": "SCHEMA_INVALID"
+    },
+    {
+      "id": "fake-weather",
+      "modifyRequest": {
+        "context": {
+          "timeOfDay": "EVENING",
+          "weather": null,
+          "mode": "FAMILY",
+          "previousEra": "1980s",
+          "nextEra": "2010s"
+        }
+      },
+      "expected": "WEATHER_UNGROUNDED"
+    },
+    {
+      "id": "invalid-json-text",
+      "replaceResponse": "<p>DJ says hello</p>",
+      "expected": "JSON_INVALID"
+    }
+  ]
+}

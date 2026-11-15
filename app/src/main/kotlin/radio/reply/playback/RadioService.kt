@@ -18,9 +18,14 @@ import radio.reply.orchestrator.*
 @UnstableApi
 class RadioService : MediaLibraryService() {
     // Debug APK diagnostics for instrumented lifecycle assertions; cleared on destruction, never persisted.
-    companion object { internal var active: RadioService? = null; private set }
+    companion object {
+        internal var active: RadioService? = null; private set
+        const val SET_DJ = "radio.reply.SET_DJ"
+    }
     lateinit var engine: PlaybackEngine; private set
     lateinit var output: Media3Output; private set
+    lateinit var voice: PlatformVoice; private set
+    private lateinit var ux: radio.reply.ux.VehicleUx
     private lateinit var sessionPlayer: SessionPlayer
     private lateinit var library: MediaLibrarySession
     private val handler = Handler(Looper.getMainLooper())
@@ -38,10 +43,18 @@ class RadioService : MediaLibraryService() {
         super.onCreate()
         active = this
         output = Media3Output(this)
-        engine = PlaybackEngine(output, SystemClock::elapsedRealtime) { state ->
+        voice = PlatformVoice(this, handler)
+        engine = PlaybackEngine(RadioOutput(output, voice.output), SystemClock::elapsedRealtime) { state ->
             if (::sessionPlayer.isInitialized) sessionPlayer.refresh()
-            if (state.phase == Phase.STOPPED && lastPhase != Phase.STOPPED) { abandonFocus(); stopForeground(STOP_FOREGROUND_REMOVE); stopSelf() }
-            lastPhase = state.phase
+            if (::library.isInitialized) library.setSessionExtras(Bundle().apply {
+                putString("phase", state.phase.name); putBoolean("djEnabled", state.settings.djEnabled)
+                putString("voiceBackend", voice.backend); putString("voiceStatus", voice.lastStatus)
+                putString("notice", state.notice)
+            })
+            if (state.phase == Phase.STOPPED && state.awaitingStop == null && lastPhase != Phase.STOPPED) {
+                abandonFocus(); stopForeground(STOP_FOREGROUND_REMOVE); stopSelf()
+            }
+            if (state.awaitingStop == null) lastPhase = state.phase
         }
         sessionPlayer = SessionPlayer(output, engine, ::command)
         audioManager = getSystemService(AudioManager::class.java)
@@ -61,6 +74,7 @@ class RadioService : MediaLibraryService() {
             }, handler).build()
         library = MediaLibrarySession.Builder(this, sessionPlayer, LibraryCallback()).setSessionActivity(
             PendingIntent.getActivity(this, 0, Intent(this, PlaybackActivity::class.java), PendingIntent.FLAG_IMMUTABLE)).build()
+        ux = radio.reply.ux.VehicleUx(this) {}
         if (Build.VERSION.SDK_INT >= 33) registerReceiver(noisy, IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY), RECEIVER_NOT_EXPORTED)
         else @Suppress("UnspecifiedRegisterReceiverFlag") registerReceiver(noisy, IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY))
         refreshCatalog {}
@@ -72,7 +86,7 @@ class RadioService : MediaLibraryService() {
         val manager = getSystemService(NotificationManager::class.java)
         manager.createNotificationChannel(NotificationChannel("reply-radio", "음악 재생", NotificationManager.IMPORTANCE_LOW))
         startForeground(1001, Notification.Builder(this, "reply-radio").setSmallIcon(R.drawable.radio_icon)
-            .setContentTitle("응답하라 라디오").setContentText("로컬 음악 재생 준비 · DJ OFF")
+            .setContentTitle("응답하라 라디오").setContentText("로컬 라디오 재생 준비")
             .setContentIntent(PendingIntent.getActivity(this, 0, Intent(this, PlaybackActivity::class.java), PendingIntent.FLAG_IMMUTABLE)).build())
     }
     fun command(event: Event) {
@@ -106,11 +120,11 @@ class RadioService : MediaLibraryService() {
             }
         }
     }
-    override fun onTaskRemoved(rootIntent: Intent?) { if (!engine.state.desiredPlaying) stopSelf() }
+    override fun onTaskRemoved(rootIntent: Intent?) { if (!engine.state.desiredPlaying && engine.state.awaitingStop == null) stopSelf() }
     override fun onDestroy() {
         destroyed = true; pendingPlay = false
         active = null
-        engine.command(Event.Stop); output.close(); abandonFocus()
+        engine.command(Event.Stop); voice.close(); output.close(); abandonFocus(); ux.close()
         library.release(); sessionPlayer.release()
         unregisterReceiver(noisy); handler.removeCallbacksAndMessages(null)
         super.onDestroy()
@@ -126,10 +140,23 @@ class RadioService : MediaLibraryService() {
     private inner class LibraryCallback : MediaLibrarySession.Callback {
         override fun onConnect(session: MediaSession, controller: MediaSession.ControllerInfo): MediaSession.ConnectionResult =
             if (controller.uid == applicationInfo.uid || controller.isTrusted)
-                MediaSession.ConnectionResult.AcceptedResultBuilder(session).build()
+                MediaSession.ConnectionResult.AcceptedResultBuilder(session).apply {
+                    if (controller.uid == applicationInfo.uid) setAvailableSessionCommands(
+                        MediaSession.ConnectionResult.DEFAULT_SESSION_AND_LIBRARY_COMMANDS.buildUpon()
+                            .add(SessionCommand(SET_DJ, Bundle.EMPTY)).build())
+                }.build()
             else MediaSession.ConnectionResult.reject()
+        override fun onCustomCommand(session: MediaSession, controller: MediaSession.ControllerInfo,
+            customCommand: SessionCommand, args: Bundle): ListenableFuture<SessionResult> {
+            if (controller.uid != applicationInfo.uid || customCommand.customAction != SET_DJ)
+                return Futures.immediateFuture(SessionResult(SessionError.ERROR_PERMISSION_DENIED))
+            ux.refresh()
+            if (!ux.gate.detailsAllowed) return Futures.immediateFuture(SessionResult(SessionError.ERROR_PERMISSION_DENIED))
+            command(Event.SettingsChanged(engine.state.settings.copy(djEnabled = args.getBoolean("enabled"))))
+            return Futures.immediateFuture(SessionResult(SessionResult.RESULT_SUCCESS))
+        }
         override fun onGetLibraryRoot(session: MediaLibrarySession, browser: MediaSession.ControllerInfo, params: LibraryParams?) =
-            Futures.immediateFuture(LibraryResult.ofItem(folder("root", "로컬 시대별 라디오 · DJ OFF"), params))
+            Futures.immediateFuture(LibraryResult.ofItem(folder("root", "로컬 시대별 라디오"), params))
         override fun onGetChildren(session: MediaLibrarySession, browser: MediaSession.ControllerInfo, parentId: String,
             page: Int, pageSize: Int, params: LibraryParams?): ListenableFuture<LibraryResult<ImmutableList<MediaItem>>> {
             val result = SettableFuture.create<LibraryResult<ImmutableList<MediaItem>>>()

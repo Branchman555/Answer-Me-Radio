@@ -1,6 +1,6 @@
 {
-  "ticket": "RR-004",
-  "recordedAtUtc": "2026-11-15T11:02:05.053629+00:00",
+  "ticket": "RR-005",
+  "recordedAtUtc": "2026-11-15T12:56:28.808784+00:00",
   "scope": "JVM_AND_ANDROID_BUILD_WITH_SEPARATE_NATIVE_DEVICE_EVIDENCE",
   "sourceIntegrity": {
     "status": "PASS",
@@ -11,7 +11,7 @@
   },
   "jvm": {
     "status": "PASS",
-    "testCount": 144,
+    "testCount": 174,
     "suites": [
       {
         "name": "radio.reply.ContextDjIntegrationTest",
@@ -906,6 +906,166 @@
             ]
           }
         ]
+      },
+      {
+        "name": "radio.reply.UxSafetyGateTest",
+        "tests": [
+          {
+            "name": "onlyCompleteUnrestrictedObservationUnlocks",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "automotiveStartsUnknownAndLocked",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "anyActiveRestrictionLocksDetails",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "pickerResultAfterRestrictionAndRestoreIsRejected",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "optimizationFlagAloneLocks",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "sameStateRefreshDoesNotInvalidatePicker",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "disconnectRevokesPreviouslyAllowedDetails",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "phoneIsExplicitlyNonVehicleNotAssumedParked",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "missingEitherObservationIsUnknown",
+            "status": "PASS",
+            "relatedDesignCases": []
+          }
+        ]
+      },
+      {
+        "name": "radio.reply.VoiceOutputTest",
+        "tests": [
+          {
+            "name": "stopTimeoutPreventsPlayEvenWithFocusGain",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "stoppedVoiceCannotResumeOnLateCallbacks",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "stopWaitsForRealAcknowledgement",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "djOffWaitsForStopBeforeMusic",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "errorDuringStopCannotProveSilence",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "readyIsNotCompletion",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "focusLossStopsVoiceAndGainResumesOnlyAfterSilence",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "wrongStopTokenCannotStopCurrentSpeech",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "factoryFailureRecoversWithoutFakeVoiceCompletion",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "synthesisDeadlineRequestsFailureButNeverClaimsSilence",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "terminalCallbacksCancelDeadlines",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "doneDuringStopIsStopNotNaturalEnd",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "nextDuringVoiceStartsIntroducedSongOnlyAfterStop",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "closeRetiresAllCallbacksWithoutPlaybackEvents",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "voiceFailureSkipsOnceAfterStop",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "lateAcknowledgementAfterTimeoutCanOnlyReleaseOldLease",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "staleCallbacksCannotFinishNewVoice",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "pauseAndLateDoneStayPausedUntilUserPlay",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "timeoutDoesNotPermitAnotherVoice",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "doneClosesBeforeExactlyOneEnd",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "unsolicitedStopIsFailureAndSafeMusicRecovery",
+            "status": "PASS",
+            "relatedDesignCases": []
+          }
+        ]
       }
     ]
   },
@@ -924,15 +1084,20 @@
     "testsPreservedAndExecuted": 127,
     "sourceHashesUnchanged": true
   },
+  "rr004Regression": {
+    "status": "PASS",
+    "testsPreservedAndExecuted": 144,
+    "sourceHashesUnchanged": true
+  },
   "contractVerification": "Preserved v0.5/v0.6 schema keyword checks, fixture hashes, payload isolation, Mock provider/reducer integration",
   "debugApk": {
     "status": "PASS",
     "path": "app/build/outputs/apk/debug/app-debug.apk",
-    "sha256": "64e302bc009b540578220bb0e726ef02e1ccd17a4b9c2f96feab5aaf1f4ec074"
+    "sha256": "3460f51819b21e45995d309d2bd8863e2335ee5c87b7a88de562081e594dde9f"
   },
   "testApk": {
     "path": "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk",
-    "sha256": "e723652fe98dae58a1b293dde93e7c99193820e161cef32285d8bc348aef98cb"
+    "sha256": "87361089d27a04e23b8dfd69397441c9bb191f42111d07985eb4f8aa74a71315"
   },
   "catalogArtifactIsolation": "PASS_NO_AUDIO_OR_TEST_PROVIDER_IN_MAIN_APK_NO_BROAD_PERMISSIONS",
   "lint": {
@@ -940,18 +1105,18 @@
     "errors": 0,
     "warnings": 0
   },
-  "buildLog": "evidence/build-20261115-105950-544.log",
+  "buildLog": "evidence/build-20261115-125216-389.log",
   "deviceEvidence": [
     {
-      "ticket": "RR-004",
-      "recordedAtUtc": "2026-11-15T11:01:02.579033+00:00",
+      "ticket": "RR-005",
+      "recordedAtUtc": "2026-11-15T12:53:54.344768+00:00",
       "avd": "ReplyRadio_RR003_API34",
       "serial": "emulator-5584",
       "user": "10",
       "androidApi": "34",
       "fingerprint": "Pleos/crp_avd/crp_avd_x86_64:14/RELEASE.release_connect_v2.1.0/release_connect_v2.1.0:user/test-keys",
-      "appSha256": "64e302bc009b540578220bb0e726ef02e1ccd17a4b9c2f96feab5aaf1f4ec074",
-      "testApkSha256": "e723652fe98dae58a1b293dde93e7c99193820e161cef32285d8bc348aef98cb",
+      "appSha256": "3460f51819b21e45995d309d2bd8863e2335ee5c87b7a88de562081e594dde9f",
+      "testApkSha256": "87361089d27a04e23b8dfd69397441c9bb191f42111d07985eb4f8aa74a71315",
       "audioFixture": "ORIGINAL_SYNTHESIZED_MP3_TEST_APK_ONLY",
       "tests": [
         {
@@ -1083,29 +1248,100 @@
           "name": "service_releases_after_stop_and_last_controller_disconnect",
           "stage": "playback",
           "status": "PASS"
+        },
+        {
+          "name": "platform_ux_subscription_and_unknown_fail_closed",
+          "stage": "voiceux",
+          "status": "PASS"
+        },
+        {
+          "name": "binding_does_not_start_music_or_voice",
+          "stage": "voiceux",
+          "status": "PASS"
+        },
+        {
+          "name": "platform_voice_initialization_and_music_fallback_probe",
+          "stage": "voiceux",
+          "status": "PASS"
+        },
+        {
+          "name": "actual_voice_done_then_media3_audio_without_overlap",
+          "stage": "voiceux",
+          "status": "PASS"
+        },
+        {
+          "name": "actual_voice_pause_stop_ack_and_no_auto_resume",
+          "stage": "voiceux",
+          "status": "PASS"
+        },
+        {
+          "name": "actual_voice_resume_then_next_uses_introduced_track",
+          "stage": "voiceux",
+          "status": "PASS"
+        },
+        {
+          "name": "actual_voice_stop_never_starts_next_music",
+          "stage": "voiceux",
+          "status": "PASS"
+        },
+        {
+          "name": "actual_focus_loss_stops_voice_gain_restarts_serially",
+          "stage": "voiceux",
+          "status": "PASS"
+        },
+        {
+          "name": "user_pause_during_voice_focus_loss_blocks_gain_resume",
+          "stage": "voiceux",
+          "status": "PASS"
+        },
+        {
+          "name": "three_natural_music_completions_trigger_serial_era_bridge",
+          "stage": "voiceux",
+          "status": "PASS"
+        },
+        {
+          "name": "dj_off_makes_no_additional_voice_request",
+          "stage": "voiceux",
+          "status": "PASS"
+        },
+        {
+          "name": "pleos_driving_restriction_locks_details_and_service_settings",
+          "stage": "voiceux",
+          "status": "PASS"
         }
       ],
       "status": "PASS",
       "physicalSpeakerListening": "NOT_RUN_EMULATOR_NO_AUDIO",
       "physicalUsbUnplug": "NOT_RUN",
-      "vehicleDrivingUx": "NOT_RUN",
+      "vehicleDrivingUx": "EMULATED_PLATFORM_RESTRICTION_ON_OFF",
       "audio": {
         "audioTrackAdvances": 5,
-        "renderedDecoderBuffers": 229,
+        "renderedDecoderBuffers": 255,
         "verifiedDecoderOrIoErrors": 5
       },
+      "voice": {
+        "starts": 9,
+        "done": 2,
+        "stopAcks": 7,
+        "errors": 0,
+        "stopTimeouts": 0,
+        "audioBytes": 0,
+        "rmsUpdates": 28
+      },
+      "ux": "ALLOWED",
+      "voiceBackend": "PLEOS_ON_DEVICE",
       "artifactMatchesCurrentBuild": true
     },
     {
-      "ticket": "RR-004",
-      "recordedAtUtc": "2026-11-15T11:01:01.091365+00:00",
+      "ticket": "RR-005",
+      "recordedAtUtc": "2026-11-15T12:53:51.710018+00:00",
       "avd": "ReplyRadio_RR003_API37",
       "serial": "emulator-5586",
       "user": "0",
       "androidApi": "37",
       "fingerprint": "google/sdk_gphone64_x86_64/emu64xa:17/CE2A.260420.051.A2/16418371:user/release-keys",
-      "appSha256": "64e302bc009b540578220bb0e726ef02e1ccd17a4b9c2f96feab5aaf1f4ec074",
-      "testApkSha256": "e723652fe98dae58a1b293dde93e7c99193820e161cef32285d8bc348aef98cb",
+      "appSha256": "3460f51819b21e45995d309d2bd8863e2335ee5c87b7a88de562081e594dde9f",
+      "testApkSha256": "87361089d27a04e23b8dfd69397441c9bb191f42111d07985eb4f8aa74a71315",
       "audioFixture": "ORIGINAL_SYNTHESIZED_MP3_TEST_APK_ONLY",
       "tests": [
         {
@@ -1242,27 +1478,93 @@
           "name": "service_releases_after_stop_and_last_controller_disconnect",
           "stage": "playback",
           "status": "PASS"
+        },
+        {
+          "name": "platform_ux_subscription_and_unknown_fail_closed",
+          "stage": "voiceux",
+          "status": "PASS"
+        },
+        {
+          "name": "binding_does_not_start_music_or_voice",
+          "stage": "voiceux",
+          "status": "PASS"
+        },
+        {
+          "name": "platform_voice_initialization_and_music_fallback_probe",
+          "stage": "voiceux",
+          "status": "PASS"
+        },
+        {
+          "name": "actual_voice_done_then_media3_audio_without_overlap",
+          "stage": "voiceux",
+          "status": "PASS"
+        },
+        {
+          "name": "actual_voice_pause_stop_ack_and_no_auto_resume",
+          "stage": "voiceux",
+          "status": "PASS"
+        },
+        {
+          "name": "actual_voice_resume_then_next_uses_introduced_track",
+          "stage": "voiceux",
+          "status": "PASS"
+        },
+        {
+          "name": "actual_voice_stop_never_starts_next_music",
+          "stage": "voiceux",
+          "status": "PASS"
+        },
+        {
+          "name": "actual_focus_loss_stops_voice_gain_restarts_serially",
+          "stage": "voiceux",
+          "status": "PASS"
+        },
+        {
+          "name": "user_pause_during_voice_focus_loss_blocks_gain_resume",
+          "stage": "voiceux",
+          "status": "PASS"
+        },
+        {
+          "name": "three_natural_music_completions_trigger_serial_era_bridge",
+          "stage": "voiceux",
+          "status": "PASS"
+        },
+        {
+          "name": "dj_off_makes_no_additional_voice_request",
+          "stage": "voiceux",
+          "status": "PASS"
         }
       ],
       "status": "PASS",
       "physicalSpeakerListening": "NOT_RUN_EMULATOR_NO_AUDIO",
       "physicalUsbUnplug": "NOT_RUN",
-      "vehicleDrivingUx": "NOT_RUN",
+      "vehicleDrivingUx": "NON_VEHICLE",
       "audio": {
         "audioTrackAdvances": 3,
-        "renderedDecoderBuffers": 256,
+        "renderedDecoderBuffers": 266,
         "verifiedDecoderOrIoErrors": 5
       },
+      "voice": {
+        "starts": 9,
+        "done": 2,
+        "stopAcks": 7,
+        "errors": 0,
+        "stopTimeouts": 0,
+        "audioBytes": 1066766,
+        "rmsUpdates": 0
+      },
+      "ux": "NON_VEHICLE",
+      "voiceBackend": "ANDROID_OFFLINE",
       "artifactMatchesCurrentBuild": true
     }
   ],
-  "realAudioPlayback": "SEE_DEVICE_MP3_DECODER_AND_AUDIOTRACK_EVIDENCE",
-  "vehicle": "NOT_RUN",
+  "realAudioPlayback": "SEE_DEVICE_MP3_AND_PLATFORM_TTS_EVIDENCE",
+  "vehicle": "EMULATOR_ONLY_SEE_DEVICE_EVIDENCE",
   "acceptanceMatricesPromoted": false,
   "limitations": [
-    "Actual Media3 MP3 pipeline; DJ OFF because TTS remains RR-005",
+    "Pleos ON_DEVICE and Android offline TTS; physical speaker listening not tested",
     "Pleos API34 picker resolves to platform stub; picker roundtrip only on regular Android",
-    "Physical speaker listening, USB removal, driving restrictions and physical media buttons not tested",
+    "Physical USB removal, actual vehicle driving and physical media buttons not tested",
     "Only local approved templates; unrestricted LLM/backend validation remains RR-006",
     "Actual road geometry/editorial/music rights unverified",
     "History is process-local; no replay or 7-day persistence",

@@ -26,7 +26,8 @@ class SessionPlayer(output: Media3Output, private val engine: PlaybackEngine, pr
             Player.COMMAND_GET_TIMELINE, Player.COMMAND_GET_METADATA, Player.COMMAND_SET_MEDIA_ITEM).build()
         return state.buildUpon().setAvailableCommands(commands).apply {
             setPlayWhenReady(engine.state.desiredPlaying && engine.state.focusAllowed, Player.PLAY_WHEN_READY_CHANGE_REASON_USER_REQUEST)
-            val track = (engine.state.segment as? Segment.Music)?.track
+            val voice = engine.state.segment as? Segment.Voice
+            val track = (engine.state.segment as? Segment.Music)?.track ?: voice?.next?.track
                 ?: radio.reply.planner.RadioPlanner().plan(engine.state.catalog, engine.state.settings, 0).block?.candidates?.firstOrNull()
             if (track != null) {
                 setPlaylist(listOf(MediaItemData.Builder(track.id).setMediaItem(Media3Output.item(track))
@@ -37,6 +38,11 @@ class SessionPlayer(output: Media3Output, private val engine: PlaybackEngine, pr
                 setContentPositionMs(0); setContentBufferedPositionMs { 0L }; setTotalBufferedDurationMs { 0L }
             }
             if (engine.state.phase in setOf(Phase.IDLE, Phase.STOPPED)) { setPlaybackState(Player.STATE_IDLE); setContentPositionMs(0) }
+            if (engine.state.phase == Phase.DJ_SPEAKING) {
+                // TTS is not ExoPlayer music. Keep standard pause/next available while exposing the domain phase separately.
+                setPlaybackState(Player.STATE_BUFFERING); setContentPositionMs(0)
+                setContentBufferedPositionMs { 0L }; setTotalBufferedDurationMs { 0L }
+            }
             if (engine.state.phase in setOf(Phase.PAUSED, Phase.SUSPENDED)) {
                 setPlayWhenReady(false, Player.PLAY_WHEN_READY_CHANGE_REASON_USER_REQUEST)
                 setContentPositionMs(engine.state.positionMs)

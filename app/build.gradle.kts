@@ -5,12 +5,13 @@ plugins {
 android {
     namespace = "radio.reply"
     compileSdk = 35
+    useLibrary("android.car", false)
     defaultConfig {
         applicationId = "radio.reply.prototype"
         minSdk = 28
         targetSdk = 35
-        versionCode = 4
-        versionName = "0.4.0-playback"
+        versionCode = 5
+        versionName = "0.5.0-voice-ux"
         testInstrumentationRunner = "radio.reply.catalog.CatalogInstrumentation"
     }
     compileOptions {
@@ -27,6 +28,7 @@ android {
 androidComponents { beforeVariants(selector().withBuildType("release")) { it.enable = false } }
 dependencyLocking { lockAllConfigurations() }
 dependencies {
+    implementation("ai.pleos.playground:TextToSpeech:3.3.1")
     implementation("androidx.media3:media3-exoplayer:1.6.1")
     implementation("androidx.media3:media3-session:1.6.1")
     implementation("com.google.code.gson:gson:2.10.1")

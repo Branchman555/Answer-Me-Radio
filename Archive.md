@@ -1,6 +1,26 @@
 # 현재 개발 기록
 
-## 현재 상태 — RR-004 구현·검증 완료 (2026-11-15)
+## 현재 상태 — RR-005 구현·검증 완료 (2026-11-15)
+
+실제 한국어 DJ 음성과 차량 UX 제한을 구현했다. **다음 티켓은 RR-006: FastAPI + Mock LLM 계약·검증**이다. 사용자 지정 GitHub 저장소의 기존 이력을 보존하며 이번 구현·검증·README 갱신을 함께 반영한다.
+
+- `playback/PlatformVoice.kt`: Pleos TTS 3.3.1 ON_DEVICE와 일반 Android 한국어 오프라인 TTS. 발화별 드라이버, SDK 초기화·해제, 실제 완료/정지/오류. 기기 내 엔진이 없거나 실패하면 DJ 생략.
+- `VoiceOutput.kt`: 발화 token/리스너 수명, READY와 DONE 구분, stop 중 늦은 done/error, 2초 정지 확인 제한과 단일 출력. `RadioOutput`이 음악/음성 출력을 직렬화한다. Media3 자연 종료 시에도 AudioTrack을 해제한 뒤 음성으로 전환한다.
+- `ux/`: CarUxRestrictions 구독·조회·연결 세대 검증, UNKNOWN 상세 잠금. 등록 실패·연결 상실·오래된 연결의 콜백은 상세 허용으로 바꾸지 않는다. 일반 Android는 NON_VEHICLE이다.
+- 카탈로그는 플랫폼 허용 상태에서만 등록/삭제/상세 표시하며 늦은 선택 결과도 폐기한다. 실제 재생 화면은 큰 표준 버튼 5개와 DJ 상태를 제공하고, 제한 중에는 상세 설정을 숨긴다. 서비스도 앱 UID와 현재 UX 상태를 확인한다.
+- debug versionCode 5 / `0.5.0-voice-ux`. 공식 Pleos Maven 의존성 lock/checksum 고정. SDK가 추가한 네트워크 권한은 제거하고 병합 manifest를 검사한다. 위치·마이크·차속 권한이나 서버 키를 추가하지 않았다.
+
+`./tools/check.ps1 -Offline` 성공: **JVM 174개 = 기존 144개 + 신규 30개**, 실패·스킵 0, lint 오류·경고 0, debug/test APK 생성. [기존 144개 테스트 소스 해시](evidence/rr004-test-hashes.json)와 이전 결과의 실행 이름을 검사했다. 원본 설계 27개 hash와 54+40개 인수 상태를 보존했다.
+
+최종 APK로 **Pleos API34 38개, 일반 Android API37 38개** 네이티브 검사를 통과했다. 이전 RR-003/004의 26/27개에 실제 음성/UX 12/11개를 추가했다. 두 TTS 경로의 실제 시작·완료·정지 확인, 음악 전환, PAUSE/NEXT/STOP, 실제 포커스 경쟁, 사용자 PAUSE 뒤 복귀 차단, 3곡 정상 완료 뒤 시대 브리지를 검사했다. Pleos는 CAAS 4.2.10-coral-aosp의 ON_DEVICE 출력 이벤트/RMS, 일반 Android는 한국어 PCM 바이트 생성도 관측했다.
+
+Virtual Console에서 D(속도 0)로 변경해 실제 CarUxRestrictions 제한을 수신하고, 상세 버튼 숨김·DJ 설정 명령 거부·표준 재생 제어를 확인한 뒤 P로 복원했다. 현재 이미지에는 공식 ADB 예제의 hmg_car_service가 없으므로 공식 Console 경로를 사용했다. 순수 오류·중복/늦은 콜백·정지 timeout은 JVM에서 제어해 검증했으며 실차 장애 재현이라고 표현하지 않는다.
+
+증거: [RR-005 집계](evidence/rr005.json), [Pleos](evidence/rr005-device-ReplyRadio_RR003_API34.json), [일반 Android](evidence/rr005-device-ReplyRadio_RR003_API37.json), [구현·재현·공식 근거](docs/rr005-voice-ux.md). 검증 도구가 두 장치와 최종 APK hash 일치를 확인한다. README의 실제 음성 화면과 차량 제한 화면도 새 캡처로 갱신했다.
+
+한계: 호스트 무음 에뮬레이터로 물리 스피커 청취·실차 주행·물리 USB·차량 버튼·국가별 UX 심사는 미검증이다. DO 선언은 심사나 안전 인증을 뜻하지 않는다. Pleos 파일 선택기는 stub이며 실제 SAF 선택은 일반 Android에서 검증했다. 실제 역사·위치·외부 AI 서버·영속 다시듣기는 후속 티켓이다.
+
+## 이력: RR-004 구현·검증 완료 (2026-11-15)
 
 Media3/MediaLibraryService와 실제 MP3 재생·표준 제어를 구현했다. **다음 티켓은 RR-005: 실제 음성·차량 UX**다. 사용자 지정 [원격 저장소](https://github.com/Branchman555/Answer-Me-Radio)에 현재 개발 내용과 이후 검증된 작업을 반영한다. 원격의 기존 MIT LICENSE와 초기 커밋을 보존한다.
 

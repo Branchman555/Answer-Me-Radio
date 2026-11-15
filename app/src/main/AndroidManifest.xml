@@ -1,4 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="pleos.car.permission.TTS_SERVICE" />
+    <!-- RR-005 uses ON_DEVICE only; remove network permissions contributed by the SDK's server registration dependency. -->
+    <uses-permission android:name="android.permission.INTERNET" tools:node="remove" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" tools:node="remove" />
+    <queries><intent><action android:name="android.intent.action.TTS_SERVICE" /></intent></queries>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -6,8 +11,12 @@
         android:icon="@drawable/radio_icon" android:dataExtractionRules="@xml/data_extraction_rules"
         android:theme="@android:style/Theme.Material.NoActionBar"
         android:supportsRtl="true">
+        <uses-library android:name="android.car" android:required="false" />
         <activity android:name="radio.reply.catalog.CatalogActivity" android:exported="false" />
-        <activity android:name="radio.reply.playback.PlaybackActivity" android:exported="false" />
+        <activity android:name="radio.reply.playback.PlaybackActivity" android:exported="false">
+            <!-- Only this compact control screen stays available; setup/catalog/simulator have no DO declaration. -->
+            <meta-data android:name="distractionOptimized" android:value="true" />
+        </activity>
         <!-- Media browsers require discovery; onConnect restricts controllers to this UID or OS-trusted clients. -->
         <service android:name="radio.reply.playback.RadioService" android:foregroundServiceType="mediaPlayback" android:exported="true" tools:ignore="ExportedService">
             <intent-filter>

@@ -4,6 +4,8 @@
 |---|---|---|
 | `reply-radio-hero.png` | AI 생성 콘셉트 일러스트 | 2026-11-15, 내장 ImageGen 도구로 신규 생성. 실제 앱 UI·차량 사진이 아님. 로고/브랜드 표식 없음. |
 | `catalog-android.png` | 실제 앱 캡처 | `evidence/rr003-catalog.png`의 원본 복사. Android API37, 합성 테스트 파일 등록. |
+| `voice-android.png` | 실제 앱 캡처 | `evidence/rr005-ReplyRadio_RR003_API37-speaking.png`의 원본 복사. 한국어 DJ 발화 중. |
+| `vehicle-ux-pleos.png` | 실제 앱 캡처 | `evidence/rr005-ReplyRadio_RR003_API34-restricted.png`의 원본 복사. Virtual Console D 상태의 실제 UX 제한. |
 | `playback-android.png` | 실제 앱 캡처 | `evidence/rr004-ReplyRadio_RR003_API37.png`의 원본 복사. 실제 Media3 재생 중. |
 
 프로젝트 소비용 이미지는 이 폴더에 저장하며 사용자 홈의 생성 경로에 의존하지 않는다. 캡처의 색상·텍스트·레이아웃을 합성하거나 수정하지 않았다. 실제 APK의 UI가 대표 일러스트처럼 구현되었다고 표현하지 않는다.

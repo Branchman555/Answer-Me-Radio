@@ -18,6 +18,7 @@ class DemoActivity : Activity() {
     private lateinit var status: TextView
     private var localCatalog = false
     private var loadGeneration = 0
+    private lateinit var ux: radio.reply.ux.VehicleUx
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +65,8 @@ class DemoActivity : Activity() {
         row("재생" to { simulation.send(Event.Play) }, "일시정지" to { simulation.send(Event.Pause) },
             "정지" to { simulation.send(Event.Stop) }, "다음" to { simulation.send(Event.Next) })
         row("현재 음악/음성 완료 주입" to { if (simulation.state.output != null) simulation.complete() })
-        val road = Switch(this).apply {
+        val road = ToggleButton(this).apply {
+            textOn = getString(R.string.road_opt_in); textOff = getString(R.string.road_opt_in)
             setText(R.string.road_opt_in)
             setTextColor(Color.WHITE)
             setOnCheckedChangeListener { _, checked ->
@@ -81,6 +83,8 @@ class DemoActivity : Activity() {
         row("위치 11초 경과" to { simulation.now += 11_000 }, "기록 삭제" to { simulation.send(Event.ClearHistory) })
         text("시대 A 3곡 → DJ → 시대 B. 모의 구간 진입 시 정상 완료 2곡 경계에서 역사 코너를 검사합니다.", 15f, Color.LTGRAY)
         setContentView(ScrollView(this).apply { fitsSystemWindows = true; addView(layout) })
+        ux = radio.reply.ux.VehicleUx(this) { gate -> if (!isFinishing && !gate.detailsAllowed) openPlayback() }
+        if (!ux.gate.detailsAllowed) openPlayback()
         render()
     }
 
@@ -88,8 +92,11 @@ class DemoActivity : Activity() {
         simulation.send(Event.Pause)
         super.onStop()
     }
-    override fun onResume() { super.onResume(); if (localCatalog) loadCatalog() }
-    override fun onDestroy() { loadGeneration++; super.onDestroy() }
+    private fun openPlayback() {
+        startActivity(Intent(this, radio.reply.playback.PlaybackActivity::class.java)); finish()
+    }
+    override fun onResume() { super.onResume(); if (::ux.isInitialized) ux.refresh(); if (localCatalog) loadCatalog() }
+    override fun onDestroy() { loadGeneration++; if (::ux.isInitialized) ux.close(); super.onDestroy() }
     private fun loadCatalog() {
         val generation = ++loadGeneration
         val runtime = CatalogRuntime.get(this)

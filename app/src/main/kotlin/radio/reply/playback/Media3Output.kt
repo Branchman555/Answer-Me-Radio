@@ -38,7 +38,11 @@ class Media3Output(private val context: Context) : MusicOutput {
         player.addListener(object : Player.Listener {
             override fun onPlaybackStateChanged(state: Int) {
                 if (state == Player.STATE_ENDED && token == output.token) {
-                    naturalEnds++; token = null; emit(Event.Ended(output.token))
+                    naturalEnds++
+                    // A voice can follow this callback. Tear down AudioTrack before releasing the output lease.
+                    releasePlayer()
+                    if (releaseFailed) emit(Event.Failed(output.token))
+                    else { token = null; emit(Event.Ended(output.token)) }
                 }
             }
             override fun onPlayerError(error: PlaybackException) {

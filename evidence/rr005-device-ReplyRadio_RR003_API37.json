@@ -1,0 +1,224 @@
+{
+  "ticket": "RR-005",
+  "recordedAtUtc": "2026-11-15T12:53:51.710018+00:00",
+  "avd": "ReplyRadio_RR003_API37",
+  "serial": "emulator-5586",
+  "user": "0",
+  "androidApi": "37",
+  "fingerprint": "google/sdk_gphone64_x86_64/emu64xa:17/CE2A.260420.051.A2/16418371:user/release-keys",
+  "appSha256": "3460f51819b21e45995d309d2bd8863e2335ee5c87b7a88de562081e594dde9f",
+  "testApkSha256": "87361089d27a04e23b8dfd69397441c9bb191f42111d07985eb4f8aa74a71315",
+  "audioFixture": "ORIGINAL_SYNTHESIZED_MP3_TEST_APK_ONLY",
+  "tests": [
+    {
+      "name": "picker_contract_local_only_read_only_multiple",
+      "stage": "write",
+      "status": "PASS"
+    },
+    {
+      "name": "cancel_and_clipdata_results",
+      "stage": "write",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown_detail_access_is_denied",
+      "stage": "write",
+      "status": "PASS"
+    },
+    {
+      "name": "six_real_mp3_metadata_and_persisted_read_grants",
+      "stage": "write",
+      "status": "PASS"
+    },
+    {
+      "name": "missing_year_and_broken_files_are_individual_failures",
+      "stage": "write",
+      "status": "PASS"
+    },
+    {
+      "name": "native_store_roundtrip_stable_ids_and_no_backup_path",
+      "stage": "write",
+      "status": "PASS"
+    },
+    {
+      "name": "corrupt_store_is_not_silently_overwritten",
+      "stage": "write",
+      "status": "PASS"
+    },
+    {
+      "name": "persisted_rights_survive_target_process_death",
+      "stage": "restore",
+      "status": "PASS"
+    },
+    {
+      "name": "revoked_rights_require_reselection",
+      "stage": "restore",
+      "status": "PASS"
+    },
+    {
+      "name": "reselection_keeps_id_and_does_not_duplicate",
+      "stage": "restore",
+      "status": "PASS"
+    },
+    {
+      "name": "deleted_document_is_excluded_after_reopen",
+      "stage": "restore",
+      "status": "PASS"
+    },
+    {
+      "name": "remove_releases_persisted_grant_and_keeps_source_file",
+      "stage": "restore",
+      "status": "PASS"
+    },
+    {
+      "name": "system_picker_and_actual_catalog_activity_import",
+      "stage": "picker",
+      "status": "PASS"
+    },
+    {
+      "name": "ac044_media3_browse_eras_and_selected_tracks_without_uris",
+      "stage": "playback",
+      "status": "PASS"
+    },
+    {
+      "name": "legacy_platform_media_browser_root_and_children",
+      "stage": "playback",
+      "status": "PASS"
+    },
+    {
+      "name": "library_search_and_mutation_command_boundaries",
+      "stage": "playback",
+      "status": "PASS"
+    },
+    {
+      "name": "mp3_decoder_audio_track_advances_and_pause_preserves_position",
+      "stage": "playback",
+      "status": "PASS"
+    },
+    {
+      "name": "ac045_previous_threshold_and_next_do_not_count_completion",
+      "stage": "playback",
+      "status": "PASS"
+    },
+    {
+      "name": "previous_while_paused_has_no_audio_output",
+      "stage": "playback",
+      "status": "PASS"
+    },
+    {
+      "name": "platform_transport_controls_play_pause_next_previous_share_reducer",
+      "stage": "playback",
+      "status": "PASS"
+    },
+    {
+      "name": "actual_audio_focus_transient_loss_and_gain_resume_same_position",
+      "stage": "playback",
+      "status": "PASS"
+    },
+    {
+      "name": "user_pause_prevents_focus_gain_auto_resume",
+      "stage": "playback",
+      "status": "PASS"
+    },
+    {
+      "name": "background_foreground_notification_and_actual_natural_end",
+      "stage": "playback",
+      "status": "PASS"
+    },
+    {
+      "name": "deleted_selected_file_reports_real_io_error_and_recovers",
+      "stage": "playback",
+      "status": "PASS"
+    },
+    {
+      "name": "revoked_uri_reports_real_permission_error_and_recovers",
+      "stage": "playback",
+      "status": "PASS"
+    },
+    {
+      "name": "ac052_three_real_corrupt_mp3_errors_stop_without_infinite_retry",
+      "stage": "playback",
+      "status": "PASS"
+    },
+    {
+      "name": "service_releases_after_stop_and_last_controller_disconnect",
+      "stage": "playback",
+      "status": "PASS"
+    },
+    {
+      "name": "platform_ux_subscription_and_unknown_fail_closed",
+      "stage": "voiceux",
+      "status": "PASS"
+    },
+    {
+      "name": "binding_does_not_start_music_or_voice",
+      "stage": "voiceux",
+      "status": "PASS"
+    },
+    {
+      "name": "platform_voice_initialization_and_music_fallback_probe",
+      "stage": "voiceux",
+      "status": "PASS"
+    },
+    {
+      "name": "actual_voice_done_then_media3_audio_without_overlap",
+      "stage": "voiceux",
+      "status": "PASS"
+    },
+    {
+      "name": "actual_voice_pause_stop_ack_and_no_auto_resume",
+      "stage": "voiceux",
+      "status": "PASS"
+    },
+    {
+      "name": "actual_voice_resume_then_next_uses_introduced_track",
+      "stage": "voiceux",
+      "status": "PASS"
+    },
+    {
+      "name": "actual_voice_stop_never_starts_next_music",
+      "stage": "voiceux",
+      "status": "PASS"
+    },
+    {
+      "name": "actual_focus_loss_stops_voice_gain_restarts_serially",
+      "stage": "voiceux",
+      "status": "PASS"
+    },
+    {
+      "name": "user_pause_during_voice_focus_loss_blocks_gain_resume",
+      "stage": "voiceux",
+      "status": "PASS"
+    },
+    {
+      "name": "three_natural_music_completions_trigger_serial_era_bridge",
+      "stage": "voiceux",
+      "status": "PASS"
+    },
+    {
+      "name": "dj_off_makes_no_additional_voice_request",
+      "stage": "voiceux",
+      "status": "PASS"
+    }
+  ],
+  "status": "PASS",
+  "physicalSpeakerListening": "NOT_RUN_EMULATOR_NO_AUDIO",
+  "physicalUsbUnplug": "NOT_RUN",
+  "vehicleDrivingUx": "NON_VEHICLE",
+  "audio": {
+    "audioTrackAdvances": 3,
+    "renderedDecoderBuffers": 266,
+    "verifiedDecoderOrIoErrors": 5
+  },
+  "voice": {
+    "starts": 9,
+    "done": 2,
+    "stopAcks": 7,
+    "errors": 0,
+    "stopTimeouts": 0,
+    "audioBytes": 1066766,
+    "rmsUpdates": 0
+  },
+  "ux": "NON_VEHICLE",
+  "voiceBackend": "ANDROID_OFFLINE"
+}

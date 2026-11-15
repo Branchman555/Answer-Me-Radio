@@ -8,8 +8,8 @@
 | RR-002 | ContextEngine와 일반 DJ 로컬 계약 | v0.6 DTO·TTL·fingerprint, v0.5 허용 필드 투영, 선행 요청/폴백, AC-036~042 | 완료; evidence/rr002.json, 로컬 템플릿/Mock 범위 |
 | RR-003 | SAF와 로컬 MP3 카탈로그 | TITLE/ARTIST/YEAR 실제 추출, URI 권한 수명, 파일/권한 오류; AC-001~005 관련 부분 | 구현·검증 완료; JVM127, Pleos12/일반 Android13. Pleos 선택기 stub·물리 USB 한계는 아래 참조 |
 | RR-004 | Media3/MediaLibraryService + 표준 제어 | 실제 곡 재생, PLAY/PAUSE/NEXT/PREVIOUS 단일 전이, 포커스/위치 보존, AC-044~045 | 구현·검증 완료; JVM144, Pleos26/일반 Android27. 물리 USB·실차는 미검증 |
-| RR-005 | 실제 음성·차량 UX | Pleos API/권한 확인, stop/done/error 순서, 단일 출력, 상세 UX UNKNOWN 차단 | 다음 작업 |
-| RR-006 | FastAPI + Mock LLM | v0.5 요청/응답 계약, 검증·3초 실패 폴백·인증/제한; 외부 모델 호출 별도 설정 | 대기 |
+| RR-005 | 실제 음성·차량 UX | Pleos API/권한 확인, stop/done/error 순서, 단일 출력, 상세 UX UNKNOWN 차단 | 구현·검증 완료; JVM174(기존144 유지), Pleos38/일반 Android38. 실제 TTS·에뮬레이터 차량 제한 검증 |
+| RR-006 | FastAPI + Mock LLM | v0.5 요청/응답 계약, 검증·3초 실패 폴백·인증/제한; 외부 모델 호출 별도 설정 | 다음 작업 |
 | RR-007 | 실제 역사 콘텐츠와 위치 | 한 코스 검수 팩 3~5건, geometry/구간 판별, 측정시각·정확도·평행도로, ETA 단위 | 실제 자료·SDK 검증 필요 |
 | RR-008 | 로컬 기록과 다시듣기 | 보존 7일/50건, 정정·철회 반영, 플랫폼 허용 상태에서만 탐색·재청취 | 대기 |
 | RR-009 | 통합 시연·제출 | 실제 음원·권리, 레트로 UI, 에뮬레이터/실차 구분한 전체 인수 증빙 | 대기 |
@@ -19,3 +19,5 @@ RR-003~005의 플랫폼 사전검증은 관련 티켓 착수 시 먼저 수행�
 RR-003은 합성 MP3 파일을 Android API로 실제 읽고, 일반 Android의 실제 SAF 선택 화면으로 등록했다. 설치된 Pleos API34의 선택기는 플랫폼 stub이므로 차량 대상 선택 왕복은 미완료다. RR-004에서는 실제 디코더/AudioTrack과 파일 삭제·권한 철회·손상 오류 복구를 검증했다. 물리 USB 분리·드라이버 오류(AC-005 전체), 실제 차량 주행·스피커 검증은 대상 장치 통합 조건으로 남는다. [RR-004 증거와 한계](rr004-playback.md).
 
 기획 측 준비물: 시연 코스, 사건 날짜·게시일·출처·검수 대본, 실제 도로 연결 자료, 콘텐츠 이용 범위, TITLE/ARTIST/YEAR가 채워진 로컬 음원. 실제 음악 재생 검증에는 사용 범위가 확인된 테스트 음원이 필요하다.
+
+RR-005에서는 Pleos ON_DEVICE TTS와 일반 Android 오프라인 한국어 TTS를 실제 연결하고 완료·정지·포커스·DJ 전환을 확인했다. Virtual Console D/P 변경으로 CarUxRestrictions와 상세 조작 잠금/복원을 검증했다. 오류·늦은 콜백·UNKNOWN/재연결 경계는 JVM 및 어댑터의 보수적 처리로 구분한다. 실제 차량 주행·물리 스피커 청취·국가별 안전 UX 심사는 미완료다. [RR-005 구현·재현·한계](rr005-voice-ux.md).

@@ -20,6 +20,8 @@ class CatalogActivity : Activity() {
     private var busy = false
     private var pickerPending = false
     private var generation = 0
+    private lateinit var ux: radio.reply.ux.VehicleUx
+    private var pickerRevision = -1L
     companion object {
         const val DEVELOPMENT_ACCESS = "developmentCatalog"
         private const val PICK_DOCUMENTS = 3003
@@ -38,7 +40,9 @@ class CatalogActivity : Activity() {
         add = Button(this).apply {
             setText(R.string.catalog_add)
             setOnClickListener {
-                if (!busy && !pickerPending) {
+                ux.refresh()
+                if (ux.gate.detailsAllowed && !busy && !pickerPending) {
+                    pickerRevision = ux.gate.revision
                     pickerPending = true; updateButtons()
                     try { startActivityForResult(SafSelection.intent(), PICK_DOCUMENTS) }
                     catch (_: ActivityNotFoundException) {
@@ -52,7 +56,8 @@ class CatalogActivity : Activity() {
         rows = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
         root.addView(rows)
         setContentView(ScrollView(this).apply { fitsSystemWindows = true; addView(root) })
-        work { runtime.load() }
+        ux = radio.reply.ux.VehicleUx(this) { if (::ux.isInitialized && alive) updateAccess() }
+        updateAccess()
     }
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putBoolean("pickerPending", pickerPending)
@@ -63,25 +68,42 @@ class CatalogActivity : Activity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode != PICK_DOCUMENTS || !pickerPending || !alive) return
         pickerPending = false
+        ux.refresh()
+        if (!ux.gate.allowsResult(pickerRevision)) { updateAccess(); return }
         val selection = SafSelection.result(resultCode, data)
         if (selection == null) { message.setText(R.string.catalog_cancelled); updateButtons(); return }
         work { runtime.catalog.importSelection(selection) }
     }
     private fun work(action: () -> CatalogResult) {
+        if (!::ux.isInitialized || !ux.gate.detailsAllowed) return
         val requestGeneration = ++generation
+        val permissionRevision = ux.gate.revision
         busy = true; updateButtons(); message.setText(R.string.catalog_loading)
         // Serial IO; obsolete view callbacks cannot update a recreated screen.
         runtime.io.execute {
-            val result = runCatching(action)
+            val result = runCatching { check(ux.gate.allowsResult(permissionRevision)); action() }
             runOnUiThread {
                 if (!alive || isFinishing || isDestroyed || requestGeneration != generation) return@runOnUiThread
                 busy = false; updateButtons()
+                if (!ux.gate.allowsResult(permissionRevision)) { updateAccess(); return@runOnUiThread }
                 result.fold(::render) { message.setText(R.string.catalog_failure) }
             }
         }
     }
-    private fun updateButtons() { add.isEnabled = !busy && !pickerPending; refresh.isEnabled = !busy && !pickerPending }
+    private fun updateButtons() {
+        val allowed = ::ux.isInitialized && ux.gate.detailsAllowed
+        add.isEnabled = allowed && !busy && !pickerPending; refresh.isEnabled = allowed && !busy && !pickerPending
+    }
+    private fun updateAccess() {
+        updateButtons()
+        if (!ux.gate.detailsAllowed) {
+            generation++; busy = false; pickerRevision = -1
+            rows.removeAllViews(); message.setText(R.string.ux_details_locked)
+            if (pickerPending) { runCatching { finishActivity(PICK_DOCUMENTS) }; pickerPending = false }
+        } else if (!busy && !pickerPending) work { runtime.load() }
+    }
     private fun render(result: CatalogResult) {
+        if (!ux.gate.detailsAllowed) { updateAccess(); return }
         message.text = getString(R.string.catalog_summary, result.entries.size, result.entries.count { it.track().eligible }, result.rejected)
         rows.removeAllViews()
         for (entry in result.entries) {
@@ -94,7 +116,7 @@ class CatalogActivity : Activity() {
             })
             row.addView(Button(this).apply {
                 setText(R.string.catalog_remove)
-                setOnClickListener { if (!busy) work { runtime.catalog.remove(entry.id) } }
+                setOnClickListener { ux.refresh(); if (!busy && ux.gate.detailsAllowed) work { runtime.catalog.remove(entry.id) } }
             }, ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT))
             rows.addView(row)
         }
@@ -110,5 +132,6 @@ class CatalogActivity : Activity() {
         CatalogStatus.UNREADABLE -> R.string.catalog_unreadable
         CatalogStatus.NEEDS_RESELECT -> R.string.catalog_reselect
     })
-    override fun onDestroy() { alive = false; super.onDestroy() }
+    override fun onResume() { super.onResume(); if (::ux.isInitialized) { ux.refresh(); updateAccess() } }
+    override fun onDestroy() { alive = false; if (::ux.isInitialized) ux.close(); super.onDestroy() }
 }

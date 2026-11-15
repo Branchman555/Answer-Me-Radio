@@ -1,0 +1,12 @@
+{
+  "project": "Pretendard",
+  "version": "v1.3.9",
+  "license": "SIL Open Font License 1.1",
+  "upstream": "https://github.com/orioncactus/pretendard/tree/v1.3.9/packages/pretendard/dist",
+  "modified": false,
+  "files": {
+    "app/src/main/res/font/pretendard_regular.otf": "3ffbacde6ab8411f1d2db54bb9b1f0b3ee2a738932033722cf0388c06aed1c93",
+    "app/src/main/res/font/pretendard_semibold.otf": "c89bc43027dc7cde5726e96223376f8eec09302b2fc1f8147fd5b57cfc376118",
+    "app/src/main/assets/licenses/Pretendard-OFL.txt": "b04538c9abec39a3db75108cf0af0fd9c77032fe8aa2cf38345b4d250e98e38e"
+  }
+}

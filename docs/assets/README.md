@@ -19,3 +19,7 @@
 ## UI-001 실제 화면 (2026-11-15)
 
 `prototype-radio.png`, `prototype-dj.png`, `prototype-catalog.png`는 일반 Android API37의 실제 앱 캡처다. `prototype-pleos.png`, `prototype-restricted.png`는 Pleos API34의 실제 재생/차량 제한 화면이다. 테스트 APK의 합성 음원만 사용했다. 라디오 다이얼은 `RadioTheme.kt`에서 Canvas로 그린 로컬 벡터 장식이며 외부 사진·음원·폰트를 사용하지 않는다. UI 검증 단계가 생성한 PNG를 그대로 복사했고 합성하거나 보정하지 않았다. 기존 이미지와 제작 기록은 위에 보존한다.
+
+## UI-002 실제 화면 (2026-11-15)
+
+`product-radio.png`, `product-catalog.png`, `product-empty.png`, `product-dj.png`는 일반 Android API37의 실제 실행 캡처다. `product-pleos.png`, `product-restricted.png`는 Pleos API34의 실제 재생·차량 제한 캡처다. 각각 `evidence/ui002-*` PNG 원본을 그대로 복사했다. UI에 새로 포함한 Pretendard v1.3.9의 출처와 OFL 조건은 [별도 기록](../../THIRD_PARTY_NOTICES.md)에 있다. 라디오 그림과 재생 아이콘은 앱의 Canvas 벡터다. 폰트 이외에 외부 이미지·새 음원은 추가하지 않았다. 테스트에 쓰인 곡 제목은 합성 음원의 실제 태그이며 표시를 꾸미기 위해 바꾸지 않았다.

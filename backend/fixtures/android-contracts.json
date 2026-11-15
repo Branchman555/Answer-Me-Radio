@@ -3,7 +3,7 @@
   "cases": [
     {
       "name": "opening-dry",
-      "now": "2026-11-15T13:43:31.999205+00:00",
+      "now": "2026-11-15T14:05:48.764512+00:00",
       "request": {
         "schemaVersion": "1.0",
         "requestId": "live-opening",
@@ -64,7 +64,7 @@
     },
     {
       "name": "opening-rain",
-      "now": "2026-11-15T13:43:32.003206+00:00",
+      "now": "2026-11-15T14:05:48.768511+00:00",
       "request": {
         "schemaVersion": "1.0",
         "requestId": "live-opening",
@@ -80,7 +80,7 @@
           "weather": {
             "condition": "RAIN",
             "valid": true,
-            "observedAt": "2026-11-15T13:43:32.003206+00:00"
+            "observedAt": "2026-11-15T14:05:48.768511+00:00"
           },
           "mode": "FAMILY",
           "previousEra": "1980s",
@@ -130,7 +130,7 @@
     },
     {
       "name": "era_bridge-dry",
-      "now": "2026-11-15T13:43:32.008207+00:00",
+      "now": "2026-11-15T14:05:48.772514+00:00",
       "request": {
         "schemaVersion": "1.0",
         "requestId": "live-era_bridge",
@@ -191,7 +191,7 @@
     },
     {
       "name": "era_bridge-rain",
-      "now": "2026-11-15T13:43:32.012208+00:00",
+      "now": "2026-11-15T14:05:48.775513+00:00",
       "request": {
         "schemaVersion": "1.0",
         "requestId": "live-era_bridge",
@@ -207,7 +207,7 @@
           "weather": {
             "condition": "RAIN",
             "valid": true,
-            "observedAt": "2026-11-15T13:43:32.012208+00:00"
+            "observedAt": "2026-11-15T14:05:48.775513+00:00"
           },
           "mode": "FAMILY",
           "previousEra": "1980s",
@@ -257,7 +257,7 @@
     },
     {
       "name": "same_era_bridge-dry",
-      "now": "2026-11-15T13:43:32.015207+00:00",
+      "now": "2026-11-15T14:05:48.779514+00:00",
       "request": {
         "schemaVersion": "1.0",
         "requestId": "live-same_era_bridge",
@@ -318,7 +318,7 @@
     },
     {
       "name": "same_era_bridge-rain",
-      "now": "2026-11-15T13:43:32.019207+00:00",
+      "now": "2026-11-15T14:05:48.782511+00:00",
       "request": {
         "schemaVersion": "1.0",
         "requestId": "live-same_era_bridge",
@@ -334,7 +334,7 @@
           "weather": {
             "condition": "RAIN",
             "valid": true,
-            "observedAt": "2026-11-15T13:43:32.019207+00:00"
+            "observedAt": "2026-11-15T14:05:48.782511+00:00"
           },
           "mode": "FAMILY",
           "previousEra": "1980s",
@@ -384,7 +384,7 @@
     },
     {
       "name": "invalid-dry",
-      "now": "2026-11-15T13:43:32.023206+00:00",
+      "now": "2026-11-15T14:05:48.786515+00:00",
       "request": {
         "schemaVersion": "1.0",
         "requestId": "live-invalid",
@@ -445,7 +445,7 @@
     },
     {
       "name": "error-dry",
-      "now": "2026-11-15T13:43:32.027206+00:00",
+      "now": "2026-11-15T14:05:48.789512+00:00",
       "request": {
         "schemaVersion": "1.0",
         "requestId": "live-error",
@@ -506,7 +506,7 @@
     },
     {
       "name": "timeout-dry",
-      "now": "2026-11-15T13:43:32.030207+00:00",
+      "now": "2026-11-15T14:05:48.798513+00:00",
       "request": {
         "schemaVersion": "1.0",
         "requestId": "live-timeout",

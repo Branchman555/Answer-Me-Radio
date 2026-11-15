@@ -1,0 +1,90 @@
+INSTRUMENTATION_STATUS: stream=RUN ac044_media3_browse_eras_and_selected_tracks_without_uris
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS ac044_media3_browse_eras_and_selected_tracks_without_uris
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=RUN legacy_platform_media_browser_root_and_children
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS legacy_platform_media_browser_root_and_children
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=RUN library_search_and_mutation_command_boundaries
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS library_search_and_mutation_command_boundaries
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=RUN mp3_decoder_audio_track_advances_and_pause_preserves_position
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS mp3_decoder_audio_track_advances_and_pause_preserves_position
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=RUN ac045_previous_threshold_and_next_do_not_count_completion
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS ac045_previous_threshold_and_next_do_not_count_completion
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=RUN previous_while_paused_has_no_audio_output
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS previous_while_paused_has_no_audio_output
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=RUN platform_transport_controls_play_pause_next_previous_share_reducer
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS platform_transport_controls_play_pause_next_previous_share_reducer
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=RUN actual_audio_focus_transient_loss_and_gain_resume_same_position
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS actual_audio_focus_transient_loss_and_gain_resume_same_position
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=RUN user_pause_prevents_focus_gain_auto_resume
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS user_pause_prevents_focus_gain_auto_resume
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=RUN background_foreground_notification_and_actual_natural_end
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS background_foreground_notification_and_actual_natural_end
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=RUN deleted_selected_file_reports_real_io_error_and_recovers
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS deleted_selected_file_reports_real_io_error_and_recovers
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=RUN revoked_uri_reports_real_permission_error_and_recovers
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS revoked_uri_reports_real_permission_error_and_recovers
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=RUN ac052_three_real_corrupt_mp3_errors_stop_without_infinite_retry
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=RR004_AUDIO advances=5 renderedBuffers=216 errors=5
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS ac052_three_real_corrupt_mp3_errors_stop_without_infinite_retry
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=RUN service_releases_after_stop_and_last_controller_disconnect
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: stream=PASS service_releases_after_stop_and_last_controller_disconnect
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: stream=RR003_PASS_COUNT=14 STAGE=playback
+
+INSTRUMENTATION_CODE: -1

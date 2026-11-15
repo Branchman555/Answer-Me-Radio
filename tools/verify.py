@@ -102,8 +102,21 @@ def report(source_result, log, require_devices=False):
     permissions = {p.attrib["{http://schemas.android.com/apk/res/android}name"] for p in manifest.findall("uses-permission")}
     assert permissions == {"android.permission.FOREGROUND_SERVICE", "android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK", "android.permission.WAKE_LOCK",
                            "pleos.car.permission.TTS_SERVICE", "radio.reply.prototype.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"}, permissions
+    font_manifest = json.loads((ROOT / "docs/pretendard-provenance.json").read_text(encoding="utf-8"))
+    for path, expected_hash in font_manifest["files"].items():
+        assert digest(ROOT / path) == expected_hash, f"Bundled font/license changed: {path}"
+    with zipfile.ZipFile(apk) as archive:
+        assert archive.read("assets/licenses/Pretendard-OFL.txt") == (ROOT / "app/src/main/assets/licenses/Pretendard-OFL.txt").read_bytes()
+    ui_controls = []
+    for path in sorted((ROOT / "evidence").glob("ui002-controls-*.json")):
+        controls = json.loads(path.read_text(encoding="utf-8"))
+        controls["artifactMatchesCurrentBuild"] = controls["appSha256"] == digest(apk) and controls["testApkSha256"] == digest(test_apk)
+        ui_controls.append(controls)
+    if require_devices:
+        assert {item["avd"] for item in ui_controls} == {"ReplyRadio_RR003_API34", "ReplyRadio_RR003_API37"}
+        assert all(item["status"] == "PASS" and item["testCount"] == 7 and item["artifactMatchesCurrentBuild"] for item in ui_controls)
     devices = []
-    for path in sorted((ROOT / "evidence").glob("ui001-device-*.json")):
+    for path in sorted((ROOT / "evidence").glob("ui002-device-*.json")):
         device = json.loads(path.read_text(encoding="utf-8"))
         device["artifactMatchesCurrentBuild"] = device["appSha256"] == digest(apk) and device["testApkSha256"] == digest(test_apk)
         devices.append(device)
@@ -127,14 +140,14 @@ def report(source_result, log, require_devices=False):
             if "API34" in avd:
                 assert device["vehicleDrivingUx"] == "EMULATED_PLATFORM_RESTRICTION_ON_OFF"
                 assert "pleos_driving_restriction_locks_details_and_service_settings" in names
-    backend = json.loads((ROOT / "evidence/ui001-backend.json").read_text(encoding="utf-8"))
+    backend = json.loads((ROOT / "evidence/ui002-backend.json").read_text(encoding="utf-8"))
     assert backend["status"] == "PASS"
     prior_backend = json.loads((ROOT / "evidence/rr006-backend.json").read_text(encoding="utf-8"))
     assert len(prior_backend["tests"]) == 115
     assert {t["name"] for t in prior_backend["tests"]}.issubset({t["name"] for t in backend["tests"]})
     for path, expected_hash in backend["sourceHashes"].items():
         assert digest(ROOT / path) == expected_hash, f"Stale backend evidence: {path}"
-    value = {"ticket": "UI-001", "recordedAtUtc": datetime.now(timezone.utc).isoformat(),
+    value = {"ticket": "UI-002", "recordedAtUtc": datetime.now(timezone.utc).isoformat(),
              "scope": "JVM_AND_ANDROID_BUILD_WITH_SEPARATE_NATIVE_DEVICE_EVIDENCE", "sourceIntegrity": source_result,
              "jvm": {"status": "PASS", "testCount": sum(len(s["tests"]) for s in suites), "suites": suites},
              "rr001Regression": {"status": "PASS", "testsPreservedAndExecuted": len(prior_tests), "sourceHashesUnchanged": True},
@@ -142,22 +155,22 @@ def report(source_result, log, require_devices=False):
              "rr003Regression": {"status": "PASS", "testsPreservedAndExecuted": len(catalog_tests), "sourceHashesUnchanged": True},
              "rr004Regression": {"status": "PASS", "testsPreservedAndExecuted": len(playback_tests), "sourceHashesUnchanged": True},
              "rr005Regression": {"status": "PASS", "testsPreservedAndExecuted": len(voice_tests), "sourceHashesUnchanged": True},
-             "backend": {"status": "PASS", "testCount": backend["testCount"], "evidence": "evidence/ui001-backend.json", "liveHttpCases": 9},
+             "backend": {"status": "PASS", "testCount": backend["testCount"], "evidence": "evidence/ui002-backend.json", "liveHttpCases": 9},
              "rr006Regression": {"status": "PASS", "jvmPreserved": 177, "backendPreserved": 115},
              "contractVerification": "Original v0.5/v0.6 preserved; 9 Uvicorn HTTP captures checked by existing Kotlin decoder/editorial validator",
              "debugApk": {"status": "PASS", "path": apk.relative_to(ROOT).as_posix(), "sha256": digest(apk)},
              "testApk": {"path": test_apk.relative_to(ROOT).as_posix(), "sha256": digest(test_apk)},
              "catalogArtifactIsolation": "PASS_NO_AUDIO_OR_TEST_PROVIDER_IN_MAIN_APK_NO_BROAD_PERMISSIONS",
              "lint": {"status": "PASS", "errors": 0, "warnings": len(issues)},
-             "buildLog": log, "deviceEvidence": devices, "realAudioPlayback": "SEE_DEVICE_MP3_AND_PLATFORM_TTS_EVIDENCE", "vehicle": "EMULATOR_ONLY_SEE_DEVICE_EVIDENCE",
+             "buildLog": log, "deviceEvidence": devices, "uiControls": ui_controls, "bundledFontLicense": "OFL_1_1_UNMODIFIED_PRETENDARD_V1_3_9", "realAudioPlayback": "SEE_DEVICE_MP3_AND_PLATFORM_TTS_EVIDENCE", "vehicle": "EMULATOR_ONLY_SEE_DEVICE_EVIDENCE",
              "acceptanceMatricesPromoted": False,
              "limitations": ["Pleos ON_DEVICE and Android offline TTS; physical speaker listening not tested", "Pleos API34 picker resolves to platform stub; picker roundtrip only on regular Android",
                              "Physical USB removal, actual vehicle driving and physical media buttons not tested", "RR-006 backend is localhost Mock with approved templates; no external model/deployment/Android HTTP connection",
                              "Actual road geometry/editorial/music rights unverified", "History is process-local; no replay or 7-day persistence",
                              "Empty-cache build and supplier signature verification not performed"]}
     (ROOT / "evidence/latest.json").write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    (ROOT / "evidence/ui001.json").write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"PASS: {value['jvm']['testCount']} JVM tests (177 preserved); backend {backend['testCount']}; APK + test APK built; lint {len(issues)} warnings. Native evidence recorded under UI-001.")
+    (ROOT / "evidence/ui002.json").write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(f"PASS: {value['jvm']['testCount']} JVM tests (177 preserved); backend {backend['testCount']}; APK + test APK built; lint {len(issues)} warnings. Native evidence recorded under UI-002.")
 
 
 if __name__ == "__main__":

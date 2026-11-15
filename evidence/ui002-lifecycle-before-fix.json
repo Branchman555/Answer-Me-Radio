@@ -1,0 +1,14 @@
+{
+  "ticket": "UI-002",
+  "recordedAtUtc": "2026-11-15T14:15:28.336282+00:00",
+  "avd": "ReplyRadio_RR003_API34",
+  "status": "FAIL",
+  "testCount": 0,
+  "tests": [],
+  "appSha256": "eff3f3e643f2bd98ae6bd19d4246007d60e508b9c90c2a8e990788e1fb618f97",
+  "testApkSha256": "cfbbaa6566847330c436f1a7cf0f825b5087d9c28419d857902d30759c3d0330",
+  "log": "evidence/ui002-lifecycle-before-fix.log",
+  "scope": "EMPTY_STATE_AND_ACTUAL_TRANSPORT_BUTTONS_EMULATOR_ONLY",
+  "failure": "Process crashed: IllegalArgumentException Service not registered in MediaControllerImplBase deferred release",
+  "resolution": "PlaybackActivity uses applicationContext for MediaBrowser binding; releaseFuture remains in onDestroy"
+}

@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--evidence-prefix", choices=["rr006", "ui001"], default="rr006")
+    parser.add_argument("--evidence-prefix", choices=["rr006", "ui001", "ui002"], default="rr006")
     args = parser.parse_args()
     if sys.version_info[:2] != (3, 11):
         raise SystemExit("Use Python 3.11 in backend/.venv (the verified runtime).")
@@ -46,7 +46,7 @@ def main():
     captures = json.loads(capture.read_text(encoding="utf-8"))["cases"]
     assert len(captures) == 9 and {x["result"] for x in captures} == {"VALID", "SCHEMA_INVALID", "PROVIDER_FAILED", "AI_TIMEOUT"}
     files = sorted((ROOT / "backend").glob("*.py")) + sorted((ROOT / "backend/tests").glob("*.py")) + [capture, lock, Path(__file__).resolve()]
-    evidence = {"ticket": "UI-001" if args.evidence_prefix == "ui001" else "RR-006", "status": "PASS", "recordedAtUtc": datetime.now(timezone.utc).isoformat(),
+    evidence = {"ticket": "UI-002" if args.evidence_prefix == "ui002" else "UI-001" if args.evidence_prefix == "ui001" else "RR-006", "status": "PASS", "recordedAtUtc": datetime.now(timezone.utc).isoformat(),
                 "python": platform.python_version(), "dependencies": dependencies, "testCount": len(cases),
                 "tests": [{"name": case.attrib["classname"] + "." + case.attrib["name"], "status": "PASS"} for case in cases],
                 "liveHttp": {"transport": "Uvicorn TCP localhost", "cases": 9, "modelTimeoutSeconds": 3,

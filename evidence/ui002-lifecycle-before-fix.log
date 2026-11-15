@@ -1,0 +1,17 @@
+--------- beginning of crash
+11-15 06:15:27.223  7436  7436 E AndroidRuntime: FATAL EXCEPTION: main
+11-15 06:15:27.223  7436  7436 E AndroidRuntime: Process: radio.reply.prototype, PID: 7436
+11-15 06:15:27.223  7436  7436 E AndroidRuntime: java.lang.IllegalArgumentException: Service not registered: androidx.media3.session.MediaControllerImplBase$SessionServiceConnection@6e1b87a
+11-15 06:15:27.223  7436  7436 E AndroidRuntime: 	at android.app.LoadedApk.forgetServiceDispatcher(LoadedApk.java:2001)
+11-15 06:15:27.223  7436  7436 E AndroidRuntime: 	at android.app.ContextImpl.unbindService(ContextImpl.java:2168)
+11-15 06:15:27.223  7436  7436 E AndroidRuntime: 	at android.content.ContextWrapper.unbindService(ContextWrapper.java:923)
+11-15 06:15:27.223  7436  7436 E AndroidRuntime: 	at androidx.media3.session.MediaControllerImplBase.lambda$release$4$androidx-media3-session-MediaControllerImplBase(MediaControllerImplBase.java:301)
+11-15 06:15:27.223  7436  7436 E AndroidRuntime: 	at androidx.media3.session.MediaControllerImplBase$$ExternalSyntheticLambda79.run(D8$$SyntheticClass:0)
+11-15 06:15:27.223  7436  7436 E AndroidRuntime: 	at android.os.Handler.handleCallback(Handler.java:958)
+11-15 06:15:27.223  7436  7436 E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+11-15 06:15:27.223  7436  7436 E AndroidRuntime: 	at android.os.Looper.loopOnce(Looper.java:205)
+11-15 06:15:27.223  7436  7436 E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:294)
+11-15 06:15:27.223  7436  7436 E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:8194)
+11-15 06:15:27.223  7436  7436 E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+11-15 06:15:27.223  7436  7436 E AndroidRuntime: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:552)
+11-15 06:15:27.223  7436  7436 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:971)

@@ -1,0 +1,20 @@
+{
+  "ticket": "UI-002",
+  "recordedAtUtc": "2026-11-15T14:18:58.387649+00:00",
+  "avd": "ReplyRadio_RR003_API34",
+  "status": "PASS",
+  "testCount": 7,
+  "tests": [
+    "empty_launch_never_autoplays",
+    "accessible_transport_targets_fit_viewport",
+    "play_icon_starts_actual_audio",
+    "pause_icon_stops_and_keeps_position",
+    "next_previous_icons_change_tracks_without_autoplay",
+    "stop_icon_ends_output",
+    "screen_reopen_releases_browser_without_crash_or_autoplay"
+  ],
+  "appSha256": "e2a2583ecac50f98ae234fae468eb46a73f24ed5aefd6d4cfb99e119a64cca88",
+  "testApkSha256": "ef1029faa606e15f91b9f660ebea8cacb8637f3085b3abf2b449dde6722108a8",
+  "log": "evidence/ui002-controls-ReplyRadio_RR003_API34.log",
+  "scope": "EMPTY_STATE_AND_ACTUAL_TRANSPORT_BUTTONS_EMULATOR_ONLY"
+}

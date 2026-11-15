@@ -1,6 +1,6 @@
 {
-  "ticket": "UI-001",
-  "recordedAtUtc": "2026-11-15T13:44:46.979077+00:00",
+  "ticket": "UI-002",
+  "recordedAtUtc": "2026-11-15T14:23:08.656631+00:00",
   "scope": "JVM_AND_ANDROID_BUILD_WITH_SEPARATE_NATIVE_DEVICE_EVIDENCE",
   "sourceIntegrity": {
     "status": "PASS",
@@ -1117,7 +1117,7 @@
   "backend": {
     "status": "PASS",
     "testCount": 115,
-    "evidence": "evidence/ui001-backend.json",
+    "evidence": "evidence/ui002-backend.json",
     "liveHttpCases": 9
   },
   "rr006Regression": {
@@ -1129,11 +1129,11 @@
   "debugApk": {
     "status": "PASS",
     "path": "app/build/outputs/apk/debug/app-debug.apk",
-    "sha256": "28f2d49fb53e84525927c791f75a13ba02b5028f326eba520047cc9aa8f5ef62"
+    "sha256": "e2a2583ecac50f98ae234fae468eb46a73f24ed5aefd6d4cfb99e119a64cca88"
   },
   "testApk": {
     "path": "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk",
-    "sha256": "87361089d27a04e23b8dfd69397441c9bb191f42111d07985eb4f8aa74a71315"
+    "sha256": "ef1029faa606e15f91b9f660ebea8cacb8637f3085b3abf2b449dde6722108a8"
   },
   "catalogArtifactIsolation": "PASS_NO_AUDIO_OR_TEST_PROVIDER_IN_MAIN_APK_NO_BROAD_PERMISSIONS",
   "lint": {
@@ -1141,18 +1141,18 @@
     "errors": 0,
     "warnings": 0
   },
-  "buildLog": "evidence/build-20261115-134357-078.log",
+  "buildLog": "evidence/build-20261115-141638-649.log",
   "deviceEvidence": [
     {
-      "ticket": "UI-001",
-      "recordedAtUtc": "2026-11-15T13:37:59.974665+00:00",
+      "ticket": "UI-002",
+      "recordedAtUtc": "2026-11-15T14:19:23.901881+00:00",
       "avd": "ReplyRadio_RR003_API34",
       "serial": "emulator-5584",
       "user": "10",
       "androidApi": "34",
       "fingerprint": "Pleos/crp_avd/crp_avd_x86_64:14/RELEASE.release_connect_v2.1.0/release_connect_v2.1.0:user/test-keys",
-      "appSha256": "28f2d49fb53e84525927c791f75a13ba02b5028f326eba520047cc9aa8f5ef62",
-      "testApkSha256": "87361089d27a04e23b8dfd69397441c9bb191f42111d07985eb4f8aa74a71315",
+      "appSha256": "e2a2583ecac50f98ae234fae468eb46a73f24ed5aefd6d4cfb99e119a64cca88",
+      "testApkSha256": "ef1029faa606e15f91b9f660ebea8cacb8637f3085b3abf2b449dde6722108a8",
       "audioFixture": "ORIGINAL_SYNTHESIZED_MP3_TEST_APK_ONLY",
       "tests": [
         {
@@ -1352,7 +1352,7 @@
       "vehicleDrivingUx": "EMULATED_PLATFORM_RESTRICTION_ON_OFF",
       "audio": {
         "audioTrackAdvances": 5,
-        "renderedDecoderBuffers": 223,
+        "renderedDecoderBuffers": 216,
         "verifiedDecoderOrIoErrors": 5
       },
       "voice": {
@@ -1369,15 +1369,15 @@
       "artifactMatchesCurrentBuild": true
     },
     {
-      "ticket": "UI-001",
-      "recordedAtUtc": "2026-11-15T13:37:55.323843+00:00",
+      "ticket": "UI-002",
+      "recordedAtUtc": "2026-11-15T14:18:47.297718+00:00",
       "avd": "ReplyRadio_RR003_API37",
       "serial": "emulator-5586",
       "user": "0",
       "androidApi": "37",
       "fingerprint": "google/sdk_gphone64_x86_64/emu64xa:17/CE2A.260420.051.A2/16418371:user/release-keys",
-      "appSha256": "28f2d49fb53e84525927c791f75a13ba02b5028f326eba520047cc9aa8f5ef62",
-      "testApkSha256": "87361089d27a04e23b8dfd69397441c9bb191f42111d07985eb4f8aa74a71315",
+      "appSha256": "e2a2583ecac50f98ae234fae468eb46a73f24ed5aefd6d4cfb99e119a64cca88",
+      "testApkSha256": "ef1029faa606e15f91b9f660ebea8cacb8637f3085b3abf2b449dde6722108a8",
       "audioFixture": "ORIGINAL_SYNTHESIZED_MP3_TEST_APK_ONLY",
       "tests": [
         {
@@ -1577,7 +1577,7 @@
       "vehicleDrivingUx": "NON_VEHICLE",
       "audio": {
         "audioTrackAdvances": 3,
-        "renderedDecoderBuffers": 240,
+        "renderedDecoderBuffers": 253,
         "verifiedDecoderOrIoErrors": 5
       },
       "voice": {
@@ -1586,7 +1586,7 @@
         "stopAcks": 7,
         "errors": 0,
         "stopTimeouts": 0,
-        "audioBytes": 1081102,
+        "audioBytes": 1062670,
         "rmsUpdates": 0
       },
       "ux": "NON_VEHICLE",
@@ -1594,6 +1594,51 @@
       "artifactMatchesCurrentBuild": true
     }
   ],
+  "uiControls": [
+    {
+      "ticket": "UI-002",
+      "recordedAtUtc": "2026-11-15T14:18:58.387649+00:00",
+      "avd": "ReplyRadio_RR003_API34",
+      "status": "PASS",
+      "testCount": 7,
+      "tests": [
+        "empty_launch_never_autoplays",
+        "accessible_transport_targets_fit_viewport",
+        "play_icon_starts_actual_audio",
+        "pause_icon_stops_and_keeps_position",
+        "next_previous_icons_change_tracks_without_autoplay",
+        "stop_icon_ends_output",
+        "screen_reopen_releases_browser_without_crash_or_autoplay"
+      ],
+      "appSha256": "e2a2583ecac50f98ae234fae468eb46a73f24ed5aefd6d4cfb99e119a64cca88",
+      "testApkSha256": "ef1029faa606e15f91b9f660ebea8cacb8637f3085b3abf2b449dde6722108a8",
+      "log": "evidence/ui002-controls-ReplyRadio_RR003_API34.log",
+      "scope": "EMPTY_STATE_AND_ACTUAL_TRANSPORT_BUTTONS_EMULATOR_ONLY",
+      "artifactMatchesCurrentBuild": true
+    },
+    {
+      "ticket": "UI-002",
+      "recordedAtUtc": "2026-11-15T14:18:28.715172+00:00",
+      "avd": "ReplyRadio_RR003_API37",
+      "status": "PASS",
+      "testCount": 7,
+      "tests": [
+        "empty_launch_never_autoplays",
+        "accessible_transport_targets_fit_viewport",
+        "play_icon_starts_actual_audio",
+        "pause_icon_stops_and_keeps_position",
+        "next_previous_icons_change_tracks_without_autoplay",
+        "stop_icon_ends_output",
+        "screen_reopen_releases_browser_without_crash_or_autoplay"
+      ],
+      "appSha256": "e2a2583ecac50f98ae234fae468eb46a73f24ed5aefd6d4cfb99e119a64cca88",
+      "testApkSha256": "ef1029faa606e15f91b9f660ebea8cacb8637f3085b3abf2b449dde6722108a8",
+      "log": "evidence/ui002-controls-ReplyRadio_RR003_API37.log",
+      "scope": "EMPTY_STATE_AND_ACTUAL_TRANSPORT_BUTTONS_EMULATOR_ONLY",
+      "artifactMatchesCurrentBuild": true
+    }
+  ],
+  "bundledFontLicense": "OFL_1_1_UNMODIFIED_PRETENDARD_V1_3_9",
   "realAudioPlayback": "SEE_DEVICE_MP3_AND_PLATFORM_TTS_EVIDENCE",
   "vehicle": "EMULATOR_ONLY_SEE_DEVICE_EVIDENCE",
   "acceptanceMatricesPromoted": false,

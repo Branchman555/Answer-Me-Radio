@@ -20,7 +20,7 @@ class CatalogInstrumentation : Instrumentation() {
     override fun onCreate(arguments: Bundle?) { super.onCreate(arguments); stage = arguments?.getString("stage") ?: "write"; start() }
     override fun onStart() {
         try {
-            when (stage) { "write" -> writeTests(); "restore" -> restoreTests(); "picker" -> pickerTest(); "playback" -> radio.reply.playback.PlaybackChecks(this).run(); "voiceux" -> radio.reply.playback.VoiceUxChecks(this).run(); else -> error("INVALID_STAGE") }
+            when (stage) { "write" -> writeTests(); "restore" -> restoreTests(); "picker" -> pickerTest(); "playback" -> radio.reply.playback.PlaybackChecks(this).run(); "voiceux" -> radio.reply.playback.VoiceUxChecks(this).run(); "ui002" -> radio.reply.ui.UiPolishInstrumentation(this).run(); else -> error("INVALID_STAGE") }
             finish(Activity.RESULT_OK, Bundle().apply { putString("stream", "RR003_PASS_COUNT=$passed STAGE=$stage\n") })
         } catch (failure: Throwable) {
             finish(Activity.RESULT_CANCELED, Bundle().apply { putString("stream", "RR003_FAILED $stage ${failure.javaClass.simpleName}: ${failure.message}\n${failure.stackTrace.take(5).joinToString("\n")}\n") })

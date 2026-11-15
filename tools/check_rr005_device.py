@@ -17,7 +17,7 @@ def main():
     parser.add_argument("--avd", required=True)
     parser.add_argument("--picker", action="store_true")
     parser.add_argument("--voice-only", action="store_true")
-    parser.add_argument("--evidence-prefix", choices=["rr005", "ui001"], default="rr005")
+    parser.add_argument("--evidence-prefix", choices=["rr005", "ui001", "ui002"], default="rr005")
     args = parser.parse_args()
     assert args.serial.startswith("emulator-") and args.avd.startswith("ReplyRadio_RR003_")
     adb = str(Path(os.environ["LOCALAPPDATA"]) / "Android/Sdk/platform-tools/adb.exe")
@@ -31,7 +31,7 @@ def main():
     apk = ROOT / "app/build/outputs/apk/debug/app-debug.apk"
     tests = ROOT / "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk"
     for path in (apk, tests): assert "Success" in call("install", "-r", str(path))
-    report = {"ticket": "UI-001" if args.evidence_prefix == "ui001" else "RR-005", "recordedAtUtc": datetime.now(timezone.utc).isoformat(), "avd": args.avd,
+    report = {"ticket": "UI-002" if args.evidence_prefix == "ui002" else "UI-001" if args.evidence_prefix == "ui001" else "RR-005", "recordedAtUtc": datetime.now(timezone.utc).isoformat(), "avd": args.avd,
               "serial": args.serial, "user": user, "androidApi": call("shell", "getprop", "ro.build.version.sdk"),
               "fingerprint": call("shell", "getprop", "ro.build.fingerprint"),
               "appSha256": hashlib.sha256(apk.read_bytes()).hexdigest(), "testApkSha256": hashlib.sha256(tests.read_bytes()).hexdigest(),

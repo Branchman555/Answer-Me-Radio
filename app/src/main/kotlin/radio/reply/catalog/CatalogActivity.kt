@@ -38,11 +38,15 @@ class CatalogActivity : Activity() {
         pickerPending = savedInstanceState?.getBoolean("pickerPending") ?: false
         runtime = CatalogRuntime.get(this)
         val root = Theme.column(this).apply { setBackgroundColor(Theme.background) }
-        root.addView(Theme.button(this, "‹  라디오로 돌아가기").apply { setOnClickListener { finish() } })
-        root.addView(Theme.gap(this, 24))
-        root.addView(Theme.text(this, "MY MUSIC COLLECTION", 11f, Theme.amber, true))
+        root.addView(Theme.button(this, "‹  라디오").apply {
+            background = android.graphics.drawable.RippleDrawable(android.content.res.ColorStateList.valueOf(0x20708070),
+                Theme.shape(this@CatalogActivity, Theme.background, 12, Theme.background), null)
+            minHeight = dp(48); minimumHeight = dp(48); setOnClickListener { finish() }
+        }, LinearLayout.LayoutParams(-2, dp(48)))
+        root.addView(Theme.gap(this, 16))
+        root.addView(Theme.text(this, "LIBRARY", 11f, Theme.amber, true))
         root.addView(Theme.gap(this, 8))
-        root.addView(Theme.text(this, "나의 음악 서랍", 30f, bold = true))
+        root.addView(Theme.text(this, "음악 서랍", 30f, bold = true))
         root.addView(Theme.gap(this, 10))
         root.addView(Theme.text(this, getString(R.string.catalog_scope), 14f, Theme.muted))
         root.addView(Theme.gap(this, 20))
@@ -67,6 +71,8 @@ class CatalogActivity : Activity() {
         root.addView(add); root.addView(Theme.gap(this, 10)); root.addView(refresh); root.addView(Theme.gap(this, 22))
         rows = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
         root.addView(rows)
+        root.addView(Theme.gap(this, 12))
+        root.addView(Theme.text(this, "목록에서 빼도 원본 파일은 지워지지 않아요.", 12f, Theme.muted))
         setContentView(ScrollView(this).apply { fitsSystemWindows = true; isFillViewport = true; setBackgroundColor(Theme.background); addView(root) })
         ux = radio.reply.ux.VehicleUx(this) { if (::ux.isInitialized && alive) updateAccess() }
         updateAccess()
@@ -121,21 +127,21 @@ class CatalogActivity : Activity() {
         if (result.entries.isEmpty()) {
             rows.addView(Theme.column(this, 24).apply {
                 background = Theme.shape(this@CatalogActivity)
-                addView(Theme.text(this@CatalogActivity, "첫 번째 추억을 담아 주세요", 21f, bold = true))
+                addView(Theme.text(this@CatalogActivity, "아직 담은 음악이 없어요", 21f, bold = true))
                 addView(Theme.gap(this@CatalogActivity, 12))
-                addView(Theme.text(this@CatalogActivity, "1980·2010년대 MP3를 선택하면\n두 시대의 음악이 하나의 라디오로 이어집니다.\n\n제목 · 아티스트 · 연도 태그가 필요해요.", 15f, Theme.muted))
+                addView(Theme.text(this@CatalogActivity, "1980년대와 2010년대 MP3를 추가해 주세요.\n파일에 제목·아티스트·연도가 있어야 해요.", 15f, Theme.muted))
             })
         }
         for (entry in result.entries) {
             val row = Theme.column(this, 18).apply { background = Theme.shape(this@CatalogActivity) }
             row.addView(Theme.text(this, entry.releaseYear?.let { "${it / 10 * 10}s  /  $it" } ?: "연도를 확인해 주세요", 11f, Theme.amber, true))
             row.addView(Theme.gap(this, 10))
-            row.addView(Theme.text(this, "").apply {
-                text = getString(R.string.catalog_entry, entry.title.ifBlank { getString(R.string.catalog_unknown_title) },
-                    entry.artist.ifBlank { getString(R.string.catalog_unknown_artist) }, entry.releaseYear?.toString() ?: "—",
-                    statusLabel(entry.status), if (entry.access == ReadAccess.SESSION_ONLY) getString(R.string.catalog_session_only) else "")
-                textSize = 17f; setLineSpacing(dp(4).toFloat(), 1f)
-            })
+            row.addView(Theme.text(this, entry.title.ifBlank { getString(R.string.catalog_unknown_title) }, 21f, bold = true))
+            row.addView(Theme.gap(this, 6))
+            row.addView(Theme.text(this, entry.artist.ifBlank { getString(R.string.catalog_unknown_artist) }, 14f, Theme.muted))
+            row.addView(Theme.gap(this, 14))
+            row.addView(Theme.text(this, statusLabel(entry.status), 12f, Theme.amber))
+            if (entry.access == ReadAccess.SESSION_ONLY) row.addView(Theme.text(this, getString(R.string.catalog_session_only), 12f, Theme.muted))
             row.addView(Theme.gap(this, 14))
             row.addView(Theme.button(this, getString(R.string.catalog_remove)).apply {
                 setText(R.string.catalog_remove)

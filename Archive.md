@@ -1,6 +1,24 @@
 # 현재 개발 기록
 
-## 현재 상태 — RR-005 구현·검증 완료 (2026-11-15)
+## 현재 상태 — RR-006 구현·검증 완료 (2026-11-15)
+
+FastAPI + Mock LLM 로컬 API와 v0.5 계약 검증을 구현했다. **다음 티켓은 RR-007: 실제 역사 콘텐츠와 위치**이며 실제 검수 자료·도로 구간·SDK 확인이 필요하다. 완료 범위는 로컬 Mock 서버다. 외부 모델, 클라우드 배포, Android HTTP 연결은 아직 활성화하지 않았다.
+
+- `backend/models.py`: 엄격한 Pydantic v2 요청/응답, 추가 필드·타입 변환 금지, 32 KiB/중첩/중복 키/비유한 수/과도한 숫자 입력 거부. 원본 설계 스키마는 보존한다.
+- `backend/scripts.py`: 버전별 프롬프트와 JSON 데이터 분리, 소재 선택, 날씨 TTL 재검사, 기존 앱과 일치하는 승인 템플릿, 응답 식별자·근거·내용·길이 검사. 3초 timeout·취소·재시도 0회·서비스 소유 폴백.
+- `backend/app.py`: `/api/v1/dj/scripts`, Bearer 인증, 분당30회·동시4개, 3초 본문 수신, 개인정보를 반사하지 않는 오류/운영 로그, OpenAPI·Mock health 상태.
+- Python3.11 / FastAPI0.163.1 / Pydantic2.14.3 / Uvicorn0.54.0. 전이 의존성30개 버전·배포 파일 hash 잠금, `--require-hashes` 재설치와 `pip check` 완료. 개발 토큰은 실행 환경에서만 공급한다.
+- `BackendContractTest.kt`: 실제 HTTP 응답9개를 기존 Kotlin decoder·내용 검증기·폴백에 대조. 기존174개 테스트 파일은 수정하지 않았고 `evidence/rr005-test-hashes.json`과 실행 이름으로 보존을 검사한다.
+
+검증: `backend/.venv/Scripts/python.exe -X utf8 tools/check_backend.py` **서버115개 PASS**, 경고도 실패 처리. 실제 Uvicorn TCP 요청으로 정상6개/잘못된 모델 응답·장애·timeout3개를 확인했다. `./tools/check.ps1 -Offline` **JVM177개 PASS(174+3)**, 실패·스킵0, lint 오류·경고0, debug/test APK 확인. 원본 설계27개 hash와 54+40개 인수 상태를 유지한다.
+
+Android 실행 코드는 그대로이며 두 APK hash가 RR-005 증거와 일치한다. 기존 **Pleos38/Android38 장치 결과를 재사용**했으며 이번에 네이티브 검사를 새로 실행했다고 표시하지 않는다. README의 대표 이미지·앱 캡처를 유지하고 Mock API 흐름·검증 수치·실행 방법·로드맵을 갱신했다.
+
+증거: [전체 집계](evidence/rr006.json), [서버 테스트·소스 hash](evidence/rr006-backend.json), [HTTP 응답](backend/fixtures/android-contracts.json), [구현·재현·제한](docs/rr006-backend.md). 서버 증거가 현재 소스와 다르면 검증 스크립트가 실패한다.
+
+한계: 단일 프로세스 로컬 개발 인증·한도이며 실제 서비스 인증/분산 제한이 아니다. Mock 대본만 승인하고 원본 예제는 스키마 fixture로 검사한다. 자유 생성문·두 시대 전체 오프닝·30회 수동 청취 평가·외부 LLM·앱 네트워크 왕복은 후속 검수/통합 대상이다. 재생은 계속 기존 기기 내 음성/로컬 음악 경로다. 실차·물리 스피커·USB·역사/위치 자료의 기존 한계도 남아 있다.
+
+## 이력: RR-005 구현·검증 완료 (2026-11-15)
 
 실제 한국어 DJ 음성과 차량 UX 제한을 구현했다. **다음 티켓은 RR-006: FastAPI + Mock LLM 계약·검증**이다. 사용자 지정 GitHub 저장소의 기존 이력을 보존하며 이번 구현·검증·README 갱신을 함께 반영한다.
 

@@ -1,0 +1,569 @@
+{
+  "source": "Uvicorn localhost HTTP; synthetic data; injected test faults",
+  "cases": [
+    {
+      "name": "opening-dry",
+      "now": "2026-11-15T13:16:35.179945+00:00",
+      "request": {
+        "schemaVersion": "1.0",
+        "requestId": "live-opening",
+        "sessionId": "session-001",
+        "generation": 12,
+        "segmentId": "dj-before-block-002",
+        "type": "OPENING",
+        "personaId": "retro_fm_90_v1",
+        "locale": "ko-KR",
+        "maxSpokenSeconds": 25,
+        "context": {
+          "timeOfDay": "EVENING",
+          "weather": null,
+          "mode": "FAMILY",
+          "previousEra": "1980s",
+          "nextEra": "2010s"
+        },
+        "previousTracks": [
+          {
+            "id": "local-1987",
+            "title": "연습곡 A",
+            "artist": "가수 A",
+            "year": 1987
+          }
+        ],
+        "nextTracks": [
+          {
+            "id": "local-2014",
+            "title": "연습곡 B",
+            "artist": "가수 B",
+            "year": 2014
+          }
+        ],
+        "recentTopics": [
+          "GENERAL_NOSTALGIA"
+        ]
+      },
+      "response": {
+        "schemaVersion": "1.0",
+        "requestId": "live-opening",
+        "sessionId": "session-001",
+        "generation": 12,
+        "segmentId": "dj-before-block-002",
+        "type": "OPENING",
+        "personaId": "retro_fm_90_v1",
+        "text": "반갑습니다. 응답하라 라디오입니다. 2010년대 음악부터 차례로 만나보겠습니다. 편안하게 함께해 주세요.",
+        "topic": "ERA_TRANSITION",
+        "delivery": {
+          "tone": "WARM",
+          "pace": "RELAXED"
+        },
+        "groundingFields": [
+          "context.nextEra"
+        ],
+        "isFallback": false
+      },
+      "result": "VALID"
+    },
+    {
+      "name": "opening-rain",
+      "now": "2026-11-15T13:16:35.181946+00:00",
+      "request": {
+        "schemaVersion": "1.0",
+        "requestId": "live-opening",
+        "sessionId": "session-001",
+        "generation": 12,
+        "segmentId": "dj-before-block-002",
+        "type": "OPENING",
+        "personaId": "retro_fm_90_v1",
+        "locale": "ko-KR",
+        "maxSpokenSeconds": 25,
+        "context": {
+          "timeOfDay": "EVENING",
+          "weather": {
+            "condition": "RAIN",
+            "valid": true,
+            "observedAt": "2026-11-15T13:16:35.181946+00:00"
+          },
+          "mode": "FAMILY",
+          "previousEra": "1980s",
+          "nextEra": "2010s"
+        },
+        "previousTracks": [
+          {
+            "id": "local-1987",
+            "title": "연습곡 A",
+            "artist": "가수 A",
+            "year": 1987
+          }
+        ],
+        "nextTracks": [
+          {
+            "id": "local-2014",
+            "title": "연습곡 B",
+            "artist": "가수 B",
+            "year": 2014
+          }
+        ],
+        "recentTopics": [
+          "GENERAL_NOSTALGIA"
+        ]
+      },
+      "response": {
+        "schemaVersion": "1.0",
+        "requestId": "live-opening",
+        "sessionId": "session-001",
+        "generation": 12,
+        "segmentId": "dj-before-block-002",
+        "type": "OPENING",
+        "personaId": "retro_fm_90_v1",
+        "text": "비 소식이 있네요. 반갑습니다. 응답하라 라디오입니다. 2010년대 음악부터 차례로 만나보겠습니다. 편안하게 함께해 주세요.",
+        "topic": "WEATHER",
+        "delivery": {
+          "tone": "WARM",
+          "pace": "RELAXED"
+        },
+        "groundingFields": [
+          "context.weather.condition",
+          "context.nextEra"
+        ],
+        "isFallback": false
+      },
+      "result": "VALID"
+    },
+    {
+      "name": "era_bridge-dry",
+      "now": "2026-11-15T13:16:35.183945+00:00",
+      "request": {
+        "schemaVersion": "1.0",
+        "requestId": "live-era_bridge",
+        "sessionId": "session-001",
+        "generation": 12,
+        "segmentId": "dj-before-block-002",
+        "type": "ERA_BRIDGE",
+        "personaId": "retro_fm_90_v1",
+        "locale": "ko-KR",
+        "maxSpokenSeconds": 25,
+        "context": {
+          "timeOfDay": "EVENING",
+          "weather": null,
+          "mode": "FAMILY",
+          "previousEra": "1980s",
+          "nextEra": "2010s"
+        },
+        "previousTracks": [
+          {
+            "id": "local-1987",
+            "title": "연습곡 A",
+            "artist": "가수 A",
+            "year": 1987
+          }
+        ],
+        "nextTracks": [
+          {
+            "id": "local-2014",
+            "title": "연습곡 B",
+            "artist": "가수 B",
+            "year": 2014
+          }
+        ],
+        "recentTopics": [
+          "GENERAL_NOSTALGIA"
+        ]
+      },
+      "response": {
+        "schemaVersion": "1.0",
+        "requestId": "live-era_bridge",
+        "sessionId": "session-001",
+        "generation": 12,
+        "segmentId": "dj-before-block-002",
+        "type": "ERA_BRIDGE",
+        "personaId": "retro_fm_90_v1",
+        "text": "이제 2010년대 음악으로 이어가겠습니다. 다음 곡도 함께하시죠.",
+        "topic": "ERA_TRANSITION",
+        "delivery": {
+          "tone": "WARM",
+          "pace": "RELAXED"
+        },
+        "groundingFields": [
+          "context.nextEra"
+        ],
+        "isFallback": false
+      },
+      "result": "VALID"
+    },
+    {
+      "name": "era_bridge-rain",
+      "now": "2026-11-15T13:16:35.185946+00:00",
+      "request": {
+        "schemaVersion": "1.0",
+        "requestId": "live-era_bridge",
+        "sessionId": "session-001",
+        "generation": 12,
+        "segmentId": "dj-before-block-002",
+        "type": "ERA_BRIDGE",
+        "personaId": "retro_fm_90_v1",
+        "locale": "ko-KR",
+        "maxSpokenSeconds": 25,
+        "context": {
+          "timeOfDay": "EVENING",
+          "weather": {
+            "condition": "RAIN",
+            "valid": true,
+            "observedAt": "2026-11-15T13:16:35.185946+00:00"
+          },
+          "mode": "FAMILY",
+          "previousEra": "1980s",
+          "nextEra": "2010s"
+        },
+        "previousTracks": [
+          {
+            "id": "local-1987",
+            "title": "연습곡 A",
+            "artist": "가수 A",
+            "year": 1987
+          }
+        ],
+        "nextTracks": [
+          {
+            "id": "local-2014",
+            "title": "연습곡 B",
+            "artist": "가수 B",
+            "year": 2014
+          }
+        ],
+        "recentTopics": [
+          "GENERAL_NOSTALGIA"
+        ]
+      },
+      "response": {
+        "schemaVersion": "1.0",
+        "requestId": "live-era_bridge",
+        "sessionId": "session-001",
+        "generation": 12,
+        "segmentId": "dj-before-block-002",
+        "type": "ERA_BRIDGE",
+        "personaId": "retro_fm_90_v1",
+        "text": "비 소식이 있네요. 이제 2010년대 음악으로 이어가겠습니다. 다음 곡도 함께하시죠.",
+        "topic": "WEATHER",
+        "delivery": {
+          "tone": "WARM",
+          "pace": "RELAXED"
+        },
+        "groundingFields": [
+          "context.weather.condition",
+          "context.nextEra"
+        ],
+        "isFallback": false
+      },
+      "result": "VALID"
+    },
+    {
+      "name": "same_era_bridge-dry",
+      "now": "2026-11-15T13:16:35.187945+00:00",
+      "request": {
+        "schemaVersion": "1.0",
+        "requestId": "live-same_era_bridge",
+        "sessionId": "session-001",
+        "generation": 12,
+        "segmentId": "dj-before-block-002",
+        "type": "SAME_ERA_BRIDGE",
+        "personaId": "retro_fm_90_v1",
+        "locale": "ko-KR",
+        "maxSpokenSeconds": 25,
+        "context": {
+          "timeOfDay": "EVENING",
+          "weather": null,
+          "mode": "FAMILY",
+          "previousEra": "1980s",
+          "nextEra": "2010s"
+        },
+        "previousTracks": [
+          {
+            "id": "local-1987",
+            "title": "연습곡 A",
+            "artist": "가수 A",
+            "year": 1987
+          }
+        ],
+        "nextTracks": [
+          {
+            "id": "local-2014",
+            "title": "연습곡 B",
+            "artist": "가수 B",
+            "year": 2014
+          }
+        ],
+        "recentTopics": [
+          "GENERAL_NOSTALGIA"
+        ]
+      },
+      "response": {
+        "schemaVersion": "1.0",
+        "requestId": "live-same_era_bridge",
+        "sessionId": "session-001",
+        "generation": 12,
+        "segmentId": "dj-before-block-002",
+        "type": "SAME_ERA_BRIDGE",
+        "personaId": "retro_fm_90_v1",
+        "text": "계속해서 2010년대 음악을 들려드리겠습니다. 다음 곡도 함께하시죠.",
+        "topic": "ERA_TRANSITION",
+        "delivery": {
+          "tone": "WARM",
+          "pace": "RELAXED"
+        },
+        "groundingFields": [
+          "context.nextEra"
+        ],
+        "isFallback": false
+      },
+      "result": "VALID"
+    },
+    {
+      "name": "same_era_bridge-rain",
+      "now": "2026-11-15T13:16:35.189946+00:00",
+      "request": {
+        "schemaVersion": "1.0",
+        "requestId": "live-same_era_bridge",
+        "sessionId": "session-001",
+        "generation": 12,
+        "segmentId": "dj-before-block-002",
+        "type": "SAME_ERA_BRIDGE",
+        "personaId": "retro_fm_90_v1",
+        "locale": "ko-KR",
+        "maxSpokenSeconds": 25,
+        "context": {
+          "timeOfDay": "EVENING",
+          "weather": {
+            "condition": "RAIN",
+            "valid": true,
+            "observedAt": "2026-11-15T13:16:35.189946+00:00"
+          },
+          "mode": "FAMILY",
+          "previousEra": "1980s",
+          "nextEra": "2010s"
+        },
+        "previousTracks": [
+          {
+            "id": "local-1987",
+            "title": "연습곡 A",
+            "artist": "가수 A",
+            "year": 1987
+          }
+        ],
+        "nextTracks": [
+          {
+            "id": "local-2014",
+            "title": "연습곡 B",
+            "artist": "가수 B",
+            "year": 2014
+          }
+        ],
+        "recentTopics": [
+          "GENERAL_NOSTALGIA"
+        ]
+      },
+      "response": {
+        "schemaVersion": "1.0",
+        "requestId": "live-same_era_bridge",
+        "sessionId": "session-001",
+        "generation": 12,
+        "segmentId": "dj-before-block-002",
+        "type": "SAME_ERA_BRIDGE",
+        "personaId": "retro_fm_90_v1",
+        "text": "비 소식이 있네요. 계속해서 2010년대 음악을 들려드리겠습니다. 다음 곡도 함께하시죠.",
+        "topic": "WEATHER",
+        "delivery": {
+          "tone": "WARM",
+          "pace": "RELAXED"
+        },
+        "groundingFields": [
+          "context.weather.condition",
+          "context.nextEra"
+        ],
+        "isFallback": false
+      },
+      "result": "VALID"
+    },
+    {
+      "name": "invalid-dry",
+      "now": "2026-11-15T13:16:35.191946+00:00",
+      "request": {
+        "schemaVersion": "1.0",
+        "requestId": "live-invalid",
+        "sessionId": "session-001",
+        "generation": 12,
+        "segmentId": "dj-before-block-002",
+        "type": "ERA_BRIDGE",
+        "personaId": "retro_fm_90_v1",
+        "locale": "ko-KR",
+        "maxSpokenSeconds": 25,
+        "context": {
+          "timeOfDay": "EVENING",
+          "weather": null,
+          "mode": "FAMILY",
+          "previousEra": "1980s",
+          "nextEra": "2010s"
+        },
+        "previousTracks": [
+          {
+            "id": "local-1987",
+            "title": "연습곡 A",
+            "artist": "가수 A",
+            "year": 1987
+          }
+        ],
+        "nextTracks": [
+          {
+            "id": "local-2014",
+            "title": "연습곡 B",
+            "artist": "가수 B",
+            "year": 2014
+          }
+        ],
+        "recentTopics": [
+          "GENERAL_NOSTALGIA"
+        ]
+      },
+      "response": {
+        "schemaVersion": "1.0",
+        "requestId": "live-invalid",
+        "sessionId": "session-001",
+        "generation": 12,
+        "segmentId": "dj-before-block-002",
+        "type": "ERA_BRIDGE",
+        "personaId": "retro_fm_90_v1",
+        "text": "이제 2010년대 음악으로 이어가겠습니다. 다음 곡도 함께하시죠.",
+        "topic": "ERA_TRANSITION",
+        "delivery": {
+          "tone": "WARM",
+          "pace": "RELAXED"
+        },
+        "groundingFields": [
+          "context.nextEra"
+        ],
+        "isFallback": true
+      },
+      "result": "SCHEMA_INVALID"
+    },
+    {
+      "name": "error-dry",
+      "now": "2026-11-15T13:16:35.193944+00:00",
+      "request": {
+        "schemaVersion": "1.0",
+        "requestId": "live-error",
+        "sessionId": "session-001",
+        "generation": 12,
+        "segmentId": "dj-before-block-002",
+        "type": "ERA_BRIDGE",
+        "personaId": "retro_fm_90_v1",
+        "locale": "ko-KR",
+        "maxSpokenSeconds": 25,
+        "context": {
+          "timeOfDay": "EVENING",
+          "weather": null,
+          "mode": "FAMILY",
+          "previousEra": "1980s",
+          "nextEra": "2010s"
+        },
+        "previousTracks": [
+          {
+            "id": "local-1987",
+            "title": "연습곡 A",
+            "artist": "가수 A",
+            "year": 1987
+          }
+        ],
+        "nextTracks": [
+          {
+            "id": "local-2014",
+            "title": "연습곡 B",
+            "artist": "가수 B",
+            "year": 2014
+          }
+        ],
+        "recentTopics": [
+          "GENERAL_NOSTALGIA"
+        ]
+      },
+      "response": {
+        "schemaVersion": "1.0",
+        "requestId": "live-error",
+        "sessionId": "session-001",
+        "generation": 12,
+        "segmentId": "dj-before-block-002",
+        "type": "ERA_BRIDGE",
+        "personaId": "retro_fm_90_v1",
+        "text": "이제 2010년대 음악으로 이어가겠습니다. 다음 곡도 함께하시죠.",
+        "topic": "ERA_TRANSITION",
+        "delivery": {
+          "tone": "WARM",
+          "pace": "RELAXED"
+        },
+        "groundingFields": [
+          "context.nextEra"
+        ],
+        "isFallback": true
+      },
+      "result": "PROVIDER_FAILED"
+    },
+    {
+      "name": "timeout-dry",
+      "now": "2026-11-15T13:16:35.195947+00:00",
+      "request": {
+        "schemaVersion": "1.0",
+        "requestId": "live-timeout",
+        "sessionId": "session-001",
+        "generation": 12,
+        "segmentId": "dj-before-block-002",
+        "type": "ERA_BRIDGE",
+        "personaId": "retro_fm_90_v1",
+        "locale": "ko-KR",
+        "maxSpokenSeconds": 25,
+        "context": {
+          "timeOfDay": "EVENING",
+          "weather": null,
+          "mode": "FAMILY",
+          "previousEra": "1980s",
+          "nextEra": "2010s"
+        },
+        "previousTracks": [
+          {
+            "id": "local-1987",
+            "title": "연습곡 A",
+            "artist": "가수 A",
+            "year": 1987
+          }
+        ],
+        "nextTracks": [
+          {
+            "id": "local-2014",
+            "title": "연습곡 B",
+            "artist": "가수 B",
+            "year": 2014
+          }
+        ],
+        "recentTopics": [
+          "GENERAL_NOSTALGIA"
+        ]
+      },
+      "response": {
+        "schemaVersion": "1.0",
+        "requestId": "live-timeout",
+        "sessionId": "session-001",
+        "generation": 12,
+        "segmentId": "dj-before-block-002",
+        "type": "ERA_BRIDGE",
+        "personaId": "retro_fm_90_v1",
+        "text": "이제 2010년대 음악으로 이어가겠습니다. 다음 곡도 함께하시죠.",
+        "topic": "ERA_TRANSITION",
+        "delivery": {
+          "tone": "WARM",
+          "pace": "RELAXED"
+        },
+        "groundingFields": [
+          "context.nextEra"
+        ],
+        "isFallback": true
+      },
+      "result": "AI_TIMEOUT"
+    }
+  ]
+}

@@ -1,0 +1,530 @@
+{
+  "ticket": "RR-006",
+  "status": "PASS",
+  "recordedAtUtc": "2026-11-15T13:16:41.687985+00:00",
+  "python": "3.11.4",
+  "dependencies": {
+    "annotated-doc": "0.0.6",
+    "annotated-types": "0.8.0",
+    "anyio": "4.16.0",
+    "attrs": "26.1.0",
+    "certifi": "2026.10.23",
+    "click": "8.5.1",
+    "colorama": "0.4.6",
+    "fastapi": "0.163.1",
+    "h11": "0.16.0",
+    "httpcore": "1.0.9",
+    "httpx": "0.28.1",
+    "idna": "3.20",
+    "iniconfig": "2.3.1",
+    "jsonschema": "4.26.0",
+    "jsonschema-specifications": "2025.9.1",
+    "opentelemetry-api": "1.45.2",
+    "packaging": "26.3",
+    "pluggy": "1.7.0",
+    "pydantic": "2.14.3",
+    "pydantic_core": "2.50.4",
+    "Pygments": "2.21.0",
+    "pytest": "9.2.0",
+    "referencing": "0.37.0",
+    "rfc3339-validator": "0.1.4",
+    "rpds-py": "2026.9.1",
+    "six": "1.17.0",
+    "starlette": "1.10.0",
+    "typing-inspection": "0.4.5",
+    "typing_extensions": "4.16.0",
+    "uvicorn": "0.54.0"
+  },
+  "testCount": 115,
+  "tests": [
+    {
+      "name": "backend.tests.test_api.test_server_refuses_missing_or_invalid_secret[]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_api.test_server_refuses_missing_or_invalid_secret[short]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_api.test_server_refuses_missing_or_invalid_secret[\\ud55c\\ud55c\\ud55c\\ud55c\\ud55c\\ud55c\\ud55c\\ud55c\\ud55c\\ud55c\\ud55c\\ud55c\\ud55c\\ud55c\\ud55c\\ud55c\\ud55c\\ud55c\\ud55c\\ud55c\\ud55c\\ud55c\\ud55c\\ud55c\\ud55c\\ud55c\\ud55c\\ud55c\\ud55c\\ud55c\\ud55c\\ud55c]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_api.test_server_refuses_missing_or_invalid_secret[xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_api.test_authentication_precedes_body_parsing[None]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_api.test_authentication_precedes_body_parsing[Bearer invalid]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_api.test_authentication_precedes_body_parsing[Basic invalid]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_api.test_authentication_precedes_body_parsing[Bearer ]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_api.test_valid_response_and_operational_logs_do_not_retain_data",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_api.test_body_failures_are_bounded_private_and_do_not_call_model[{}-422-application/json]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_api.test_body_failures_are_bounded_private_and_do_not_call_model[{-422-application/json]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_api.test_body_failures_are_bounded_private_and_do_not_call_model[{\"requestId\":\"secret\",\"requestId\":\"other\"}-422-application/json]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_api.test_body_failures_are_bounded_private_and_do_not_call_model[body3-413-application/json]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_api.test_body_failures_are_bounded_private_and_do_not_call_model[{}-415-text/plain]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_api.test_body_failures_are_bounded_private_and_do_not_call_model[{}-415-application/octet-stream]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_api.test_compressed_body_rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_api.test_422_never_echoes_sensitive_extra_fields",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_api.test_extreme_numeric_input_is_422_not_server_error[1e999999999]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_api.test_extreme_numeric_input_is_422_not_server_error[1e999999999999999999999999]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_api.test_extreme_numeric_input_is_422_not_server_error[number2]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_api.test_rate_limit_counts_invalid_requests_and_recovers_at_boundary",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_api.test_inflight_limit_and_slot_release_on_provider_failure",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_api.test_chunked_body_cannot_bypass_size_limit_and_releases_slot",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_api.test_body_read_timeout_is_bounded_and_releases_slot",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_api.test_openapi_describes_strict_request_response_and_bearer",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_original_fixture_and_generated_schemas_agree",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_every_required_field_is_required_by_both_models[request]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_every_required_field_is_required_by_both_models[response]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_request_negative_schema_parity[change0]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_request_negative_schema_parity[change1]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_request_negative_schema_parity[change2]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_request_negative_schema_parity[change3]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_request_negative_schema_parity[change4]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_request_negative_schema_parity[change5]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_request_negative_schema_parity[change6]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_request_negative_schema_parity[change7]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_request_negative_schema_parity[change8]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_request_negative_schema_parity[change9]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_request_negative_schema_parity[change10]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_request_negative_schema_parity[change11]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_request_negative_schema_parity[change12]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_request_negative_schema_parity[change13]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_request_negative_schema_parity[change14]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_request_negative_schema_parity[change15]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_request_negative_schema_parity[change16]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_strict_json_rejects_ambiguous_or_unbounded_inputs[{\"x\":1,\"x\":2}]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_strict_json_rejects_ambiguous_or_unbounded_inputs[{\"nested\":{\"x\":1,\"x\":2}}]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_strict_json_rejects_ambiguous_or_unbounded_inputs[{} {}]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_strict_json_rejects_ambiguous_or_unbounded_inputs[NaN]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_strict_json_rejects_ambiguous_or_unbounded_inputs[Infinity]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_strict_json_rejects_ambiguous_or_unbounded_inputs[<p>hello</p>]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_strict_json_rejects_ambiguous_or_unbounded_inputs[\\xff]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_strict_json_rejects_ambiguous_or_unbounded_inputs[\"\\\\ud800\"]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_strict_json_rejects_ambiguous_or_unbounded_inputs[[[[[[[[[[[[[[[[[[[0]]]]]]]]]]]]]]]]]]]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_strict_json_rejects_ambiguous_or_unbounded_inputs[raw9]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_integer_decimal_has_json_schema_semantics",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_weather_requires_real_offset_timestamp[2026-11-15]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_weather_requires_real_offset_timestamp[2026-11-15T00:00:00]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_weather_requires_real_offset_timestamp[garbage]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_weather_requires_real_offset_timestamp[2026-02-30T00:00:00Z]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_metadata_normalization_and_prompt_data_admission",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_all_templates_remain_v05_compatible[1900s-OPENING]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_all_templates_remain_v05_compatible[1900s-ERA_BRIDGE]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_all_templates_remain_v05_compatible[1900s-SAME_ERA_BRIDGE]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_all_templates_remain_v05_compatible[1980s-OPENING]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_all_templates_remain_v05_compatible[1980s-ERA_BRIDGE]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_all_templates_remain_v05_compatible[1980s-SAME_ERA_BRIDGE]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_all_templates_remain_v05_compatible[2010s-OPENING]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_all_templates_remain_v05_compatible[2010s-ERA_BRIDGE]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_all_templates_remain_v05_compatible[2010s-SAME_ERA_BRIDGE]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_all_templates_remain_v05_compatible[2090s-OPENING]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_all_templates_remain_v05_compatible[2090s-ERA_BRIDGE]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_all_templates_remain_v05_compatible[2090s-SAME_ERA_BRIDGE]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_all_templates_remain_v05_compatible[None-OPENING]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_all_templates_remain_v05_compatible[None-ERA_BRIDGE]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_all_templates_remain_v05_compatible[None-SAME_ERA_BRIDGE]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_original_negative_fixtures_have_expected_codes[wrong-generation]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_original_negative_fixtures_have_expected_codes[unexpected-track-list]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_original_negative_fixtures_have_expected_codes[fake-weather]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_original_negative_fixtures_have_expected_codes[invalid-json-text]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_every_correlation_field_is_enforced[requestId-other]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_every_correlation_field_is_enforced[sessionId-old]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_every_correlation_field_is_enforced[generation-11]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_every_correlation_field_is_enforced[segmentId-old]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_every_correlation_field_is_enforced[type-OPENING]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_model_output_cannot_claim_authority[change0-SCHEMA_INVALID]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_model_output_cannot_claim_authority[change1-SCHEMA_INVALID]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_model_output_cannot_claim_authority[change2-SCHEMA_INVALID]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_model_output_cannot_claim_authority[change3-SCHEMA_INVALID]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_model_output_cannot_claim_authority[change4-FACT_UNGROUNDED]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_model_output_cannot_claim_authority[change5-SCHEMA_INVALID]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_model_output_cannot_claim_authority[change6-FACT_UNGROUNDED]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_model_output_cannot_claim_authority[change7-CONTENT_UNSAFE]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_model_output_cannot_claim_authority[change8-CONTENT_UNSAFE]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_model_output_cannot_claim_authority[change9-DURATION_EXCEEDED]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_weather_ttl_boundaries[0-True]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_weather_ttl_boundaries[3600-True]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_weather_ttl_boundaries[3601-False]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_weather_ttl_boundaries[-1-False]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_weather_flag_is_not_trusted[change0]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_contract.test_weather_flag_is_not_trusted[change1]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_live_http.test_real_http_exports_android_compatible_mock_and_fallback",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_service.test_mock_approved_or_no_weather[None]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_service.test_mock_approved_or_no_weather[RAIN]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_service.test_mock_approved_or_no_weather[SUN]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_service.test_mock_approved_or_no_weather[CLOUD]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_service.test_mock_approved_or_no_weather[SNOW]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_service.test_recent_weather_avoids_repetition_and_tags_remain_data",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_service.test_failure_returns_schema_valid_fallback_once[provider0-JSON_INVALID]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_service.test_failure_returns_schema_valid_fallback_once[provider1-PROVIDER_FAILED]",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_service.test_actual_three_second_timeout_cancels_once",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_service.test_external_cancellation_propagates_without_fallback",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_service.test_weather_expires_while_model_runs",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_service.test_short_budget_uses_service_owned_fallback",
+      "status": "PASS"
+    },
+    {
+      "name": "backend.tests.test_service.test_stale_weather_is_removed_before_provider",
+      "status": "PASS"
+    }
+  ],
+  "liveHttp": {
+    "transport": "Uvicorn TCP localhost",
+    "cases": 9,
+    "modelTimeoutSeconds": 3,
+    "retryCount": 0,
+    "timeoutCancellationObserved": true,
+    "provider": "Mock + injected test faults"
+  },
+  "sourceHashes": {
+    "backend/__init__.py": "da5a9c992fa5c97969805f903b658de161d1a65f0fbc49d0f25fc519a913eea3",
+    "backend/app.py": "166f765a64a703e716bcf5716d2c44b0e24aa8f3f82bd06f27d8c7b9e639c934",
+    "backend/models.py": "e0e5b9a551e02a60cee467cf3fe6b09f7590ac5e8ab1b6253c9181ffa00a2b73",
+    "backend/scripts.py": "e29e4b6049c31b7bd44b7d5abcef6b79b604e2dd3a29a84add23a51e0e84a0b8",
+    "backend/tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend/tests/conftest.py": "6d3944d7682f8380035f7e3f4071782b55ddd0410a21238ce79bc0d3d80f4a4d",
+    "backend/tests/test_api.py": "2f297085cf8c04ef4af2bb0117d7d7a897976877cf033550eaaca458ccb83324",
+    "backend/tests/test_contract.py": "62edde2d1ee270910c1d3b099090761c093c2a8db1cdac369febbae844c09cb3",
+    "backend/tests/test_live_http.py": "5419b1c4f730635c2c46f67ddd5c7a8571d2fe2b20236e0adec6129e7559c0ad",
+    "backend/tests/test_service.py": "9da5ccaeb366169cb32227657ff4c06bcd18f52945a2487c25627877c141206c",
+    "backend/fixtures/android-contracts.json": "806b1dd4fa4aa2735ce09926babadd182d026559b9adb506c4d514c70bcfb7ba",
+    "backend/requirements.lock": "0b7e43595008e1e8908ed5ce0366b3d03b5e07f07ecd219b94938d2fba83c67b",
+    "tools/check_backend.py": "7f22d8b504f3a31281889a7f20ca220bfa53d094549c6ed9c7e7b5500ae69dd0"
+  },
+  "log": "evidence/backend-20261115-131630.log",
+  "limitations": [
+    "Local single-process Mock API; no external model, cloud deployment or Android HTTP wiring",
+    "Approved templates only; original example is schema data, not general editorial authorization",
+    "Text length heuristic is not measured TTS duration or human listening evaluation"
+  ]
+}

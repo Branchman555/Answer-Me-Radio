@@ -1,6 +1,6 @@
 {
-  "ticket": "RR-005",
-  "recordedAtUtc": "2026-11-15T12:56:28.808784+00:00",
+  "ticket": "RR-006",
+  "recordedAtUtc": "2026-11-15T13:18:03.726267+00:00",
   "scope": "JVM_AND_ANDROID_BUILD_WITH_SEPARATE_NATIVE_DEVICE_EVIDENCE",
   "sourceIntegrity": {
     "status": "PASS",
@@ -11,8 +11,28 @@
   },
   "jvm": {
     "status": "PASS",
-    "testCount": 174,
+    "testCount": 177,
     "suites": [
+      {
+        "name": "radio.reply.BackendContractTest",
+        "tests": [
+          {
+            "name": "realServerMockAndFailureFallbacksPassExistingEditorialValidator",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "actualServerPayloadsConformToOriginalContractAndStrictAndroidDecoder",
+            "status": "PASS",
+            "relatedDesignCases": []
+          },
+          {
+            "name": "serverFallbackCannotReorderTracksOrIntroduceUnprovidedMusic",
+            "status": "PASS",
+            "relatedDesignCases": []
+          }
+        ]
+      },
       {
         "name": "radio.reply.ContextDjIntegrationTest",
         "tests": [
@@ -1089,7 +1109,18 @@
     "testsPreservedAndExecuted": 144,
     "sourceHashesUnchanged": true
   },
-  "contractVerification": "Preserved v0.5/v0.6 schema keyword checks, fixture hashes, payload isolation, Mock provider/reducer integration",
+  "rr005Regression": {
+    "status": "PASS",
+    "testsPreservedAndExecuted": 174,
+    "sourceHashesUnchanged": true
+  },
+  "backend": {
+    "status": "PASS",
+    "testCount": 115,
+    "evidence": "evidence/rr006-backend.json",
+    "liveHttpCases": 9
+  },
+  "contractVerification": "Original v0.5/v0.6 preserved; 9 Uvicorn HTTP captures checked by existing Kotlin decoder/editorial validator",
   "debugApk": {
     "status": "PASS",
     "path": "app/build/outputs/apk/debug/app-debug.apk",
@@ -1105,7 +1136,7 @@
     "errors": 0,
     "warnings": 0
   },
-  "buildLog": "evidence/build-20261115-125216-389.log",
+  "buildLog": "evidence/build-20261115-131657-969.log",
   "deviceEvidence": [
     {
       "ticket": "RR-005",
@@ -1565,7 +1596,7 @@
     "Pleos ON_DEVICE and Android offline TTS; physical speaker listening not tested",
     "Pleos API34 picker resolves to platform stub; picker roundtrip only on regular Android",
     "Physical USB removal, actual vehicle driving and physical media buttons not tested",
-    "Only local approved templates; unrestricted LLM/backend validation remains RR-006",
+    "RR-006 backend is localhost Mock with approved templates; no external model/deployment/Android HTTP connection",
     "Actual road geometry/editorial/music rights unverified",
     "History is process-local; no replay or 7-day persistence",
     "Empty-cache build and supplier signature verification not performed"

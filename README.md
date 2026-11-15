@@ -12,8 +12,9 @@
 
 ![Android](https://img.shields.io/badge/Android-Kotlin-153F42?style=flat-square)
 ![Media3](https://img.shields.io/badge/Media3-Local_Audio-AD7941?style=flat-square)
-![Stage](https://img.shields.io/badge/Prototype-RR--005-153F42?style=flat-square)
-![Tests](https://img.shields.io/badge/JVM-174_passed-397566?style=flat-square)
+![Stage](https://img.shields.io/badge/Prototype-RR--006-153F42?style=flat-square)
+![Tests](https://img.shields.io/badge/JVM-177_passed-397566?style=flat-square)
+![API](https://img.shields.io/badge/Mock_API-115_passed-AD7941?style=flat-square)
 
 [프로젝트 소개](#왜-응답하라-라디오인가요) · [실제 앱 화면](#실제-앱-화면) · [검증 결과](#검증으로-확인한-것) · [실행 방법](#직접-실행하기) · [개발 로드맵](#개발-로드맵)
 
@@ -100,15 +101,39 @@ flowchart LR
 
 미디어 콜백이 직접 다음 곡을 선택하지 않습니다. **RadioReducer가 상태를 결정하고, 출력 해제를 확인한 뒤 다음 출력을 시작합니다.** 한국어 DJ는 기기 내 TTS로 연결했습니다. 점선 경로의 역사·위치 연동과 외부 AI 서버는 후속 단계이며, 현재 대본은 로컬 템플릿입니다.
 
+### 검증 가능한 DJ 서버
+
+RR-006에서는 **FastAPI + Mock LLM 로컬 API**를 추가했습니다. 서버가 음악을 고르거나 재생을 제어하지 않습니다. 승인된 짧은 대본을 만들고, 응답이 잘못되거나 3초를 넘기면 시대 안내 폴백을 반환합니다.
+
+```mermaid
+flowchart LR
+    R[v0.5 요청] --> A[인증 · 크기 · 사용량 제한]
+    A --> C[허용 필드 · 날씨 TTL 검사]
+    C --> M[Mock LLM · 3초 제한]
+    M --> V[식별자 · 근거 · 내용 검증]
+    V --> O[승인 대본]
+    M -->|장애 · 시간 초과| F[고정 폴백]
+    V -->|검증 실패| F
+    O --> T[실제 HTTP → Kotlin 계약 검사]
+    F --> T
+    classDef core fill:#153F42,color:#F5EBD8,stroke:#D9A058
+    classDef fallback fill:#F5EBD8,color:#153F42,stroke:#AD7941
+    class A,C,M,V,T core
+    class F fallback
+```
+
+**현재 앱은 기기 내 대본으로 재생합니다.** 위 서버는 독립적으로 실행·검증하는 로컬 Mock API이며, 외부 LLM·클라우드 배포·앱 HTTP 연결은 아직 활성화하지 않았습니다. 실제 HTTP로 받은 정상/폴백 9개 응답이 기존 Kotlin 대본 검증기를 통과하는 것까지 확인했습니다. [서버 구현과 실행 방법 →](docs/rr006-backend.md)
+
 ## 검증으로 확인한 것
 
-**2026-11-15 · RR-005 로컬 검증 스냅샷** — 아래 수치는 실행 증거에 기반하며 CI 또는 실차 인증 배지가 아닙니다.
+**2026-11-15 · RR-006 로컬 검증 스냅샷** — 아래 수치는 실행 증거에 기반하며 CI 또는 실차 인증 배지가 아닙니다.
 
 | 검증 대상 | 결과 | 확인한 범위 |
 | :--- | :---: | :--- |
-| JVM 회귀 테스트 | **174 / 174** | 기존 144개 소스·테스트 유지 + 신규 30개, 실패·스킵 0 |
-| Pleos API34 에뮬레이터 | **38 / 38** | 기존 26개 + Pleos TTS·차량 제한 12개 |
-| Android API37 에뮬레이터 | **38 / 38** | 기존 27개 + 한국어 오프라인 TTS 11개 |
+| JVM 회귀 테스트 | **177 / 177** | 기존 174개 소스·테스트 유지 + 서버 호환성 3개, 실패·스킵 0 |
+| FastAPI + Mock LLM | **115 / 115** | 원본 계약·인증·한도·실제 3초 timeout, HTTP 9개 시나리오 포함 |
+| Pleos API34 에뮬레이터 | **38 / 38** | RR-005 증거 재사용 · 현재 APK hash 일치 |
+| Android API37 에뮬레이터 | **38 / 38** | RR-005 증거 재사용 · 현재 APK hash 일치 |
 | Android lint | **오류 0 · 경고 0** | debug 앱·테스트 APK 생성, strict 의존성 검증 |
 | 설계 원본 보존 | **27개 hash 일치** | 기존 인수 기준 54 + 40개 상태 보존 |
 
@@ -116,7 +141,7 @@ flowchart LR
 
 **검증 경계도 함께 공개합니다.** 에뮬레이터는 호스트 무음으로 실행했으므로 물리 스피커 청취 검증은 아닙니다. 물리 USB 분리·실제 차량 버튼·실차 주행·국가별 UX 심사는 미검증입니다. 오류·늦은 음성 콜백 순서는 JVM에서 별도로 검증했습니다. 현재 Pleos 이미지의 파일 선택기는 stub이어서 실제 파일 선택 왕복은 일반 Android에서 검증했습니다.
 
-[전체 검증 증거](evidence/rr005.json) · [구현과 재현 명령](docs/rr005-voice-ux.md) · [Pleos 결과](evidence/rr005-device-ReplyRadio_RR003_API34.json) · [Android 결과](evidence/rr005-device-ReplyRadio_RR003_API37.json)
+[전체 검증 증거](evidence/rr006.json) · [서버 검증](evidence/rr006-backend.json) · [서버 구현·재현](docs/rr006-backend.md) · [음성·차량 UX 재현](docs/rr005-voice-ux.md) · [Pleos 결과](evidence/rr005-device-ReplyRadio_RR003_API34.json) · [Android 결과](evidence/rr005-device-ReplyRadio_RR003_API37.json)
 
 ## 직접 실행하기
 
@@ -125,7 +150,7 @@ flowchart LR
 <details>
 <summary><strong>개발 환경과 빌드 명령</strong></summary>
 
-JDK17 · Android SDK35 / build-tools35 · Python3가 필요합니다. Gradle 8.10.2, AGP 8.8.2, Kotlin 2.0.0, Media3 1.6.1, Pleos TTS 3.3.1을 고정했습니다.
+JDK17 · Android SDK35 / build-tools35 · Python3.11이 필요합니다. Gradle 8.10.2, AGP 8.8.2, Kotlin 2.0.0, Media3 1.6.1, Pleos TTS 3.3.1을 고정했습니다. 서버는 FastAPI·Pydantic·Uvicorn 및 전이 의존성의 버전과 hash를 고정합니다.
 
 ```powershell
 git clone https://github.com/Branchman555/Answer-Me-Radio.git
@@ -134,6 +159,11 @@ cd Answer-Me-Radio
 # 최초 1회: 테스트 APK에만 사용할 합성 MP3 생성
 python -m pip install --target app/build/rr004-tools lameenc==1.8.5
 python -X utf8 tools/generate_rr004_audio.py
+
+# 로컬 Mock API 계약 검증 · 실제 HTTP 자료 생성
+py -3.11 -m venv backend/.venv
+backend/.venv/Scripts/python.exe -m pip install --require-hashes -r backend/requirements.lock
+backend/.venv/Scripts/python.exe -X utf8 tools/check_backend.py
 
 # JAVA_HOME / ANDROID_HOME을 설정한 환경
 ./tools/check.ps1 -Offline
@@ -144,6 +174,7 @@ python -X utf8 tools/generate_rr004_audio.py
 - 앱: `app/build/outputs/apk/debug/app-debug.apk`
 - 테스트 APK: `app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk`
 - 장치 재현: [RR-005 문서](docs/rr005-voice-ux.md#검증과-재현)
+- 서버 시작·토큰 설정: [RR-006 문서](docs/rr006-backend.md#서버-실행)
 
 본 앱 APK에는 음원을 포함하지 않습니다. 개인 MP3·키·로컬 설정·빌드 캐시는 저장소에 올리지 않습니다. 공개 배포용 release 빌드는 아직 제공하지 않습니다.
 
@@ -163,6 +194,10 @@ app/src/main/kotlin/radio/reply/
 ├── dj/             DJ 요청·응답 검증 · 로컬 폴백
 ├── story/          역사 콘텐츠 검수·권리·구간 게이트
 └── demo/           명시적 무음 시뮬레이터
+
+backend/            FastAPI · 엄격한 v0.5 모델 · Mock · 검증 · 폴백
+├── tests/          계약 · 제한 · 취소 · 실제 HTTP 검사
+└── fixtures/       Kotlin과 대조하는 합성 HTTP 응답
 ```
 
 [현재 개발 기록](Archive.md) · [설계 읽기 순서](docs/design/CODEX_README_v0.8.md) · [RR-001](docs/rr001-foundation.md) · [RR-002](docs/rr002-context-dj.md) · [RR-003](docs/rr003-local-catalog.md) · [이미지 출처·제작 기록](docs/assets/README.md)
@@ -177,8 +212,8 @@ app/src/main/kotlin/radio/reply/
 | RR-002 | 상황정보 · 일반 DJ 계약 | 완료 · Mock/로컬 템플릿 |
 | RR-003 | SAF 로컬 MP3 카탈로그 | 완료 · Pleos 선택기 제한 공개 |
 | RR-004 | Media3 · 표준 제어 · 실제 재생 오류 처리 | 완료 · 에뮬레이터 검증 |
-| **RR-005** | **실제 한국어 음성 · 차량 UX 제한** | **완료 · Pleos/Android 에뮬레이터 검증** |
-| RR-006 | FastAPI · Mock LLM · 계약 검증 | 다음 단계 |
+| RR-005 | 실제 한국어 음성 · 차량 UX 제한 | 완료 · Pleos/Android 에뮬레이터 검증 |
+| **RR-006** | **FastAPI · Mock LLM · 계약 검증** | **완료 · 로컬 API / 앱 HTTP 연결은 별도** |
 | RR-007~009 | 실제 역사/위치 · 기록 · 통합 시연 | 예정 |
 
 [상세 완료 조건과 남은 과제 →](docs/roadmap.md)

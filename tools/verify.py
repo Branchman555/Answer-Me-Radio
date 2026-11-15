@@ -41,6 +41,8 @@ def verify_sources():
         assert digest(ROOT / entry["path"]) == entry["sha256"], f"RR-003 test modified: {entry['path']}"
     for entry in json.loads((ROOT / "evidence/rr004-test-hashes.json").read_text(encoding="utf-8-sig")):
         assert digest(ROOT / entry["path"]) == entry["sha256"], f"RR-004 test modified: {entry['path']}"
+    for entry in json.loads((ROOT / "evidence/rr005-test-hashes.json").read_text(encoding="utf-8-sig")):
+        assert digest(ROOT / entry["path"]) == entry["sha256"], f"RR-005 test modified: {entry['path']}"
     return {"status": "PASS", "manifestFilesVerified": len(manifest["files"]),
             "baselineAcceptanceCasesPreserved": 54, "roadAcceptanceCasesPreserved": 40,
             "externalExtensionMatches": external.exists()}
@@ -58,7 +60,7 @@ def report(source_result, log, require_devices=False):
             tests.append({"name": case.attrib["name"], "status": "PASS", "relatedDesignCases": linked})
         suites.append({"name": suite.attrib["name"], "tests": tests})
     required_suites = {"radio.reply." + name for name in ["RadioPlannerTest", "RadioReducerTest", "RoadStoryTest",
-                       "EventInterleavingTest", "ContextEngineTest", "DjContractTest", "ContextDjIntegrationTest", "LocalMusicCatalogTest", "PlaybackEngineTest", "VoiceOutputTest", "UxSafetyGateTest"]}
+                       "EventInterleavingTest", "ContextEngineTest", "DjContractTest", "ContextDjIntegrationTest", "LocalMusicCatalogTest", "PlaybackEngineTest", "VoiceOutputTest", "UxSafetyGateTest", "BackendContractTest"]}
     assert required_suites.issubset({suite["name"] for suite in suites}), "Required test suite missing"
     baseline = json.loads((ROOT / "evidence/rr001.json").read_text(encoding="utf-8"))
     passed = {(suite["name"], test["name"]) for suite in suites for test in suite["tests"]}
@@ -73,6 +75,9 @@ def report(source_result, log, require_devices=False):
     rr004 = json.loads((ROOT / "evidence/rr004.json").read_text(encoding="utf-8"))
     playback_tests = {(suite["name"], test["name"]) for suite in rr004["jvm"]["suites"] for test in suite["tests"]}
     assert len(playback_tests) == 144 and playback_tests.issubset(passed), "An original RR-004 test was not executed"
+    rr005 = json.loads((ROOT / "evidence/rr005.json").read_text(encoding="utf-8"))
+    voice_tests = {(suite["name"], test["name"]) for suite in rr005["jvm"]["suites"] for test in suite["tests"]}
+    assert len(voice_tests) == 174 and voice_tests.issubset(passed), "An original RR-005 test was not executed"
     lint = ET.parse(ROOT / "app/build/reports/lint-results-debug.xml").getroot()
     issues = lint.findall("issue")
     assert not any(issue.attrib["severity"] in {"Error", "Fatal"} for issue in issues)
@@ -114,14 +119,20 @@ def report(source_result, log, require_devices=False):
             if "API34" in avd:
                 assert device["vehicleDrivingUx"] == "EMULATED_PLATFORM_RESTRICTION_ON_OFF"
                 assert "pleos_driving_restriction_locks_details_and_service_settings" in names
-    value = {"ticket": "RR-005", "recordedAtUtc": datetime.now(timezone.utc).isoformat(),
+    backend = json.loads((ROOT / "evidence/rr006-backend.json").read_text(encoding="utf-8"))
+    assert backend["status"] == "PASS"
+    for path, expected_hash in backend["sourceHashes"].items():
+        assert digest(ROOT / path) == expected_hash, f"Stale backend evidence: {path}"
+    value = {"ticket": "RR-006", "recordedAtUtc": datetime.now(timezone.utc).isoformat(),
              "scope": "JVM_AND_ANDROID_BUILD_WITH_SEPARATE_NATIVE_DEVICE_EVIDENCE", "sourceIntegrity": source_result,
              "jvm": {"status": "PASS", "testCount": sum(len(s["tests"]) for s in suites), "suites": suites},
              "rr001Regression": {"status": "PASS", "testsPreservedAndExecuted": len(prior_tests), "sourceHashesUnchanged": True},
              "rr002Regression": {"status": "PASS", "testsPreservedAndExecuted": len(previous_tests), "sourceHashesUnchanged": True},
              "rr003Regression": {"status": "PASS", "testsPreservedAndExecuted": len(catalog_tests), "sourceHashesUnchanged": True},
              "rr004Regression": {"status": "PASS", "testsPreservedAndExecuted": len(playback_tests), "sourceHashesUnchanged": True},
-             "contractVerification": "Preserved v0.5/v0.6 schema keyword checks, fixture hashes, payload isolation, Mock provider/reducer integration",
+             "rr005Regression": {"status": "PASS", "testsPreservedAndExecuted": len(voice_tests), "sourceHashesUnchanged": True},
+             "backend": {"status": "PASS", "testCount": backend["testCount"], "evidence": "evidence/rr006-backend.json", "liveHttpCases": 9},
+             "contractVerification": "Original v0.5/v0.6 preserved; 9 Uvicorn HTTP captures checked by existing Kotlin decoder/editorial validator",
              "debugApk": {"status": "PASS", "path": apk.relative_to(ROOT).as_posix(), "sha256": digest(apk)},
              "testApk": {"path": test_apk.relative_to(ROOT).as_posix(), "sha256": digest(test_apk)},
              "catalogArtifactIsolation": "PASS_NO_AUDIO_OR_TEST_PROVIDER_IN_MAIN_APK_NO_BROAD_PERMISSIONS",
@@ -129,12 +140,12 @@ def report(source_result, log, require_devices=False):
              "buildLog": log, "deviceEvidence": devices, "realAudioPlayback": "SEE_DEVICE_MP3_AND_PLATFORM_TTS_EVIDENCE", "vehicle": "EMULATOR_ONLY_SEE_DEVICE_EVIDENCE",
              "acceptanceMatricesPromoted": False,
              "limitations": ["Pleos ON_DEVICE and Android offline TTS; physical speaker listening not tested", "Pleos API34 picker resolves to platform stub; picker roundtrip only on regular Android",
-                             "Physical USB removal, actual vehicle driving and physical media buttons not tested", "Only local approved templates; unrestricted LLM/backend validation remains RR-006",
+                             "Physical USB removal, actual vehicle driving and physical media buttons not tested", "RR-006 backend is localhost Mock with approved templates; no external model/deployment/Android HTTP connection",
                              "Actual road geometry/editorial/music rights unverified", "History is process-local; no replay or 7-day persistence",
                              "Empty-cache build and supplier signature verification not performed"]}
     (ROOT / "evidence/latest.json").write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    (ROOT / "evidence/rr005.json").write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"PASS: {value['jvm']['testCount']} JVM tests (144 preserved); APK + test APK built; lint {len(issues)} warnings. Native voice/UX results recorded separately.")
+    (ROOT / "evidence/rr006.json").write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(f"PASS: {value['jvm']['testCount']} JVM tests (174 preserved); backend {backend['testCount']}; APK + test APK built; lint {len(issues)} warnings. Native evidence remains RR-005.")
 
 
 if __name__ == "__main__":

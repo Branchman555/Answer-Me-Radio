@@ -21,6 +21,7 @@ android {
     kotlinOptions { jvmTarget = "17" }
     testOptions.unitTests.all {
         it.systemProperty("designDir", rootProject.file("docs/design").absolutePath)
+        it.inputs.file(rootProject.file("backend/fixtures/android-contracts.json"))
     }
     sourceSets.getByName("androidTest").assets.srcDir("build/generated/rr004-assets")
 }
